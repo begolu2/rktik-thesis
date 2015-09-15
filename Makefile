@@ -12,18 +12,18 @@ all: thesis_skeleton.latex appendix.tex
 	-V bibtitle='Bibliography' \
 	-V documentclass='scrbook' \
 	-V fontfamily='libertine' \
-	-V author='Eduardo Graells-Garrido' \
+	-V author='Vincent Ahrend' \
 	-V year='2015' \
-	-V department='DTIC' \
-	-V university='Universitat Pompeu Fabra' \
-	-V title='Biased Behavior on Web Activities: From Understanding to Unbiased Visual Exploration' \
-	-V supervisor='Prof. Dr. Ricardo Baeza-Yates, Universitat Pompeu Fabra \\ Dr. Mounia Lalmas, Yahoo Labs' \
-	-V university_logo='img/logo_upf.png' \
+	-V department='Institute for Cognitive Science' \
+	-V university='University of Osnabrueck' \
+	-V title='Rktik - A Social Network for Groups' \
+	-V supervisor='Dr. Helmar Gust, University of Osnabrueck \\ Dr. Max Mustermann, University of Osnabrueck' \
+	-V university_logo='img/uos.png' \
 	-f markdown -o thesis.pdf
 	rm thesis_skeleton.latex ref-appendix/appendix.tex
-	
+
 appendix.tex: ref-appendix/appendix.md
 	pandoc -f markdown -t latex ref-appendix/appendix.md -o ref-appendix/appendix.tex
-	
+
 thesis_skeleton.latex: ClassicThesis.tex
 	python template_gen.py
