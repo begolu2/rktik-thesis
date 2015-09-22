@@ -1,6 +1,6 @@
 # Introduction [5p]
 
-Souma is an X allowing Y to do Z. This document describes software architecture with insight into development process where appropriate. The first part concerns motivation for the project, methodology and differentiation to similar products.
+Rktik is an online community allowing groups of like minded people to find each other, collect and publish content together. This document describes its software architecture with insight into development process where appropriate. The first part concerns motivation for the project, methodology and differentiation to similar products.
 
 ”Conceptual” part describes functionality present to a user of the software, “Implementation” part describes technical background of implementation and operation of the service. Finally, “Evaluation and Discussion” presents data about feature usage and outlines future plans for the project.
 
