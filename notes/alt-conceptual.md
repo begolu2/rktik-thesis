@@ -1,30 +1,89 @@
-# Alternative Table of Contents for Conceptual Section
+**Table of Contents**
 
-# Overview
+
+# Introduction
+
+- Motivation
+- Problem: Privacy and Identity
+
+## Methodology
+
+- Tracking Source Code and Open Tasks
+
+## State of the Art
+
+- Facebook
+- Reddit
+- Email
+
+
+# Conceptual
+
+## Overview
 
 - Rktik.com
 - Brain Metaphor
 - Frontpage
 	- Frontpage Graph Visualization
-- User Accounts
 - Notifications
 
-# Content
+## Content
 
 - Overview: Thoughts
 - Attaching Media: Percepts
 - Distributing Attention: Voting and Hotness 
 
-# Identity
+## Identity
 
-- Personal vs. Group Identity
+- User Accounts
 - Personas
+- Personal vs. Group Identity
 - Movements
+	- Promoting Content
+	- Private Movements
 
-# Context
+## Context
 
-- Overview: Mindsets
-- Blogs & Mindspaces
+- Introduction
+- Mindspaces
+	- Chat
+- Blogs
+- Dialogue
 - Threaded Discussion
-- Chat
-- Dialogues
+
+
+# Implementation
+
+## Overview
+
+- Separating Data Model and Web Interface
+
+## Nucleus
+
+- Serializable
+- Nucleus Models
+- Modeling Data with SQLAlchemy
+
+## Web Server: Glia
+
+- Session Management
+- Web View and URL Routing
+- Rendering the User Interface using Templates
+- Asynchronous UI
+- Email Notifications
+- Background Workers
+
+## Improving Performance
+
+## Hosting and Deployment
+
+# Evaluation and Discussion
+
+## Usage Metrics
+
+## Movement Agency
+
+## API for External Clients
+
+- Serialization and Encryption
+- Peer to Peer Extension
