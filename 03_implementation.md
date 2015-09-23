@@ -71,7 +71,7 @@ The members relation is implemented using the [association object pattern](http:
 
 #### Mindset
 
-This model represents a list of thoughts with an author and is a superclass of Mindspace, Blog and Dialogue.
+This model represents a collections of thoughts with an author and is a superclass of Mindspace, Blog and Dialogue.
 
 * **Mindspace** models internal Thoughts of an Identity
 * **Blog** models a Blog publication
