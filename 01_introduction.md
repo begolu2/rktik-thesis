@@ -40,6 +40,8 @@ Source code was tracked using Git and the method described at ___. Git repositor
 
 State of the art compares one social network restricted to personal space, one open social network, and one old social network.
 
+[Rktik displays discussions in the replies to a thought in a hierarchical style with thoughts on the same level being ordered by their hotness value. This is the same structure as that employed in Reddit discussion (footnote: Reddit uses a different hotness algorithm for ordering replies than they use for link listings). Facebook discussions have historically used a flat design with a recent switch (todo: when?) to a partially hierarchical display with a single nesting level. The display of discussions in email newsgroups is dependent on the client used to read the newsgroup contents. Many such clients also use a nested reply structure with chronological ordering on a given nesting level.]
+
 1. Facebook
 
 Facebook is an X, it is made for Y so they can Z.

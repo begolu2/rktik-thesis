@@ -45,11 +45,11 @@
 ## Context
 
 - Introduction
+- Threaded Discussion
 - Mindspaces
 	- Chat
 - Blogs
 - Dialogue
-- Threaded Discussion
 
 
 # Implementation

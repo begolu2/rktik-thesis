@@ -22,15 +22,15 @@ All actions of users are attributed to their **active persona**, which is a scre
 
 (see [Overview: Thoughts])
 
-Thoughts can link to any number of **percepts**, which are attachments containing either more text or a hyperlink to an external resource.
+Thoughts can link to any number of **percepts**, which are attachments containing either more text or a hyperlink to an external resource. They are displayed alongside the thought throughout the user interface.
 
 (see [Attaching Media: Percepts])
 
-**Mindsets** contain lists of thoughts. Any thought may only be contained in one mindset. Every persona has a private and a public mindset (**notebook** and **blog** respectively).
+**Mindsets** are collections of thoughts. Any thought that is not a reply to another thought must be contained in a mindset. Every persona has a private and a public mindset (**notebook** and **blog** respectively).
 
 (see [Overview: Mindsets])
 
-**Movements** are groups related to a specific topic. Each of them also has a private mindset for members and a public mindset (blog). 
+**Movements** are groups related to a specific topic. Each of them has a private mindset for members and a public mindset (blog). 
 
 Any persona can create new movements and follow the (public) blog of any movement or other persona.
 
@@ -42,9 +42,9 @@ The Frontpage is located at the root of Rktik and presents users with a stream o
 
 Anonymous users don’t have any subscriptions, so they are shown thoughts from top movements. These are the seven movements with the highest member count.
 
-To the side of the main thought listing, the frontpage also contains a number of other elements:
+To the side of the thought stream, the frontpage also contains a number of other elements:
 
-* The **Frontpage Graph Visualization** displays a visual representation of Frontpage contents as a graph (see Frontpage Graph Visualization).
+* The **Frontpage Graph Visualization** displays a visual representation of Frontpage contents as a graph (see [Frontpage Graph Visualization]).
 * **Top Thought** When a user is logged in, this contains a short list of thoughts from top movements they are not following with their active persona. This allows users to notice particularly popular submissions from contexts they wouldn’t see otherwise.
 * **Discover Movements** A listing of top movements the active persona is not following.
 * **Recent Thoughts** The most recent publicly visible thoughts submitted throughout the whole site.
@@ -84,14 +84,14 @@ See [Notification] for technical details.
 
 ### Overview: Thoughts
 
-*Thoughts* are the basic building block for content in Rktik and rougly equivalent to a post on Facebook or submission on Reddit. They consist of a short text with no more than 300 characters and any number of attachments. Thoughts can be displayed 1) as part of mindsets in different listing styles, 2) on individual thought pages or 3) as part of a chat conversation (see [Overview: Mindsets]). 
+*Thoughts* are the basic building block for content in Rktik and rougly equivalent to a post on Facebook or submission on Reddit. They consist of a short text limited to 300 characters and any number of percepts (attachments). Thoughts are displayed as part of mindsets in different listing styles, 2) on individual thought pages or 3) as part of a chat conversation (see [Overview: Mindsets]). 
 
 The restriction on title length has been set for two reasons:
 
 1. A short title reduces the flexibility required from page layouts. Longer titles lead to a bigger variation in title length which would make the usage of separate display styles for long and short titles neccessary and in turn increase development and maintenance time.
 2. Short titles require users to be concise when formulating thoughts. In turn, they make it easier for other users to read and understand titles.
 
-Thoughts can be created using the dedicated *create thought* page, which is linked from all mindsets in which the active persona has editing rights, or using the *inline thought creator*, which is embedded in comments pages and as part of the chat widget. The latter only allows posting text content up to the length of a thought’s title and lets users switch to the *create thought* page without losing their input if they wish to continue typing. The dedicated *create thought* page provides separate input fields for title and longform text attachments.
+Thoughts can be created using the dedicated *create thought* page, which is linked from all mindsets in which the active persona has editing rights, or using the *inline thought creator*, which is embedded in comments sections and as part of the chat widget. The latter only allows posting text content up to the length of a thought’s title and lets users switch to the *create thought* page without losing their input if they wish to continue typing. The dedicated *create thought* page provides separate input fields for title and longform text attachments.
 
 **Reposting**
 
@@ -198,9 +198,21 @@ The blog page of private movements indicates the movement founder so that users 
 
 ## Context
 
-Every thought is created in a context to which it is linked. This may either be another thought when a user is replying to someone else or it can be the mindset in which they create the thought. Mindsets are collections of thoughts with some additional metadata. There are three different kinds of mindsets for 1) internal thoughts of an identity (mindspace), 2) its published thoughts (blog), and 3) private conversation (dialogue). Each of them is rendered with a particular layout and functionality.
+Every thought is created in a context to which it is linked. This can be another thought when a user is replying to someone else, it can be the mindset in which they create the thought or it can be both of them [^both_contexts]. Mindsets are collections of thoughts, owned by identities. There are three different kinds of mindsets for 1) internal thoughts of an identity (mindspace), 2) its published thoughts (blog), and 3) private conversation (dialogue). Each of them is rendered with a particular layout and functionality.
 
-This section will explain the differences between the three kinds of mindsets by detailing their requirements, tasks and conceptual design. The last section (see “Threaded Discussion”) will explain how single thoughts and related discussion are presented to the user.
+This section will show how communication happens in the context of a single thought, as well as in mindsets. Then, the differences between the three kinds of mindsets are explained though their requirements, tasks and conceptual design.
+
+[^both_contexts]: If a thought is defined as a reply to another thought and also defines a mindset as context it is included in both contexts. Its rendering in each of the contexts also refers to the other side, effectively linking discussion in two separate areas of the website.
+
+### Threaded Discussion
+
+Every thought in Rktik has its own page, which collects all information related to the thought. This includes both its text content and percepts as well as the thought’s context, metadata and reactions to it. Reactions may be replies written by other users, reposts and automatic promotions (see [Promoting Content]). 
+
+Displaying reactions to a thought in a flat listing can make it harder for readers to follow the exchange, as conversations regarding different aspects of the original thought may be interweaved in the listing. Rktik solves this problem by using a hierarchical display of reactions. Direct replies are aligned to the left-hand side of the screen with subsequent replies indented to the right. Every subtree of the discussion is sorted by hotness.
+
+The reaction tree depth is limited to three levels for performance reasons. If a reaction is located in a mindset different from that of the original thought, reactions happening in the other context are also included up to a total depth of three levels.
+
+If the original thought was created as a reply itself, the page also contains its parent thoughts. The thought’s author may define from 0-10 levels, how deep the reply-chain is recursed upwards for this purpose by setting the context-depth setting. Setting it to zero hides the upward context from other users and removes the thought from the discussion pages of these ancestors.
 
 ### Contextual Rights Management
 
@@ -220,7 +232,7 @@ Dialogue								Members					 — Author —
 
 ### Mindspaces
 
-Mindspaces collect internal thoughts of an identity as opposed to thoughts published to all users of Rktik. Both personas as well as movements are identities in Rktik and therefore have their own mindspace.
+Mindspaces are the first of three kinds of mindsets. They collect internal thoughts of an identity as opposed to thoughts published to all users of Rktik. Both personas as well as movements are identities in Rktik and therefore have their own mindspace.
 
 **Persona Mindspace**
 
@@ -248,7 +260,7 @@ Below the chat contents, an inline form UI allows users to send thoughts to the 
 
 ### Blogs
 
-Blogs allow identities to share their thoughts with a wider audience and are sorted in reverse chronological order. Any persona can follow any blog. Doing so places the blog’s contents in the pool of thoughts eligible for their personal frontpage.
+Blogs are mindsets that allow identities to share their thoughts with a wider audience and are sorted in reverse chronological order. Any persona can follow any blog. Doing so places the blog’s contents in the pool of thoughts eligible for their personal frontpage.
 
 Personas can directly post new thoughts to their blog, while movements can only indirectly place content in it through voting (see [Promoting Content]).
 
@@ -257,11 +269,5 @@ Personas can directly post new thoughts to their blog, while movements can only 
 While mindspaces allow exchange between many users and blogs allow broadcasting to many users, the dialogue mindset models a conversation between just two participants. As it is also implemented as a mindset, messages can be reposted freely between a dialogue and any other context. 
 
 Apart from the different privacy setting, a dialogue provides the same affordances as the chat module in a movement mindspace (see [Chat]).
-
-### Threaded Discussion
-
-Exchanges of thoughts are rendered either as a *flat* or *hierarchical* listing. The flat variation orders postings in the discussion chronologically while the hierarchical variation uses a nested display of postings to reflect their reply-structure. In the flat variation a reply relation to a previous posting may also be established by quoting part of that posting. Postings on the same nesting level in the hierarchical variation can either be sorted chronologically or by another metric, such as the hotness value.
-
-Rktik displays discussions in the replies to a thought in a hierarchical style with thoughts on the same level being ordered by their hotness value. This is the same structure as that employed in Reddit discussion (footnote: Reddit uses a different hotness algorithm for ordering replies than they use for link listings). Facebook discussions have historically used a flat design with a recent switch (todo: when?) to a partially hierarchical display with a single nesting level. The display of discussions in email newsgroups is dependent on the client used to read the newsgroup contents. Many such clients also use a nested reply structure with chronological ordering on a given nesting level.
 
 [Frontpage Graph Visualization]: img/graph.png
