@@ -3,10 +3,14 @@
 
 API Specification documents
 
-# Source Code
+# Rights Management
+
+This table show which users/personas are allowed to make changes to specific models.
 
 # Usage Metrics
 
 ### Amplitude
 
 ### Google Analytics
+
+# Source Code

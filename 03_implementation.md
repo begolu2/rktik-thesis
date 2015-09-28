@@ -6,119 +6,106 @@ This chapter will give technical information about the implementation and operat
 
 It is divided into sections for the shared data model *Nucleus*, the *Glia* web server, about improving performance as well as the deployment and operation of Rktik in a hosted environment.
 
-### Separating Data Model and Web Interface
-
-As Rktik is planned as a semi-decentralized service[^semi_decentral], the object relational manager was decoupled from the rest of the application from the beginning to allow for the easy implementation of client and server applications using this codebase. 
-
-[^semi_decentral]: Semi-decentral means that users can chose between 1) a client application for rendering and processing data which uses a web server for the transfer of (encrypted) data and 2) solely using Rktik on its website without installing an application on their computers.
-
 ## Shared Data Model: Nucleus
 
-The Nucleus data model uses the SQLAlchemy ORM in combination with a Postgresql database to provide data persistency and means of data processing directly related to the models. This section lists attributes and methods of all models. The description of methods indicates in brackets if the method is a static or class method and also, if the method’s results are cached using Memcache (see [Improving Performance]).
+The Nucleus library uses the SQLAlchemy ORM to provide data persistency and defines methods for context-independent data processing. It is implemented as a Python module which can be imported from the main application *Glia*. The Nucleus module also provides a direct database connection that can be used to bypass the ORM layer and a connection to the in-memory cache *memcache*, which is also extensively used by the ORM models. A signalling namespace provides hooks which can be used to automate postprocessing and other actions in reaction to model changes.
 
-Data models allow JSON serialization via the nucleus.serializable module. This functionality is not documented here in full scope, as it is not part of this thesis, but required for the planned P2P extension (see [Peer to Peer Extension]).
+As Rktik was planned as a semi-decentralized service[^semi_decentral], the object relational manager was decoupled from the rest of the application from the beginning to allow for the easy implementation of client and server applications using this codebase. 
+
+[^semi_decentral]: Semi-decentral means in this case that users can chose between 1) a client application for rendering and processing data which uses a web server for the transfer of (encrypted) data and 2) solely using Rktik on its website without installing an application on their computers.
 
 ### Serializable
 
-The Serializable module provides JSON serialization functionality to data models that inherit from it. This functionality is not in the scope of this thesis, but part of the planned P2P extension (see Discussion: P2P). As the module is required for rights management, I have left it in the codebase submitted along this document and will describe the relevant functionality here.
+The *Serializable* module primarily provides JSON serialization to data models that inherit from it. This functionality is not in the scope of this thesis, but part of the planned P2P extension (see Discussion: P2P). As the module is required for rights management, I have left it in the codebase submitted along this document and will describe the relevant functionality here.
 
-Serializable objects provide a method *authorize*, which validates that a specific user may execute a specific action on the instance. This method is overridden in subclasses with the original Serializable.authorize method still being called.
-
-The method takes one of the strings “insert”, “update”, “delete” as the action and an optional author_id argument, which defaults to the currently active Persona, and defines the actor to be authorized. It returns a boolean indicating whether the action is authorized.
-
-Serializable models may further define the attributes 
-
-* _insert_required
-* _update_required
-* _stub
-
-as well as the methods
-
-* create_from_changeset
-* update_from_changeset
-* export
+Serializable objects provide a method *authorize*, which validates that a given user may execute a specific action on the instance. This method is overridden in subclasses to enable object-specific rights management. Please see [Rights Management] for detailed information on which users are allowed to make changes to which objects. 
 
 ### Nucleus Models
 
-These definitions can be found in the glia.nucleus.models module. Each model is represented by a class definition. See Appendix Nucleus API for technical details such as the attributes and methods provided by each model. This section gives an overview for each model’s properties and responsibilities with respect to the functionality described in the *conceptual* chapter.
+The module `nucleus.models` contains defitions for all ORM models. Each model is represented by a class definition. See [API specification] for technical details such as the attributes and methods provided by each model. This section gives an overview for each model’s properties and responsibilities with respect to the functionality described in the *conceptual* chapter.
 
 #### User
 
-The user model represents a registered user of the site. It has relations to all Personas of this user and stores basic metadata such as the user id, account creation data, email and password hash. The User class is also used for verifying email validation actions and storing the validation state related to the user.
+The `User` model represents a registered user of the site. It has relations to all Personas of this user and stores basic metadata such as the user id, account creation data, email and password hash. The User class is also used for verifying email validation actions and storing the validation state related to the user.
 
 #### Identity
 
-The Identity class is a superclass for Persona and Movement as these two share many attributes and methods related to them being identities. 
+The `Identity` class is a superclass for `Persona` and `Movement `as these two share many attributes and methods related to them being identities. 
 
-Apart from basic information such as the username, associated color, creation and modification timestamps, the Identity model stores relations to the blog and mindspace associated with each instance as blogs it is following.
+Apart from basic information such as the username, associated color, creation and modification timestamps, the `Identity` model has relations to the blog and mindspace associated with each instance.
 
 #### Persona
 
-The Persona class represents personal identities taken by users of the site. Each user may create any number of Personas with their user account. 
+The `Persona` class represents personal identities taken by users of the site. Each `User` instance may be connected to many  `Persona` instances.
 
-The Persona model provides methods for toggling instances’ membership in Movements and their following status with respect to blogs. It also provides a number of cached methods which provide information related to the Persona that is computationally expensive to collect (see Improving Performance).
+The `Persona` model provides methods for toggling instances’ membership in movements and their following status with respect to blogs. It also provides a number of cached methods which provide information related to the Persona that is computationally expensive to collect (see [Improving Performance]).
 
 #### Movement
 
-Movement model instances also inherit from the Identity model and thereby provide all its attributes and methods. They also store the movement’s mission, whether the movement is private and relations to the movement’s admin (founder) and to Movement members.
+Just as the `Persona` model, `Movement` instances inherit from the `Identity` model and thereby provide all its attributes and methods. They also store the movement’s mission, whether the movement is private and relations to the movement’s admin (founder) and to Movement members.
 
 **MovementMemberAssociation**
 
-The members relation is implemented using the [association object pattern](http://docs.sqlalchemy.org/en/rel_1_0/orm/basic_relationships.html#association-object) to store additional metadata about the membership. 
+The members relation is implemented using the [association object pattern](http://docs.sqlalchemy.org/en/rel_1_0/orm/basic_relationships.html#association-object) to store additional metadata about the membership:
 
 * Whether the membership is active. Inactive memberships are used to represent Personas who have left the movement and for invitations, which are created as inactive memberships with no associated Persona object
 * Timestamps for creation and last modification of the membership
 * The member’s role in the movement (currently one of “member” and “admin”)
-* When the Persona was present in the Movement chat the last time. 
+* When the Persona was present in the Movement chat the last time.  
 
 #### Mindset
 
-This model represents a collections of thoughts with an author and is a superclass of Mindspace, Blog and Dialogue.
+This model represents a collections of thoughts with an author and is a superclass of `Mindspace`, `Blog` and `Dialogue`.
 
-* **Mindspace** models internal Thoughts of an Identity
-* **Blog** models a Blog publication
-* **Dialogue** models a conversation between two Identities. The Dialogue model has an additional relation to Personas representing the “other” of a conversation. This means that retrieving the Dialogue between two given Personas is not a simple lookup as the author and other attribute can be filled interchangeably. Therefore, a get_chat classmethod is provided that tries the two lookup possibilities in succession and creates a new Dialogue if both are unsuccessful.
+* **Mindspace** models internal thoughts of an identity
+* **Blog** models a blog publication
+* **Dialogue** models a conversation between two identities. The dialogue model has an additional relation to personas representing the “other” of a conversation. This means that retrieving the dialogue between two given personas is not a simple lookup, as the `author` and `other` attribute can be filled interchangeably. Therefore, a `get_chat` classmethod is provided that tries the two lookup possibilities in succession and returns a new dialogue instance if both are unsuccessful.
 
 #### Thought
 
-Represents individual content submissions by users of the site. The thought instance only contains the title text and metadata about the thought. All other media related to the Thought is contained in attachments. Thoughts also store the context they were posted in, which may either be a parent thought for replies or a mindset for top-level thoughts.
+The `Thought` model represents content submissions by users of the site. An instance only contains the title text and metadata about the thought. All other media related to the thought is contained in percepts. Thoughts also store the context they were posted in, which may either be a parent thought for replies or a mindset for top-level thoughts.
 
-The thought class is able to generate instances of itself directly from text input received via the UI. This process includes detecting embedded URLs and validating they refer to a valid HTTP resource, creating Percept objects for any text, link or linked picture attachments, relaying notifications related to the creation of this Thought and invalidating caches touched by the new Thought.
+The thought class is able to generate instances of itself directly from text input received via the UI. This process includes detecting embedded URLs and validating whether they refer to a valid HTTP resource, creating `Percept` objects for any text, link or linked picture attachments, relaying notifications triggered by the creation of new thought and percept instances and invalidating caches touched by the new thought.
 
 Thoughts also have a relation to their votes and several helper methods for accessing information about these votes (has a specific user voted, total amount of votes, hotness value).
 
 #### Upvote
 
-The Upvote model inherits from Thought. Its instances represent votes cast by Personas on other Thoughts. This relation is represented by the Upvote instance referring to the voted Thought as its parent. 
+The `Upvote` model inherits from `Thought`. Its instances represent votes cast by personas on other thoughts. This relation is represented by the upvote instance referring to the voted thought as its parent. 
 
 #### Percept
 
-The Percept model represents attachments on Thoughts. The Percept base class is used as an abstract class with subclasses for 
+The `Percept` model represents attachments on thoughts. The `Percept` class is used as an abstract class with subclasses:
 
-* Links, Linked pictures: Stores a URL.
-* Text: Stores the attached text.
-* Mentions: Stores a relation to the linked user and the text used to refer to them (these might be different if the mentioned Persona changes their username after being mentioned)
-* Tags: Store a relation to an instance of the Tag model (see below).
+* `LinkPercept`, `LinkedPicturePercept`: Stores a URL link, which is rendered inline in case of the `LinkedPicturePercept`
+* `TextPercept`: Stores the attached text
+* `MentionPercept`: Stores a relation to the linked user and the text used to refer to them (these might be different if the mentioned persona changes their username after being mentioned)
+* `TagPercept`: Store a relation to an instance of the `Tag` model (see below).
 
-Percepts are linked to a thought with the association object pattern using the PerceptAssociation class, which stores the author who created the association in addition to Thought and Percept. The association’s author is usually identical with the Thought author, but Movement admins also have the rights to edit Thoughts submitted to the Movement mindspace.
+Percepts are linked to a thought with the association object pattern. The `PerceptAssociation` class  stores the author who created the association in addition to its thought and percept. The association’s author is usually identical with the thought author, but movement admins also have the rights to edit thoughts submitted to their movement’s mindspace.
 
 #### Tag
 
-The tag model represents a label attached to a thought by embedding words starting with the hash character ‘#’ in the Thought title or text. Tagged thoughts don’t have a direct relation with a Tag instance but use the TagPercept model as an association object. This way, tags can be renamed globally without touching all Thoughts that have this tag.
+The `Tag` model represents a label attached to a thought by embedding words starting with the hash character ‘#’ in the thought title or text. Tagged thoughts don’t have a direct relation with a tag instance but use the `TagPercept` model as an association object. This way, tags can be renamed globally without touching all thoughts that have this tag.
 
 #### Notification
 
-Notifications represent direct messages to the user generated automatically when certain events require the user’s attention. The notification base class stores some metadata such as the notification text, URL, unread status and recipient. Subclasses are used to represent specific kinds of notifications:
+Notifications represent direct messages to the user, generated automatically when certain events require the user’s attention. The `Notification` base class stores metadata such as the notification text, URL, unread status and recipient. Subclasses are used to represent specific kinds of notifications:
 
-* MentionNotification: Sent to a Persona when a mention referring them is posted
-* ReplyNotification: Sent to a Persona when they receive a reply on one of their Thoughts.
-* DialogueNotification: Sent to both sides for new messages in a private conversation between two Personas.
-* FollowerNotification: Sent to a Persona when their blog gains a new follower.
+* `MentionNotification`: Sent to a persona when a mention referring them is posted
+* `ReplyNotification`: Sent to a persona when they receive a reply on one of their Thoughts.
+* `DialogueNotification`: Sent for new messages in a private conversation between two Personas.
+* `FollowerNotification`: Sent to a persona when their blog gains a new follower.
 
 ### Modeling Data with SQLAlchemy
 
-SQLAlchemy has some limitations, which are X, Y, Z. I wrote a script for automating SQLAlchemy schema migrations based on Flask-Migrate.
+SQLAlchemy allows the implicit specification of database schemas through defining the Python classes the database ought to model. Data can be retrieved using methods defined on the respective models, without writing queries specific to the underlying database system (TODO: What’s this thing called). This has the advantages that 1) developers can start modifying the database schema without having to learn a query language specific to the used database, 2) the database system can be changed with minimal changes to the model specifications and 3) all code related to the ORM models resides in one place, limiting code fragmentation. 
 
+While SQLAlchemy makes getting started really easy, it can also lead to performance problems. Reducing the complexity of database access is appropriate for straightforward use cases but can lead to misconceptions in more complex scenarios. Many advanced queries can be optimized with some knowledge of how the underlying database is used as SQLAlchemy doens’t necessarily translate a given command into the most effective query. The library provides an extensive suite of tools for implementing these optimizations.
+
+When model definitions are changed, while the database is already used in production, it is not enough to recreate the database using the new schema, as old data may have to be migrated. Rktik uses the Alembic library to record schema changes and automatically migrate the database layout. Schema migrations are automatically executed on the server by the deployment script (see [Hosting and Deployment]).
+
+In cases where not only the database layout, but also its contents have to be modified, migration scripts have to be manually written in accordances with the changes. These are stored in the `glia/migrations_extra` directory for one-time execution on the server.
 
 ## Web Server: Glia [7p]
 
