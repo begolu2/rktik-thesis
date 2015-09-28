@@ -4,21 +4,19 @@ Rktik is an online community allowing groups of like minded people to find each 
 
 ”Conceptual” part describes functionality present to a user of the software, “Implementation” part describes technical background of implementation and operation of the service. Finally, “Evaluation and Discussion” presents data about feature usage and outlines future plans for the project.
 
-## Motivation [1p]
+## Motivation
 
-Souma started from the personal need to share files with friends in groups of people without reliance on goodwill of centralistic providers of social networking systems. 
+Souma started from the wish to share files with friends in groups of people without reliance on goodwill of centralistic providers of social networking systems. As such a system did not exist in 2012, I started developing the *Souma* app myself, changing requirements to the system significantly as I went along.
 
-Distributed communications systems are built for the use case of  either file transfers or chatting. Want a system that integrates  modes of communication in digital social settings and offers persistence and privacy.
+At first I wanted a system that extends the social environment given by websites such as Facebook with filesharing functionality that can only be provided by a decentral system due to privacy and legal reasons. As the idea was further developed by me and other members of the *Cognitive Networks* study project at University of Osnabrück, priorities shifted to a focus on the more general goal of *humanist social platform*. This would not place economic constraints and existing metaphors for social software systems at the center of its conceptualization, but instead build it up from the ideals of humanism.
 
-Group brain metaphor, system for distributing attention in a group, hierarchical conversations
-
-Souma study project, feature crawl, group organization cluttered source code, stand-alone application
-
-New start, clean source code, refactoring again and again. Good Rktik.
+This shift in the goals of the study project, combined with the remnants of various side projects embedded in the Souma app, left the code base in a cluttered state. Therefore, after the end of the study project, I started developing Rktik as a new web-based platform based on the server-side component of Souma. It has now a much more limited focus: Developing a social publishing platform that implements a new concept of individual and group identity online.
 
 ## Problem: Privacy and Identity [1p]
 
-What is the problem with privacy online?
+The essential problem in managing privacy in online systems is the neccessity of direct access to user data, which is required for both cloud-based web applications and many native applications that offload parts of their data processing to web servers (which is the case for most mobile apps). Companies need  direct access to user data, so that they can take advantage of central data processing facilities running on web servers. Some of the advantages of server-based systems as opposed to software distributed to and installed on user machines are 1) easier control of software piracy, 2) more efficient maintenance due to direct access to the running system, 3) no need to support a wide range of (possibly low-performance) user hardware.
+
+While the proposed P2P extension of Rktik (see [Peer to Peer Extension]) tackles this problem more directly, …
 
 Why are cloud-based social networks inherently limited with regard to privacy?
 
