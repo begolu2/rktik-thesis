@@ -68,7 +68,7 @@
 
 - Session Management
 - Web View and URL Routing
-- Rendering the User Interface using Templates
+- HTML Templates
 - Asynchronous UI
 - Email Notifications
 - Background Workers

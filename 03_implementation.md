@@ -1,26 +1,28 @@
-# Implementation and Operation [14p]
+# Implementation and Operation
 
-## Overview [1p]
+## Overview
 
-This section will detail technical information about the implementation and operation of the Rktik service.
+This chapter will give technical information about the implementation and operation of the Rktik service.
 
-It is divided into subsections for the shared data model *Nucleus*, which can be used in a future peer to peer client as a library, the *Glia* server which provides a web interface to users and finally sections about improving performance and the operation of Rktik in hosted environment.
+It is divided into sections for the shared data model *Nucleus*, the *Glia* web server, about improving performance as well as the deployment and operation of Rktik in a hosted environment.
 
 ### Separating Data Model and Web Interface
 
-As Rktik is planned as a semi-decentral service, the object relational manager was decoupled from the rest of the application from the beginning to allow for the easy implementation of client and server applications using this codebase. 
+As Rktik is planned as a semi-decentralized service[^semi_decentral], the object relational manager was decoupled from the rest of the application from the beginning to allow for the easy implementation of client and server applications using this codebase. 
 
-## Shared Data Model: Nucleus [3p]
+[^semi_decentral]: Semi-decentral means that users can chose between 1) a client application for rendering and processing data which uses a web server for the transfer of (encrypted) data and 2) solely using Rktik on its website without installing an application on their computers.
 
-The Nucleus data model uses the SQLAlchemy ORM in combination with a Postgresql database to provide data persistency. This section lists attributes and methods of all models. The description of methods indicates in brackets if the method is a static or class method and also, if the method’s results are cached using Memcache (see section Improving Performance).
+## Shared Data Model: Nucleus
 
-Data models allow JSON serialization via the nucleus.serializable module. This functionality is not documented here in full scope, as it is not part of this thesis, but required for the planned P2P extension (see Discussion: P2P).
+The Nucleus data model uses the SQLAlchemy ORM in combination with a Postgresql database to provide data persistency and means of data processing directly related to the models. This section lists attributes and methods of all models. The description of methods indicates in brackets if the method is a static or class method and also, if the method’s results are cached using Memcache (see [Improving Performance]).
+
+Data models allow JSON serialization via the nucleus.serializable module. This functionality is not documented here in full scope, as it is not part of this thesis, but required for the planned P2P extension (see [Peer to Peer Extension]).
 
 ### Serializable
 
 The Serializable module provides JSON serialization functionality to data models that inherit from it. This functionality is not in the scope of this thesis, but part of the planned P2P extension (see Discussion: P2P). As the module is required for rights management, I have left it in the codebase submitted along this document and will describe the relevant functionality here.
 
-Serializable objects provide a method *authorize*, which validates that a specific user may execute a specific action on the instance. This method is usually overridden in subclasses with the original Serializable.authorize method still being called.
+Serializable objects provide a method *authorize*, which validates that a specific user may execute a specific action on the instance. This method is overridden in subclasses with the original Serializable.authorize method still being called.
 
 The method takes one of the strings “insert”, “update”, “delete” as the action and an optional author_id argument, which defaults to the currently active Persona, and defines the actor to be authorized. It returns a boolean indicating whether the action is authorized.
 
@@ -46,15 +48,15 @@ The user model represents a registered user of the site. It has relations to all
 
 #### Identity
 
-The Identity class is a superclass for Persona and Movement as these two share many attributes and methods related to their being identities. 
+The Identity class is a superclass for Persona and Movement as these two share many attributes and methods related to them being identities. 
 
-Apart from basic information such as the username, associated color, creation and modification timestamps, the Identity model stores relations to the blog and mindspace associated with each instance as well all blogs followed by it.
+Apart from basic information such as the username, associated color, creation and modification timestamps, the Identity model stores relations to the blog and mindspace associated with each instance as blogs it is following.
 
 #### Persona
 
-The Persona class represents personal identities taken by users of the site. Each user may create any number of Personas with their account. 
+The Persona class represents personal identities taken by users of the site. Each user may create any number of Personas with their user account. 
 
-The Persona model provides methods for toggling instances membership in Movement and their following status with respect to blogs. It also provides a number of cached methods which provide information related to the Persona that is computationally expensive to collect (see Improving Performance).
+The Persona model provides methods for toggling instances’ membership in Movements and their following status with respect to blogs. It also provides a number of cached methods which provide information related to the Persona that is computationally expensive to collect (see Improving Performance).
 
 #### Movement
 
@@ -122,7 +124,17 @@ SQLAlchemy has some limitations, which are X, Y, Z. I wrote a script for automat
 
 The Glia web server is responsible for compiling contents of the user interface, serving asynchronous UI updates, validating, storing and modifying information entered by the user, automatically performing maintenance operations and scheduling email delivery.
 
-### Session Management
+The Glia web server consists of these components:
+
+- Views are functions mapped to URL patterns that compute the contents of those URLs
+- Websocket events are special views used for asynchronous communication with a web browser
+- Forms validate restraints on user input
+- HTML Templates are used to map data obtained from the Nucleus service into a graphical user interface
+- Configuration files
+- Database migration scripts
+- Static files
+
+**Session Management**
 
 Session management is responsible for storing information about which user is logged in on which browsers. Rktik uses the Flask-Login extension to provide most of this functionality. 
 
@@ -130,7 +142,7 @@ Users can login using their email and password which, given a correct password, 
 
 ### Web View and URL Routing
 
-A web app in Flask consists of the components view, route, models and helper functions. Views provide kinds of pages and are mapped by a route to a URL scheme which can be acesses by a user.
+Views provide kinds of pages and are mapped by a route to a URL scheme which can be acesses by a user.
 
 The views provided in Glia are
 
@@ -179,7 +191,7 @@ These special views have the before_requrest decorator which causes them to be e
 * **account_notifications** Remind users of clicking the link in the validation email if they haven’t already
 * **mark_notifications_read** Mark all notifications read which have a URL equal to the current page
 
-### Rendering the User Interface using Templates
+### HTML Templates
 
 Templates allow separation of content and markup in the application backend. View functions are used to collect all information neccessary to compile a web page, this information is then passed on to a template that defines the places the information needs to go and the way it needs to be rendered.
 
