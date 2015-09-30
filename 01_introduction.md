@@ -49,28 +49,32 @@ The comparison includes Facebook as a social network mostly used for communicati
 
 In the following, I will explain the basic functionality of each of the services and then detail what makes them similar and different from Rktik.
 
-[Rktik displays discussions in the replies to a thought in a hierarchical style with thoughts on the same level being ordered by their hotness value. This is the same structure as that employed in Reddit discussion (footnote: Reddit uses a different hotness algorithm for ordering replies than they use for link listings). Facebook discussions have historically used a flat design with a recent switch (todo: when?) to a partially hierarchical display with a single nesting level. The display of discussions in email newsgroups is dependent on the client used to read the newsgroup contents. Many such clients also use a nested reply structure with chronological ordering on a given nesting level.]
-
 **Facebook**
 
 Facebook is an online social networking service, it allows friends and acquaintances to keep track of each other’s personal lifes. Facebook offers a similar core functionality to that of Rktik in that users can publish content on their profiles, vote and comment on content of other users and subscribe to their content feeds. Both services center the user interface on a feed of content from subscribed sources that is sorted based on recency as well as other factors. Facebook also allows users to create groups as either public spaces related to a topic or private spaces for exchange of messages between group members. Users may also send private messages to their “friends”.
 
-Facebook requires users to identify with their real name and explicitly forbids creating more than one personal user account.  Contents of the Facebook network are hidden from the public by default and made available only once a friendship connection has been established with a user. Facebook groups can only choose to be either public or private. They can’t exchange some messages privately and publish others to the public.
+Facebook is different from Rktik both in policy and features. It requires users to identify with their real name and explicitly forbids creating more than one personal user account.  Contents of the Facebook network are hidden from the public by default and made available only once a friendship connection has been established with a user. Facebook groups can only choose to be either public or private. They can’t exchange some messages privately and publish others to the public.
 
 In addition to the core functionality, Facebook offers many more features from business directories to video calling. I have not included them in this comparison as they don’t compare to features of Rktik.
 
 **Reddit**
 
-Reddit is a link aggregator , it is made for Y so they can Z.
+Reddit is a social link aggregator, it lets users create link and text submissions and sorts them based on user votes and recency. Submissions are created in “subreddits”, which are subcommunities of Reddit related to a specific topic. Users may also use the comments section on every submission for discussion with other users. Comments can be voted on and are displayed in a hierarchical layout based on their reply-structure. Each subtree is sorted according to number of votes and recency. Users of reddit can collect “karma”, which is a numeric value displayed on their profile that indicates the amount of votes they have received on comments and submissions created on the site.
 
-Reddit is similar to Rktik in that it ___.
+This core functionality of Reddit is identical to that of Rktik.  Differences between the services can be found in their implementation of user and group identity as well as their layout. 
 
-Reddit is different from Rktik in that it ___.
+In contrast to Facebook, Reddit encourages the creation of multiple accounts per user (@Reddit.com). It doesn’t however provide user interface controls for this use case. Every account is identified by its username, which is pseudonymous and does not neccessarily reflect the real identity of a user in any way.   
+
+Users can not directly publish content on their user profile as all submissions must be placed in an existing community/*subreddit*. Subreddits allow the aggregation of content related to a specific topic. These contents can be made visible only to confirmed members of the subreddit, or to the general public. In contrast to Rktik, Reddit doesn’t allow subreddits to aggregate content in a space visible only to members, while also publishing content in a public space.
+
+The content on reddit.com is almost text-only. If a link submission points at an image, a small preview is displayed next to the submission’s title, while links to other content are never rendered inline. 
 
 **Email**
 
-Email is an X, it is made for Y so they can Z.
+Email is a protocol for distributing messages from an author to one or many recipients. While Rktik, Facebook and Reddit are offerings provided by specific providers, Email is a *method* of message delivery that is implemented by many different service providers worldwide, while still allowing all users to exchange messages with each other. Email messages may also contain any number of media attachments.
 
-Email is similar to Rktik in that it ___.
+A user of Email is identified by their email address. Some email service providers let users chose a username for themselves, while others have policies regarding usage of a real name or other personally identifying features such as their role in a company. As there is no unified user interface for email services, users can chose from a great range of email clients. These can be websites, dedicated email applications or email features embedded in other applications. Available features depend entirely on the client used.
 
-Email is different from Rktik in that it ___.
+Email can be used in combination with *automated email lists* for similar usecases as those that Rktik was designed for. Automated email lists or *email lists* are distribution services that forwards incoming messages, sent to a special email address, to all users registered with the email list. Registration may be open to the general public or restricted to a group of users defined by the email list operator. Messages sent to the email list may also be read using a web based discussion archive. 
+
+An email list is similar to Rktik movements, subreddits and Facebook groups in that it provides members with a space for discussion and exchange. Submissions are tied to their author and discussion may be hierarchically organized by reply-structure as is the case in Reddit and Rktik. Email does not provide a mechanism for voting on messages, so discussions are sorted chronologically. Email lists also can’t collectively author content and publish it to people outside the email list using email list features.
