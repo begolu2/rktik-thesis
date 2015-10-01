@@ -4,9 +4,9 @@
 %
 % Copyright (C) 2012 Andr\'e Miede http://www.miede.de
 %
-% If you like the style then I would appreciate a postcard. My address 
-% can be found in the file ClassicThesis.pdf. A collection of the 
-% postcards I received so far is available online at 
+% If you like the style then I would appreciate a postcard. My address
+% can be found in the file ClassicThesis.pdf. A collection of the
+% postcards I received so far is available online at
 % http://postcards.miede.de
 %
 % License:
@@ -66,33 +66,34 @@ $endif$
 \usepackage{amstext}
 \usepackage{rotating}
 \usepackage{enumitem}
+\usepackage{longtable}
 \setlist{nolistsep}
 
 % Fixing bug related to Pandoc to Latex conversion
 \def\tightlist{}
 
 % ****************************************************************************************************
-% classicthesis-config.tex 
-% formerly known as loadpackages.sty, classicthesis-ldpkg.sty, and classicthesis-preamble.sty 
-% Use it at the beginning of your ClassicThesis.tex, or as a LaTeX Preamble 
+% classicthesis-config.tex
+% formerly known as loadpackages.sty, classicthesis-ldpkg.sty, and classicthesis-preamble.sty
+% Use it at the beginning of your ClassicThesis.tex, or as a LaTeX Preamble
 % in your ClassicThesis.{tex,lyx} with \input{classicthesis-config}
-% ****************************************************************************************************  
-% If you like the classicthesis, then I would appreciate a postcard. 
-% My address can be found in the file ClassicThesis.pdf. A collection 
-% of the postcards I received so far is available online at 
+% ****************************************************************************************************
+% If you like the classicthesis, then I would appreciate a postcard.
+% My address can be found in the file ClassicThesis.pdf. A collection
+% of the postcards I received so far is available online at
 % http://postcards.miede.de
 % ****************************************************************************************************
 
 % ****************************************************************************************************
-% 1. Configure classicthesis for your needs here, e.g., remove "drafting" below 
+% 1. Configure classicthesis for your needs here, e.g., remove "drafting" below
 % in order to deactivate the time-stamp on the pages
 % ****************************************************************************************************
 %\PassOptionsToPackage{eulerchapternumbers,listings,drafting,%
 %				 pdfspacing,%floatperchapter,%linedheaders,%
 %				 subfig,beramono,eulermath,parts}{classicthesis}
-\PassOptionsToPackage{listings,drafting,linedheaders,manychapters,pdfspacing,parts}{classicthesis}										
+\PassOptionsToPackage{listings,drafting,linedheaders,manychapters,pdfspacing,parts}{classicthesis}
 % ********************************************************************
-% Available options for classicthesis.sty 
+% Available options for classicthesis.sty
 % (see ClassicThesis.pdf for more information):
 % drafting
 % parts nochapters linedheaders
@@ -103,7 +104,7 @@ $endif$
 
 % ********************************************************************
 % Triggers for this config
-% ******************************************************************** 
+% ********************************************************************
 \usepackage{ifthen}
 
 % ****************************************************************************************************
@@ -117,43 +118,43 @@ $endif$
 \newcommand{\ie}{i.\,e.}
 \newcommand{\Ie}{I.\,e.}
 \newcommand{\eg}{e.\,g.}
-\newcommand{\Eg}{E.\,g.} 
+\newcommand{\Eg}{E.\,g.}
 % ****************************************************************************************************
 
 
 % ****************************************************************************************************
 % 3. Loading some handy packages
 % ****************************************************************************************************
-% ******************************************************************** 
+% ********************************************************************
 % Packages with options that might require adjustments
-% ******************************************************************** 
-			
+% ********************************************************************
+
 
 \PassOptionsToPackage{english}{babel}   % change this to your language(s)
 % Spanish languages need extra options in order to work with this template
 %\PassOptionsToPackage{spanish,es-lcroman}{babel}
-% \usepackage{babel}					
+% \usepackage{babel}
 
-\PassOptionsToPackage{fleqn}{amsmath}		% math environments and more by the AMS 
+\PassOptionsToPackage{fleqn}{amsmath}		% math environments and more by the AMS
  \usepackage{amsmath}
 
-% ******************************************************************** 
+% ********************************************************************
 % General useful packages
-% ******************************************************************** 
+% ********************************************************************
 \PassOptionsToPackage{T1}{fontenc} % T2A for cyrillics
-	\usepackage{fontenc}     
+	\usepackage{fontenc}
 \usepackage{textcomp} % fix warning with missing font shapes
-\usepackage{scrhack} % fix warnings when using KOMA with listings package          
-\usepackage{xspace} % to get the spacing after macros right  
+\usepackage{scrhack} % fix warnings when using KOMA with listings package
+\usepackage{xspace} % to get the spacing after macros right
 \usepackage{mparhack} % get marginpar right
-\usepackage{fixltx2e} % fixes some LaTeX stuff 
+\usepackage{fixltx2e} % fixes some LaTeX stuff
 \PassOptionsToPackage{printonlyused,smaller}{acronym}
 	\usepackage{acronym} % nice macros for handling all acronyms in the thesis
-{% raw %}	
+{% raw %}
 %\renewcommand*{\acsfont}[1]{\textssc{#1}} % for MinionPro
 \renewcommand{\bflabel}[1]{{#1}\hfill} % fix the list of acronyms
 {% endraw %}
- 
+
 \usepackage{biblatex}
 \bibliography{$bibfile$}
 $if(book-class)$
@@ -176,14 +177,14 @@ $endif$
 \usepackage{caption}
 \captionsetup{format=hang,font=small}
 \usepackage{subcaption}
-%\usepackage{subfig}  
+%\usepackage{subfig}
 % ****************************************************************************************************
 
 
 % ****************************************************************************************************
 % 5. Setup code listings
 % ****************************************************************************************************
-\usepackage{listings} 
+\usepackage{listings}
 \lstset{emph={trueIndex,root},emphstyle=\color{BlueViolet}}%\underbar} % for special keywords
 \lstset{language=[LaTeX]Tex,%C++,
     keywordstyle=\color{RoyalBlue},%\bfseries,
@@ -201,8 +202,8 @@ $endif$
     frame=single,
     belowcaptionskip=.75\baselineskip
     %frame=L
-} 
-% ****************************************************************************************************    		   
+}
+% ****************************************************************************************************
 
 
 % ********************************************************************
@@ -211,7 +212,7 @@ $endif$
 \PassOptionsToPackage{pdftex,hyperfootnotes=false,pdfpagelabels}{hyperref}
 	\usepackage{hyperref}  % backref linktocpage pagebackref
 \pdfcompresslevel=9
-\pdfadjustspacing=1 
+\pdfadjustspacing=1
 
 $if(graphics)$
 \usepackage{graphicx}
@@ -232,7 +233,7 @@ $endif$
     %draft,	% = no hyperlinking at all (useful in b/w printouts)
     colorlinks=true, linktocpage=true, pdfstartpage=3, pdfstartview=FitV,%
     % uncomment the following line if you want to have black links (e.g., for printing)
-    %colorlinks=false, linktocpage=false, pdfborder={0 0 0}, pdfstartpage=3, pdfstartview=FitV,% 
+    %colorlinks=false, linktocpage=false, pdfborder={0 0 0}, pdfstartpage=3, pdfstartview=FitV,%
     breaklinks=true, pdfpagemode=UseNone, pageanchor=true, pdfpagemode=UseOutlines,%
     plainpages=false, bookmarksnumbered, bookmarksopen=true, bookmarksopenlevel=1,%
     hypertexnames=true, pdfhighlight=/O,%nesting=true,%frenchlinks,%
@@ -244,7 +245,7 @@ $endif$
     pdfkeywords={},%
     pdfcreator={pdfLaTeX},%
     pdfproducer={LaTeX with hyperref and classicthesis}%
-}   
+}
 \urlstyle{same}  % don't use monospace font for urls
 
 
@@ -256,7 +257,7 @@ $endif$
 % ********************************************************************
 % Last, but not least...
 % ********************************************************************
-\usepackage{classicthesis} 
+\usepackage{classicthesis}
 
 {% if crop %}
 %\usepackage[{{ paper }}paper]{geometry}
@@ -311,7 +312,7 @@ $endif$
     $if(title)$
     {\LARGE \sffamily $title$ \par}
     $endif$
-    
+
     \vspace*{2cm}
     $if(subtitle)$
     {\Large \sffamily $subtitle$ \par}%
@@ -328,7 +329,7 @@ $endif$
     {\normalsize DIRECTOR DE LA TESI}\par
     {\large $supervisor$}  \par
     \vspace{3cm}
-   \centering  
+   \centering
     \includegraphics[width=0.5\linewidth]{$university_logo$}
    \end{flushleft}\par
    \makeatother
@@ -351,7 +352,7 @@ $endfor$
 \setcounter{secnumdepth}{3} % <-- 3 numbers up to subsubsections
 \manualmark
 \markboth{\spacedlowsmallcaps{\contentsname}}{\spacedlowsmallcaps{\contentsname}}
-\tableofcontents 
+\tableofcontents
 \automark[section]{chapter}
 {% raw %}
 \renewcommand{\chaptermark}[1]{\markboth{\spacedlowsmallcaps{#1}}{\spacedlowsmallcaps{#1}}}
@@ -360,14 +361,14 @@ $endfor$
 
 \clearpage
 
-\begingroup 
+\begingroup
     \let\clearpage\relax
     \let\cleardoublepage\relax
     \let\cleardoublepage\relax
     %*******************************************************
     % List of Figures
-    %*******************************************************    
-    %\phantomsection 
+    %*******************************************************
+    %\phantomsection
     \refstepcounter{dummy}
     %\addcontentsline{toc}{chapter}{\listfigurename}
     \pdfbookmark[1]{\listfigurename}{lof}
@@ -379,29 +380,29 @@ $endfor$
     %*******************************************************
     % List of Tables
     %*******************************************************
-    %\phantomsection 
+    %\phantomsection
     \refstepcounter{dummy}
     %\addcontentsline{toc}{chapter}{\listtablename}
     \pdfbookmark[1]{\listtablename}{lot}
     \listoftables
-        
-    \vspace*{8ex}
-    {% endif %}
-%   \newpage
-    
-    {% if table_of_contents.listings %}
-    %*******************************************************
-    % List of Listings
-    %*******************************************************      
-	  %\phantomsection 
-    \refstepcounter{dummy}
-    %\addcontentsline{toc}{chapter}{\lstlistlistingname}
-    \pdfbookmark[1]{\lstlistlistingname}{lol}
-    \lstlistoflistings 
 
     \vspace*{8ex}
     {% endif %}
-                        
+%   \newpage
+
+    {% if table_of_contents.listings %}
+    %*******************************************************
+    % List of Listings
+    %*******************************************************
+	  %\phantomsection
+    \refstepcounter{dummy}
+    %\addcontentsline{toc}{chapter}{\lstlistlistingname}
+    \pdfbookmark[1]{\lstlistlistingname}{lol}
+    \lstlistoflistings
+
+    \vspace*{8ex}
+    {% endif %}
+
 \endgroup
 
 \cleardoublepage
