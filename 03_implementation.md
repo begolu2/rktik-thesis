@@ -221,18 +221,16 @@ Email notifications are delivered using the *SendGrid* email delivery service (s
 
 The user may opt out of email delivery entirely or setup specific rules for the kind of emails they want to receive. These settings can be made in the notifications view linked from the notifications drop-down and a hyperlink at the end of all sent email messages.
 
-### Background Workers
-
-If all computatinos were done when a user is submitting information, the site responsiveness would be quite bad. That’s why a big part of the contents on sites are calculated in advance for any user that visits the site later.
-
-Actions that modify site contents trigger a process that puts a request on a queue to update the page contents with a more recent version. This information is stored in-memory so that site contents can be computet quickly.
-
 
 ## Improving Performance [1p]
 
-Improving performance is important because web users expect fast-loading sites that don’t disrupt their stream of consciousness when they are browsing. This is hard, because especially sorting on big datasets becomes slower and slower the more data is in the system.
+User satisfaction is related to a web sites performance (@NIELSEN2012). As the complex page layouts and *hot* sorting used in Rktik require significant server resources, keeping performance at a satisfactory level is hard. As the development process of Rktik did not define performance as a primary objective but focused on feasibility (see [Methodology]), the neccessary adjustments are even more difficult to make. Still, it was possible to increase performance at the end of the development process by 1) using memcache to reuse computed results and 2) optimizing database queries.
 
-For this reason a memcached system is used that stores information A, B, and C in memory. The system is triggered on process X and then performs Y. There are still some problems with Z, but this is not a pressing concern right now.
+**Caching**
+
+The memcache system is an in-memory key value store to hold computed results for fast access until they are overwritten, their expiry date is reached or they are deleted because available memory is not sufficient for new entries. Rktik uses the Flask-Cache library to access memcache (@Burgess). Caching is used if results 1) are changing slowly ^[As an example, the frontpage graph structure is cached for 1 hour per persona as the frontpage changes slowly and omissions are not considered critical.] , 2) are expected to be reusable in the near future and 3) can be reliably invalidated once they change.
+
+Cached data is invalidated by processes that change its contents. Following is a list of cached functions and the processes that trigger their invalidation. Cache contents are automatically invalidated after an amount of time that ranges from minutes to days.
 
 **Cached Information**
 
@@ -258,6 +256,10 @@ Additional:
 * “Percept” template macro 
 * Frontpage graph visualization
 * Async chat view 
+
+**Database Query Optimization**
+
+The SQLAlchemy library hides the complexity of accessing data stored and linked across multiple tables. While this eases the development process significantly, it can lead to inefficient patterns of database usage. Specifically, the number of queries required to access data can be in a linear relation to the number of items retrieved. These queries can be combined into a single query or a low number of queries by using *eager loading* techniques offered by SQLAlchemy (@SQLAlchemyAutors). Here, a *JOIN* statement is issued to simultaneously load related data from the database. Rktik uses eager loading 1) ad hoc using the SQLAlchemy `joinedload` option for specific queries and 2) in general by specifying relations to always load joined in model definitions located in Nucleus.
 
 ## Hosting and Deployment [1p]
 
