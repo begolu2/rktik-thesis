@@ -107,19 +107,19 @@ When model definitions are changed, while the database is already used in produc
 
 In cases where not only the database layout, but also its contents have to be modified, migration scripts have to be manually written in accordances with the changes. These are stored in the `glia/migrations_extra` directory for one-time execution on the server.
 
-## Web Server: Glia [7p]
+## Web Server: Glia
 
-The Glia web server is responsible for compiling contents of the user interface, serving asynchronous UI updates, validating, storing and modifying information entered by the user, automatically performing maintenance operations and scheduling email delivery.
+The Glia web server is responsible for collecting and computing contents of the user interface, serving asynchronous UI updates, validating, storing and modifying information entered by the user, automatically performing maintenance operations and scheduling email delivery.
 
 The Glia web server consists of these components:
 
-- Views are functions mapped to URL patterns that compute the contents of those URLs
-- Websocket events are special views used for asynchronous communication with a web browser
-- Forms validate restraints on user input
-- HTML Templates are used to map data obtained from the Nucleus service into a graphical user interface
-- Configuration files
-- Database migration scripts
-- Static files
+- *Views* are functions mapped to URL patterns and compute their contents when accessed by a user
+- *Websocket events* are special views used for asynchronous communication with a web browser
+- *Forms* validate restraints on structured user input
+- *HTML Templates* are used to map data into a graphical layout to be rendered by a browser
+- *Configuration files*
+- *Database migration scripts*
+- *Static files* (Images, frontend Javascript resources, etc)
 
 **Session Management**
 
@@ -129,78 +129,97 @@ Users can login using their email and password which, given a correct password, 
 
 ### Web View and URL Routing
 
-Views provide kinds of pages and are mapped by a route to a URL scheme which can be acesses by a user.
+Views are functions that return HTML content and are mapped by a route to a URL scheme, which can be acessed by a user through a web browser.
 
-The views provided in Glia are
+Following is a description of all views available in Glia. Some of these are *redirect views*, which don’t return a web page to the browser but redirect to a different URL.
 
 * **index** Frontpage at http://rktik.com/
 
 *Personas*
 
-* **create_persona** Adding a new Persona to the currently logged in account
+* **create_persona** Form for adding a new persona
 * **notebook** Private area for storing notes and reposting thoughts for oneself
-* **notifications** Access full list of notifications and set email preferences
-* **persona** Access basic information and private chat for Personas. Also displays movements the Persona is a member of.
-* **persona_blog** Personal blog of Personas
+* **notifications** Listing of notifications for active persona and email preferences for logged in user account
+* **persona** Basic information about a single persona and listing of all movements they are a member of. This view includes a chat widget for private conversations with other users.
+* **persona_blog** Personal blog of a persona
 
 *Thoughts*
 
-* **create_thought** Alternative to creating thoughts using the chat module or inline thought creation tool. Also allows entering longform text.
-* **edit_thought** Similar interface to the create_thought view. Also allows removing specific attachments.
+* **create_thought** Dedicated page for creating new thoughts. In contrast to the inline thought creator this view also allows entering long text attachments.
+* **edit_thought** Similar interface to the *create_thought* view that allows removing and editing attachments and the thought’s title.
 * **delete_thought** Confirmation dialog for removing thoughts. 
-* **thought** Display a single thought including context, attachments, comments and a box showing metadata about the thought.
+* **thought** View for a single thought that includes its context, attachments, comments and the thought’s metadata.
 
 *Movements*
 
-* **movement** Redirects members to the mindspace and everyone else to the blog
-* **movement_blog** Reverse chronological listing of thoughts in the movement blog. Also allows following the movement and becoming a member.
-* **movement_mindspace** Show the movement mindspace contents sorted by *hot* as well as the movement chat and basic movement metadata.
-* **invite_members** Provide invitation link for a movement as well as a form for sending email invitations.
+* **movement** Redirect view that sends members to a movement’s mindspace and non-members to the movement blog.
+* **movement_blog** Main listing for a movement’s blog that presents a reverse chronological, paginated view of thoughts in the blog. Also allows following the movement and becoming a member.
+* **movement_mindspace** View for movement mindspace contents as well as movement chat and basic movement metadata.
+* **invite_members** Form for obtaining invitation links for a movement and sending email invitations.
 * **movement_list** List all movements registered on Rktik
 
 *User account related*
 
-* **activate_persona** Activate a Persona and redirect to referrer or frontpage
-* **signup** Create a new user account
-* **signup_validation** Validate a user’s email address, redirects to the frontpage.
-* **login** Login to a user account using email and password
-* **logout** Logout a user account, redirecting to the login view
+* **activate_persona** Redirect view that activates a different persona registered to the logged in user account
+* **signup** Form for creating a new user account
+* **signup_validation** Redirect view for validating a user’s email address
+* **login** Login form for user accounts
+* **logout** Redirect view that logs out the current user account
 
 *Helpers*
 
 * **help** Access help pages stored in *templates/help_\*.html* files
-* **tag** List all thoughts marked with a given hashtag
+* **tag** Listing of thoughts marked with a specific hashtag
 
 *Before request* 
 
-These special views have the before_requrest decorator which causes them to be executed every time a user visits a page.
+These special views have the `before_request` decorator, which causes them to be executed every time a user visits a page.
 
-* **account_notifications** Remind users of clicking the link in the validation email if they haven’t already
-* **mark_notifications_read** Mark all notifications read which have a URL equal to the current page
+* **account_notifications** Inserts a notification into the page if the logged in user has not validated their email address
+* **mark_notifications_read** Marks all notifications as *read* which have a URL property equal to the current page
 
 ### HTML Templates
 
-Templates allow separation of content and markup in the application backend. View functions are used to collect all information neccessary to compile a web page, this information is then passed on to a template that defines the places the information needs to go and the way it needs to be rendered.
+Templates allow separation of content and layout in the application backend and thereby lead to more readable code. View functions collect all information neccessary for a given web page and then pass this information to a template which defines the places variable contents needs to go and any transformations that need to be carried out to them before inserting. Templates are defined using an extension of the HTML syntax. 
 
-Jinja2 provides almost all functionality needed, I extended it using these custom filters and extensions: ___ .
+Flask includes the Jinja2 library for templating which provides almost all required functionality. Rktik uses the *humanize* library for converting date and time data into a human readable format ^[As an example, instead of displaying `2015-10-01T15:42:23.254966+00:00` as a thought’s creation time, the relative form *two hours ago* is used]. Additionally, a number of custom filters are used in templates:
+
+* Rktik stores all date and time information in the GMT timezone. This allows handling time information in the backend without considering time zones. A custom filter is used to convert these to European central time in the template.
+* The *mentions* filter uses information from mention percepts (see [Nucleus Models]) to replace occurrences of the pattern `@persona_name` with a link to the respective persona’s page
+* The *gallery_col_width* filter is used to adapt the size of image attachments to their number. The largest format is used when only one image is attached. A successively smaller image size is used up to four image attachments.
+
+	(SCREENSHOT)
+* The *sort_hot* filter can be used to apply a hot ranking to lists of thoughts
+* The *authorize* filter replaces thought contents with a placeholder if the thought is not visible to the active persona (see [Serializable]).
 
 ### Asynchronous UI
 
-Most of the content of Rktik is compiled on the server and then rendered in the user’s computer for their screen. When an interaction requires only some part of the screen contents to be changed, site responsiveness can be increased by using asynchronous communication with the server. This allows the client-side code of Rktik to obtain new information from the server and change the site contents accordingly.
+Most of the content of Rktik is compiled on the server and then sent as a complete web page to the user’s browser. When an interaction requires only part of the screen contents to be changed, site responsiveness can be increased by using asynchronous communication with the server. This functionality is implemented using the *jQuery* (CITE) Javascript library for one-off asynchronous calls and the *websockets* browser technology (CITE) for continous streams of information. 
 
-This is used in the following parts of the site:
+The websockets technology provides a socket between the browser and the Glia server which can be used for relaying information during the time in which the browser window stays open. All thoughts created in a movement mindspace, which includes chat messages as well as all votes on these thoughts, are received and immediately relayed by the server to all browser windows that show part of the movement. Messages received on the client side are inserted into the chat widget. If the browser window shows an invidual thought’s page, new comments are inserted at the appropriate place in the hierarchical comments view. 
 
-* Chat
-* Notifications
-* Inserting new comments
+The same channel is used for sending reposts and receiving desktop notifications (see [Notifications]). Server side handlers for websockets are located in the `glia.web.events` module, while client side handlers are located in the static file `glia/static/js/main.js`.
 
-### Email Notifications
+Other asynchronous calls are handled using jQuery based javascript functions. This includes :
 
-As users can not be expected to visit the site regularly, it is neccessary to provide a means to get informed about someone communication with me on the site when this is happening. That’s why I put email notifications in the System.
+* Loading more chat contents ^[The chat window initially loads the most recent 50 messages, at the top of which a button triggers loading another 50].
+* Changing a movement’s mission description
+* Changing a persona’s username
+* Changing the amount of context ^[The context of a thought is that thought to which it is a reply. Applying this definition recursively gives a context depth.] displayed above the thought title on individual thought pages
+* Toggling following status with respect to a blog
+* Toggling membership in a movement
 
-Email delivery is hard because of Spam and the setup is also quite difficult. That’s why I use ___ to deliver Emails. They provide an API which I use in part X of Rktik to schedule email delivery.
+The server side handlers for this functionality are located in the `glia.web.async` module, while the client side handlers are located in the `glia/static/js/main.js` script.
 
-The user may opt out of email delivery entirely or setup specific rules for the kind of emails they want to receive. 
+### Notifications
+
+Notifications are direct messages from the system to a user and inform them about reactions to their thoughts, as well as other relevant messages. They are relayed as desktop notifications (SCREENSHOT) and/or as email messages. Email messages provide the further advantage of being a way to contact users who are not visiting the site regularly.
+
+Desktop notifications are displayed using the PNotify library (see @Perrin), which can insert notifications as HTML elements in the current web page or as operating system specific native UI elements outside the browser window as specified in the W3C recommendation *Web Notifications* (see @W3C). When a user first visits the Rktik website, they are prompted to allow displaying web notifications. HTML based notifications are used if this request is denied. Desktop notifications are relayed to the browser using websockets. The javascript functions used for receiving and displaying notifications are located in the `glia/static/js/main.js` script.
+
+Email notifications are delivered using the *SendGrid* email delivery service (see @SendGrid). Using this service ensures that all users can receive email notifications reliably. While an email implementation integrated with the Rktik service would be technically feasible, this approach would not guarantee that messages pass spam filters of users’ email providers. This functionality is implemented in the `glia.web.helpers` module.
+
+The user may opt out of email delivery entirely or setup specific rules for the kind of emails they want to receive. These settings can be made in the notifications view linked from the notifications drop-down and a hyperlink at the end of all sent email messages.
 
 ### Background Workers
 
