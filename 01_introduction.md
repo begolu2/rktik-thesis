@@ -12,9 +12,9 @@ At first I wanted a system that extends the social environment given by websites
 
 This shift in the goals of the study project, combined with the remnants of various side projects embedded in the Souma app, left the code base in a cluttered state. Therefore, after the end of the study project, I started developing Rktik as a new web-based platform based on the server-side component of Souma. It has now a much more limited focus: Developing a social publishing platform that implements a new concept of individual and group identity online. The goals of this process were , in order of priority:
 
-1. Bringing the application from prototype status to an application open for endusers
-2. Selecting an effective, yet minimal set of features for personas and movements that allows an efficient management of privacy
-3. Stripping out and refactoring code from the Souma prototype that is no longer required in Rktik
+1. Bringing the application from prototype status to an application ready and useful for endusers (**completeness**)
+2. Selecting an effective, yet minimal set of features for personas and movements that allows an efficient management of privacy (**feasibility**)
+3. Stripping out and refactoring code from the Souma prototype that is no longer required in Rktik and unneccessarily increases the coplexity of the source code (**maintainability**)
 
 ## Problem: Privacy and Identity
 

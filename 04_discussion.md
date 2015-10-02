@@ -1,14 +1,32 @@
 # Evaluation and Discussion
 
-Rktik is an evolution of the Souma prototype, which has evolved in some areas and taken a completely different approach in others. In this section I will reflect critically on how Rktik measures up to expectations set at the onset of its implementation and underline these findings with data from quantitative usage metrics.
+Rktik is an evolution of the Souma prototype, introducing changes in some areas and taking a completely different approach in others. In this section I will reflect critically on how Rktik measures up to expectations set at the onset of its implementation and underline these findings with data from quantitative usage metrics.
 
-I have collected usage metrics using the external services Google Analytics and Amplitude to find out how people use the site and particularly whether feature usage follows expected patterns. This data is supplemented by raw data posted to the live website. I tried to filter out my own usage of the service as much as possible. Interactions with other users on the site and technical issues make this difficult in some cases.
+## Personal Evaluation
 
-Depending on how much time I have available to continue work on this project I want to improve areas X, Y, Z. Additionally I want to build a P2P client for Rktik which can be used to communicate using the service without placing ones information in the Rktik server infrastructure.
+The goals of **completeness**, **feasibility** and **maintainability**, as defined in the [Methodology] section, have been reached by the implementation described in this document. Development of the neccessary features for publishing and discussing content using Personas and Movements have been built, and an appropriate environment for the operation of Rktik has been configured. While these initial goals are important, other aspects of Rktik have shown shortcomings in the course of development and testing. In this areas I have identified three aspects based on my own experiences and informal feedback received from acquaintances.
 
-## Usage Metrics [1p]
+1. Some of the concepts used in Rktik, such as the distinction between a private mindspace and a public blog or the concept of movements, are hard to understand for new users. This problem should be approached by building a tutorial, which explains the core mechanics and concepts in Rktik. It can be presented after signup and should both inform users and 
 
-Usage metrics are collected using Amplitude and Google Analytics. Collected data includes X, Y, Z, …
+2. As described in the section [Improving Performance], the site’s speed is still too low to be satisfactory to many users. This can be improved by setting up periodically running background processes, which precompute database queries and store them in memcache. Site performance could also be improved significantly by moving Rktik to more powerful servers, which increases the costs of running the service.
+
+3. Rktik features interesting content that is regularly updated. Users who have signed up for an account but don’t visit the site regularly could benefit from this through a periodic email newsletter. Each edition of the newsletter could feature the most interesting content on Rktik as measured by votes receivd on thoughts.
+
+## Usage Metrics
+
+Usage metrics have been collected anonymously using the Amplitude and Google Analytics services. These are external services who receive usage data via short Javascript scripts embedded in every served page. As I consider this usage data *personal information*, I have collected it anonymously. This prevents me from filtering my own usage of the service from the metrics. While Google Analytics tracks information about page requests, Amplitude tracks specific, manually defined events that can occur after a page was fully loaded.
+
+Google Analytics collected data since making rktik.com accessible to the public on July 26th 2015 until today, October 2nd 2015 for a total of 68 days. Amplitude collected data from August 8th 2015 until today, October 2nd 2015 for a total of 55 days. This difference exists because I only found out about Amplitude when the measurement had already begun. 
+
+Google Analytics and Amplitude collect extensive amounts of information. As a complete analysis of the data would go beyond the scope of this thesis, I have focussed on a number of key metrics.
+
+**Number of usage sessions**
+
+The number of sessions was assessed using Google Analytics. A session is defined as a group of interactions by a user that takes place within 30 minutes or until midnight (@Google). A total of 825 sessions were started, most of which took place in the first weeks of operation. Presumably, these are users who tried the site once but weren’t compelled to return later. 
+
+![eval_sessions]
+
+
 
 Amplitude is a web service that allows tracking events and associated metadata using a Javascript library embedded in all Rktik pages. It is used to track user behavior, specifically how many users interact with certain features of the site.
 
@@ -38,7 +56,7 @@ A movement’s blog may contain a chat module, which non-members can use to conv
 
 Members may propose a thought to be posted with attribution to the movement in another part of the site. This could be a personal message to a Persona, a reply to any thought not in the movement itself or as a message in the public chat of another movement (as described above).
 
-## API for External Clients [2p]
+## External Clients [2p]
 
 An API is an application programming interface, which means ___.  
 
