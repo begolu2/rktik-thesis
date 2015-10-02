@@ -3,6 +3,7 @@
 - Citations
 - Acknowledgements
 - Background Workers?
+- Methodology: Deployment / workflow
 
 
 **Table of Contents**
@@ -77,8 +78,7 @@
 - Web View and URL Routing
 - HTML Templates
 - Asynchronous UI
-- Email Notifications
-- Background Workers
+- Notifications
 
 ## Improving Performance
 

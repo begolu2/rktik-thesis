@@ -17,7 +17,7 @@ all: thesis_skeleton.latex appendix.tex
 	-V department='Institute for Cognitive Science' \
 	-V university='University of Osnabrueck' \
 	-V title='Rktik - A Social Network for Groups' \
-	-V supervisor='Dr. Helmar Gust, University of Osnabrueck \\ Dr. Max Mustermann, University of Osnabrueck' \
+	-V supervisor='Dr. Helmar Gust, University of Osnabrueck \\ Dr. Kai-Uwe Kühnberger, University of Osnabrueck' \
 	-V university_logo='img/uos.png' \
 	-f markdown -o thesis.pdf
 	rm thesis_skeleton.latex ref-appendix/appendix.tex
