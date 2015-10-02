@@ -261,10 +261,26 @@ Additional:
 
 The SQLAlchemy library hides the complexity of accessing data stored and linked across multiple tables. While this eases the development process significantly, it can lead to inefficient patterns of database usage. Specifically, the number of queries required to access data can be in a linear relation to the number of items retrieved. These queries can be combined into a single query or a low number of queries by using *eager loading* techniques offered by SQLAlchemy (@SQLAlchemyAutors). Here, a *JOIN* statement is issued to simultaneously load related data from the database. Rktik uses eager loading 1) ad hoc using the SQLAlchemy `joinedload` option for specific queries and 2) in general by specifying relations to always load joined in model definitions located in Nucleus.
 
-## Hosting and Deployment [1p]
+## Hosting and Deployment
 
-The site is hosted using the Heroku PAAS. Heroku offers automated deployment in the extent of ___. This is important, because ___. In the future I want to move the hosting to X, because it will be faster even though it has the downside of Y.
+Rktik ist running on servers provided via the Heroku platform-as-a-service (PAAS). In contrast to traditional server environments, which need to be manually configured for the services to be deployed, a PAAS offers a suite of tools that automate many of these tasks. This includes deployment from a Git repository, automatic installation of dependencies, a web interface for installation and semi-automatic configuration of third-party services (e.g. email delivery, memcache, log analysis, etc.) and a mechanism for simple and fast scaling of an application’s resources in the event of a sudden peak in visitor traffic. 
 
-Deployment is automated using the scripts ‘push_testing.py’ and ‘push_production.py’. They make sure that the Glia and Nucleus repositories are pushed to Github and then use the Heroku API to  download the latest revision on the remote server, install or update all required libraries and start the server.
+These capabilities allow a developer to focus on programming, instead of the time-consuming configuration and maintenance of a server environment. The downside of using Heroku is that their services come at a comparatively high price. This is mitigated somewhat as they are offering a free option for applications that require only little resources, as is the case for Rktik right now. However, if Rktik grows to a larger userbase, it might become neccesary to move to a different hosting environment that offers a better cost-benefit ratio.
 
-Configuration files for development and production use of the Glia server are separate and differ in X, Y, Z.
+Rktik is installed in two separate environments for *testing* and *production* use. The development process usually consists of testing a new feature on a local development machine, testing it in the testing environment and only then deploying it to the production environment if no bugs are found (see [Methodology]). The production environment has been accessible to the general public since 26th July 2015.
+
+Deployment to these environments is automated using the scripts ‘push_testing.py’ and ‘push_production.py’ in the source code’s root folder. These scripts execute all tasks neccessary for deployment, which includes
+
+* Checking that all changes to the Nucleus repository are commited in Git
+* Pushing the Nucleus repository to Github
+* Checking that all changes to the Glia repository are commited in Git
+* Pushing the Glia repository to the appropriate environment on Heroku. This step triggers the Heroku environment to automatically install all required dependencies ^[Dependencies are defined in the file `requirements.txt` in the Glia project root folder].
+* Running database migration scripts in the Heroku environment
+
+The script for deployment to the production environment additionally merges all changes in the *development branch* into a new commit on the *master branch* of the Glia repository (see [Methodology]). Therefore, commits on the master branch represent a history of deployments to the production environment and can be seen as versions of the Glia application. 
+
+Rktik uses *environment variables* to determine which environment it is currently running in and to load an appropriate configuration. Configurations for the development, testing and production environment differ in the passwords, secrets and external services they specify as well as the internet hostname they setup for Rktik. Sensitive information, such as passwords, is not stored in the source code repository, but loaded either from external files or from environment variables. 
+
+The development and testing configurations additionally increase the verbosity of log messages and provide interactive debugging in two ways: 1) a debugging console and interactive traceback embedded in Flask’s response when server errors occur during a request and 2) the Flask DebugToolbar (@VanTellingen2015) provides an interface for performance measurement, variable introspection and other information as an optional web overlay for successful requests.
+
+All logging messages above the *debug* severity level are also forwarded to the Rktik engineering channel in the Slack web service, which is not visible to the public. This allows monitoring of errors in Rktik from a mobile phone or any computer with an internet connection.
