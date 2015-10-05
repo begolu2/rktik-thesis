@@ -14,31 +14,85 @@ The goals of **completeness**, **feasibility** and **maintainability**, as defin
 
 ## Usage Metrics
 
-Usage metrics have been collected anonymously using the Amplitude and Google Analytics services. These are external services who receive usage data via short Javascript scripts embedded in every served page. As I consider this usage data *personal information*, I have collected it anonymously. This prevents me from filtering my own usage of the service from the metrics. While Google Analytics tracks information about page requests, Amplitude tracks specific, manually defined events that can occur after a page was fully loaded.
+Usage metrics have been collected anonymously using the Amplitude and Google Analytics services. These are external services which receive usage data via short Javascript scripts embedded in every served page. As I consider this usage data *personal information*, I have collected it anonymously. This prevents me from filtering my own usage of the service from the metrics. While Google Analytics tracks information about page requests, Amplitude tracks specific, manually defined events that can occur after a page was fully loaded.
 
 Google Analytics collected data since making rktik.com accessible to the public on July 26th 2015 until today, October 2nd 2015 for a total of 68 days. Amplitude collected data from August 8th 2015 until today, October 2nd 2015 for a total of 55 days. This difference exists because I only found out about Amplitude when the measurement had already begun. 
 
-Google Analytics and Amplitude collect extensive amounts of information. As a complete analysis of the data would go beyond the scope of this thesis, I have focussed on a number of key metrics.
+Google Analytics and Amplitude collect extensive amounts of information. As a complete analysis of the data would go beyond the scope of this thesis, I have focussed on three key metrics: 1) The total number of usage sessions, 2) the number of users per week, 3) the number of users who have used specific features  and 4) the number of thoughts and votes created. I chose these metrics because they reflect both the total amount of usage as well as the relative popularity of specific features.
 
-**Number of usage sessions**
+For the purpose of this evaluation, a *user* is defined as a web browser used to access Rktik. In contrast to the definition given in [Terminology], this does not discriminate between users with an Rktik user account and anonymous users. While it is possible, that a person uses more than one web browser to access Rktik, this is not differentiated as it is not technically feasible to identify this behavior. Usage assessment using Google Analytics and Amplitude relies on Javascript scripts embedded in the site. If a user has blocked these scripts or disabled Javascript altogether in their browser, their usage is not recorded.
 
-The number of sessions was assessed using Google Analytics. A session is defined as a group of interactions by a user that takes place within 30 minutes or until midnight (@Google). A total of 825 sessions were started, most of which took place in the first weeks of operation. Presumably, these are users who tried the site once but weren’t compelled to return later. 
+### Usage sessions
 
-![eval_sessions]
+The number of sessions was assessed using Google Analytics. A session is defined as a group of interactions by a user that takes place within 30 minutes or until midnight (@Google). A total of 825 sessions were started, most of which took place in the first weeks of operation. 
 
+![Number of sessions]
 
+### Users per week
 
-Amplitude is a web service that allows tracking events and associated metadata using a Javascript library embedded in all Rktik pages. It is used to track user behavior, specifically how many users interact with certain features of the site.
+The number of users per week was assessed using Amplitude. The count rises from two users in the first week of measurement to seven users in the third and fourth week, takes a plunge to three users and then rises from week to week up to a maximum of 17 users in the 9th week of operation.
 
-Please see Appendix: Amplitude measurements for a complete list of captured event types, metadata and usage statistics.
+![Number of weekly users]
 
-Google Analytics is a web service used to track page load events and analyze visitor metadata sent by their browser and operating system.
+### Usage of features
 
-Interesting finding 1
+The number of users who have used specific features at least once in a given week was assessed using Amplitude. A count was recorded by firing an Amplitude callback when a user triggers the user interface control associated with the measured action.
 
-Interesting finding 2
+#### Creating a thought
 
-Interesting finding 3
+Evaluated: 1) submitting the inline form for creating a thought 2) submitting the form on the dedicated *create thought* view
+
+![Number of users who created thoughts]\
+
+The number of users who create thoughts varies between one and three over the duration of measurement. The maximum number of three users was first reached in the fourth week of measurement and in the last three weeks of measurement there were never less than three users creating thoughts. While only a small amount of total users register an account, only a small amount of registered users actually create content on the site.
+
+#### Editing a thought
+
+Evaluated: Submitting the form for editing a thought in the *edit thought* view.
+
+![Number of users who edited thoughts]\
+
+The number of users who edited thoughts in a given week varies between zero and two users. Unexpectedly, this number is not much lower in a given week than the number of users who created thoughts which means that most users who create thoughts also edit them.
+
+#### Clicking the graph visualization
+
+Evaluated: Completed mouse click in any part of the frontpage graph visualization (see [Frontpage Graph Visualization]).
+
+![Number of users who clicked the frontpage graph visualization]\
+
+The number of users who clicked on the frontpage graph visualization varies between a minimum of zero users in the first two weeks and a maximum of three users in the fourth week of measurement. As the number of of clicks does not return to the maximum of three users and rests at one user per week in the last two weeks of measurement, it may be that users try this feature only once and don’t return to it later.
+
+#### Follow or unfollow a blog
+
+Evaluated: Complete asynchronous callback following a click on the *follow* or *unfollow* buttons located in movement or personal blogs and in movement mindspaces.
+
+![Number of users who followed or unfollowed blogs]\
+
+The number of users who follow or unfollow blogs lies between zero and two users over the course of measurement. This number is unexpectedly low in relation to the total number of active users, especially towards the end of the measurement. This may indicate that users don’t understand the purpose of this feature well enough. Educating users about the possibility of controlling the contents of their frontpage by following or unfollowing blogs may lead to a better user experience for them.
+
+#### Toggle membership in a movement
+
+Evaluated: Complete asynchronous callback following a click on the *Join movement* or *Leave movement* buttons located in movement blogs and movement mindspaces.
+
+![Number of users who toggled their membership status]\
+
+The number of users who toggle their membership in movements is one or two in the first three weeks, reaches a maximum of three users in the fourth week and varies between one and two users for the remainder of the measurement. Similar to the number of users who follow or unfollow blogs, this number is unexpectedly low and suggests that users don’t understand the benefits of controlling their membership in movements well enough.
+
+#### Accessing the notebook view
+
+Evaluated: Loading the notebook view
+
+![Number of users who opened the *notebook view*]\
+
+The number of users who view their notebook is zero in the first week and varies between one and three users for the remainder of the measurement. The feature was not used in the first week because it was only activated in the second week of measurement. Engagement with this feature may be higher if it was more integrated with other features of the site. Right now, the flow of data in and out of the notebook is achieved via the *repost* functionality. This mechanism may be poorly understood by users which could be helped by a more comprehensive tutorial for new users.
+
+#### Toggling a vote
+
+Evaluated: Completed mouse click on a vote button
+
+![Number of users who cast votes]\
+
+The number of users who cast votes rises from one in the first week to four in the third week and remains at this level except for the 5th and 6th weeks where two and five users engaged with the feature respectively. This feature is the most popular in this comparison, which confirms its nature as a low-barrier way of engaging with content in Rktik. 
 
 ## Movement Agency
 
@@ -81,3 +135,13 @@ Peer to peer is usually referring to a network transport model that doesn’t us
 Server based infrastructure however has become very inexpensive while offering an unsurpassed performance. The original motivation for peer to peer transfer can still be retained using a server based network if the information transferred is only passing from peer to peer without being readable while in the server-based network. 
 
 This is achieved by using end-to-end-encryption. While there are many libraries available that implement cryptographic primitives there is no clearly identifiable industry standard. The Souma prototype’s encryption was built using the Google Keyczar library and its implementations of the AES and RSA algorithms in combination with an HTTP based mechanism for key exchange.
+
+[Number of users who clicked the frontpage graph visualization]: img/eval_click_graph.png
+[Number of users who created thoughts]: img/eval_create_thought.png
+[Number of users who edited thoughts]: img/eval_edit_thought.png
+[Number of users who followed or unfollowed blogs]: img/eval_follow.png
+[Number of users who toggled their membership status]: img/eval_membership.png
+[Number of users who opened the *notebook view*]: img/eval_notebook.png
+[Number of sessions]: img/eval_sessions.png
+[Number of users who cast votes]: img/eval_vote.png
+[Number of weekly users]: img/eval_weekly_users.png
