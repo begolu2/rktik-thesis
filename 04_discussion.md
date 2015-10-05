@@ -6,11 +6,11 @@ Rktik is an evolution of the Souma prototype, introducing changes in some areas 
 
 The goals of **completeness**, **feasibility** and **maintainability**, as defined in the [Methodology] section, have been reached by the implementation described in this document. Development of the neccessary features for publishing and discussing content using Personas and Movements have been built, and an appropriate environment for the operation of Rktik has been configured. While these initial goals are important, other aspects of Rktik have shown shortcomings in the course of development and testing. In this areas I have identified three aspects based on my own experiences and informal feedback received from acquaintances.
 
-1. Some of the concepts used in Rktik, such as the distinction between a private mindspace and a public blog or the concept of movements, are hard to understand for new users. This problem should be approached by building a tutorial, which explains the core mechanics and concepts in Rktik. It can be presented after signup and should both inform users and 
+1. Some of the concepts used in Rktik, such as the distinction between a private mindspace and a public blog or the concept of movements, are hard to understand for new users. This problem should be approached by building a tutorial, which explains the core mechanics and concepts in Rktik. It can be presented after signup and should be directed both at new users with an account and potential, but unregistered users.
 
-2. As described in the section [Improving Performance], the site’s speed is still too low to be satisfactory to many users. This can be improved by setting up periodically running background processes, which precompute database queries and store them in memcache. Site performance could also be improved significantly by moving Rktik to more powerful servers, which increases the costs of running the service.
+2. As described in the section [Improving Performance], the site’s speed is still too low to be satisfactory for many users. This can be improved by setting up periodically running background processes, which precompute database queries and store them in memcache. Site performance could also be improved significantly by moving Rktik to more powerful servers, which increases the costs of running the service.
 
-3. Rktik features interesting content that is regularly updated. Users who have signed up for an account but don’t visit the site regularly could benefit from this through a periodic email newsletter. Each edition of the newsletter could feature the most interesting content on Rktik as measured by votes receivd on thoughts.
+3. Rktik features interesting content that is regularly updated. Users who have signed up for an account but don’t visit the site regularly could benefit from this through a periodic email newsletter. Each edition of the newsletter may feature the most interesting content on Rktik as measured by votes received on thoughts.
 
 ## Usage Metrics
 
@@ -96,45 +96,39 @@ The number of users who cast votes rises from one in the first week to four in t
 
 ## Movement Agency
 
-Movement agency as described in Section: Specific Patterns Movement Identity attributes action of members of a movement to the movement as a whole and thereby communicates the agency of the movement. Currently, movement can post thoughts to their blog as the sole action available. The concept can be furthered by introducing novel movement actions that can be triggered by members:
+Rktik communicates to its users that movements have agency. This is established by attributing actions taken by its members to the movement itself, once they are confirmed by a certain number of other members. As described in [Movements], this process 1) guards members’ privacy and 2) may establish stronger cohesion between movement members.
+
+While this concept may be applicable to a wide range of actions, Rktik’s current implementation only supports attributing authorship of a thought to a movement (see [Promoting Content]). In this section I will present three options for other actions that may be attributed to a movement’s agency through building consensus among its members.
+
+Planning and voting of any such collective actions may be conducted using a novel interface control which allows members to 1) identify the proposed action, 2) propose changes and 3) vote on its implementation. This control should be designed for the control of all action types to simplify the process for inexperienced users.
 
 **Events**
 
-A movement member may propose an event in the movement mindspace. An event consists of a title, location, date, time and privacy setting (members only or public) and can be implemented as an attachment type. Movement members may vote on whether the event proposal is made public which would display it prominently in the movement mindspace or movement blog depending on the events privacy settings. The proposal may be modified after posting in order to satisfy concerns voiced by other members in the events comments section and thereby gain the necessary votes to make it an official event.
+A movement member may propose an event in the movement mindspace. An event consists of a title, location, date, time and privacy setting (visible only for members or for all users) and can be implemented as an attachment type. Other members may then discuss the events and propose changes to be made by the author in order to gain their consensus and thus the neccessary votes for making the event official. Finally, members may vote on the event. If this show that consensus is reached, the movement would display the event prominently in the movement mindspace or movement blog, depending on the event’s privacy settings. The final event posting would be attributed to the movement and not its original author. This mechanic would allow movement members to organize collective action outside of Rktik’s online context.
 
-**Public Chat**
+**Public chat**
 
-A movement’s blog may contain a chat module, which non-members can use to converse with the movement. Messages entered into this chat would be displayed in the movement mindspace for members to see. Members can then propose answers and other members can confirm these by voting to a certain threshold. The user who posted the original message into the movement chat would then be shown the answer attributed to the movement as a whole.
+A movement’s (public) blog may contain a chat module, which non-members can use to converse with the movement. Messages entered in this chat would be displayed in the movement mindspace for members to see. Members can then propose answers and other members can confirm these by voting on them. The non-member who posted the original message into the movement chat would then be shown the answer attributed to the movement as a whole.
 
-**Posting in other parts of the site**
+**Creating thoughts in other parts of the site**
 
-Members may propose a thought to be posted with attribution to the movement in another part of the site. This could be a personal message to a Persona, a reply to any thought not in the movement itself or as a message in the public chat of another movement (as described above).
+Members may propose a thought to be posted with attribution to the movement in another part of Rktik. This could be a personal message to a persona, a reply to any thought not in the movement itself or as a message in the public chat of another movement (as described above). Changes to the proposed thought may be discussed by members beforehand as descibed for *events* and *public chat* .
 
-## External Clients [2p]
+## External Clients
 
-An API is an application programming interface, which means ___.  
+Rktik is the successor to Souma, which is a prototype for a decentral social network as described in [Problem: Privacy and Identity]. While Rktik is not built as a decentral system, its design allows a future extension with such functionality. Such an extension would entail two parts: 1) a publicly accessible API for Rktik’s Nucleus backend and 2) a local client application that connects to this API. Using a local client makes a new usage pattern possible in which a private movement’s  internal data is only stored in encrypted form on the server. Encrypted information about members’ activity would be distributed among them via the API. Only when members decide on a collective action would information be made available in unencrypted form on the rktik.com website. In this section I will outline the components neccessary to build this extension based on the design implemented by Souma (see @Ahrend2015).
 
-I want to build the API primarily for a client that is installed on a users computer, but it may also be used for third party services built on data published by Rktik. Usage scenarios might include A, B, C.
+**API for Rktik’s Nucleus module**
 
-An external client has the advantages A, B, C. The disadvantages are X, Y, Z.
+An API is an interface between two separate pieces of software. JSON and HTTP REST APIs have emerged as defacto standards in web infrastructure (CITE). The API will serialise ORM models into JSON representations, which are encrypted, signed and wrapped in a second layer JSON representation.
 
-The API needs the capabilities of ___ presented as API endpoints with respective functionality. It also needs to be robust against abuse from third parties.
+The API will be designed primarily for a client that is installed on a users computer, but it may also be used for third party services built on data published by Rktik. Usage scenarios might include clients for mobile devices or third-party websites that interact with Rktik.
 
-### Serialization and Encryption
+**Local client application**
 
-Data transmitted via the API is to be end-to-end encrypted unless it is visible on the public part of the website. JSON and HTTP REST APIs have emerged as defacto standards in the web infrastructure. The API will serialise ORM models into JSON representations which are then encrypted and wrapped in another JSON representation.
+An external client uses the aforementioned API to exchange data with Rktik’s server-based Nucleus backend and provides its own user interface on the user’s local machine. The implementation of this user interface may reuse most of the code from Rktik’s Glia web server to locally serve a version of the site via a loopback connection. Differences in implementation would be expected mostly from 1) code to access the API and 2) performance optimizations for personal computers.
 
-[graphic]
-
-Please see Appendix: API Specification for the full API specification.
-
-### Peer to Peer Extension
-
-Peer to peer is usually referring to a network transport model that doesn’t use server relays for data transmission, but instead exchanges data directly between end user machines. 
-
-Server based infrastructure however has become very inexpensive while offering an unsurpassed performance. The original motivation for peer to peer transfer can still be retained using a server based network if the information transferred is only passing from peer to peer without being readable while in the server-based network. 
-
-This is achieved by using end-to-end-encryption. While there are many libraries available that implement cryptographic primitives there is no clearly identifiable industry standard. The Souma prototype’s encryption was built using the Google Keyczar library and its implementations of the AES and RSA algorithms in combination with an HTTP based mechanism for key exchange.
+While such an implementation of an external client would not technically constitute peer to peer data transfer, as data is still transferred using a server, it would bring all of its advantages with it: End-to-end-encryption of data ensures, that the contained *information* is only available at the endpoints of communications when neccessary. At the same time, the server-based infrastructure would 1) ensure that data is available, even when no local machines are online and 2) increase synchronization speeds significantly by profiting off the superior connection speeds available in data centers.
 
 [Number of users who clicked the frontpage graph visualization]: img/eval_click_graph.png
 [Number of users who created thoughts]: img/eval_create_thought.png

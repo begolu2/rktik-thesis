@@ -4,6 +4,8 @@
 - Acknowledgements
 - Background Workers?
 - Methodology: Deployment / workflow
+- Stimmt das: “As described in [Movements], this process 1) guards members’ privacy and 2) may establish stronger cohesion between movement members.” ?
+- Habe ich irgendwo auf Informationen in der Peer to Peer section verwiesen die dort gar nicht enthalten sind?
 
 
 **Table of Contents**
@@ -89,8 +91,6 @@
 ## Usage Metrics
 
 ## Movement Agency
-
-## API for External Clients
 
 - Serialization and Encryption
 - Peer to Peer Extension
