@@ -4,23 +4,23 @@ Rktik is an evolution of the Souma prototype, introducing changes in some areas 
 
 ## Personal Evaluation
 
-The goals of **completeness**, **feasibility** and **maintainability**, as defined in the [Methodology] section, have been reached by the implementation described in this document. Development of the neccessary features for publishing and discussing content using Personas and Movements have been built, and an appropriate environment for the operation of Rktik has been configured. While these initial goals are important, other aspects of Rktik have shown shortcomings in the course of development and testing. In this areas I have identified three aspects based on my own experiences and informal feedback received from acquaintances.
+The goals of **completeness**, **feasibility** and **maintainability**, as defined in section [Methodology], have been reached by the implementation described in this document. Development of the neccessary features for *publishing* and *discussing* content using personas and movements have been built, and an appropriate environment for the operation of Rktik has been configured. While these initial goals are important, other aspects of Rktik have shown shortcomings in the course of development and testing. In this areas I have identified three aspects based on my own experiences and informal feedback received from acquaintances.
 
-1. Some of the concepts used in Rktik, such as the distinction between a private mindspace and a public blog or the concept of movements, are hard to understand for new users. This problem should be approached by building a tutorial, which explains the core mechanics and concepts in Rktik. It can be presented after signup and should be directed both at new users with an account and potential, but unregistered users.
+1. Some of the concepts used in Rktik, such as the distinction between a private mindspace and a public blog or the concept of movements, are hard to understand for new users. This problem should be approached by building a tutorial, which explains core mechanics and concepts. It can be presented after signup and should be directed both at new users with an account and potential, but unregistered users.
 
 2. As described in the section [Improving Performance], the site’s speed is still too low to be satisfactory for many users. This can be improved by setting up periodically running background processes, which precompute database queries and store them in memcache. Site performance could also be improved significantly by moving Rktik to more powerful servers, which increases the costs of running the service.
 
-3. Rktik features interesting content that is regularly updated. Users who have signed up for an account but don’t visit the site regularly could benefit from this through a periodic email newsletter. Each edition of the newsletter may feature the most interesting content on Rktik as measured by votes received on thoughts.
+3. Rktik features interesting content that is regularly updated. Users who have signed up for an account, but don’t visit the site regularly, could benefit from this through a periodic email newsletter. Each edition of the newsletter may feature the most interesting content on Rktik as measured by votes received on thoughts.
 
 ## Usage Metrics
 
-Usage metrics have been collected anonymously using the Amplitude and Google Analytics services. These are external services which receive usage data via short Javascript scripts embedded in every served page. As I consider this usage data *personal information*, I have collected it anonymously. This prevents me from filtering my own usage of the service from the metrics. While Google Analytics tracks information about page requests, Amplitude tracks specific, manually defined events that can occur after a page was fully loaded.
+Usage metrics have been collected anonymously using the Amplitude and Google Analytics services. These are external services which receive usage data via short Javascript scripts embedded in every served page. As I consider this usage data *personal information*, I have collected it anonymously. While Google Analytics tracks information about page requests, Amplitude tracks specific, manually defined events that can occur after a page was fully loaded.
 
-Google Analytics collected data since making rktik.com accessible to the public on July 26th 2015 until today, October 2nd 2015 for a total of 68 days. Amplitude collected data from August 8th 2015 until today, October 2nd 2015 for a total of 55 days. This difference exists because I only found out about Amplitude when the measurement had already begun. 
+Google Analytics data is included since making rktik.com accessible to the public on July 26th 2015 until October 2nd 2015 for a total of 68 days. Amplitude data is included from August 8th 2015 until October 2nd 2015 for a total of 55 days. This difference exists because I only found out about Amplitude when measurement had already begun. 
 
-Google Analytics and Amplitude collect extensive amounts of information. As a complete analysis of the data would go beyond the scope of this thesis, I have focussed on three key metrics: 1) The total number of usage sessions, 2) the number of users per week, 3) the number of users who have used specific features  and 4) the number of thoughts and votes created. I chose these metrics because they reflect both the total amount of usage as well as the relative popularity of specific features.
+Google Analytics and Amplitude collect extensive amounts of information. As a complete analysis of the data would go beyond the scope of this thesis, I have focussed on four kinds of measurement: 1) The total number of usage sessions, 2) the number of users per week, 3) the number of users who have used specific features in a given week and 4) the number of thoughts and votes created. I chose these metrics because they reflect both the total amount of usage as well as the relative popularity of specific features.
 
-For the purpose of this evaluation, a *user* is defined as a web browser used to access Rktik. In contrast to the definition given in [Terminology], this does not discriminate between users with an Rktik user account and anonymous users. While it is possible, that a person uses more than one web browser to access Rktik, this is not differentiated as it is not technically feasible to identify this behavior. Usage assessment using Google Analytics and Amplitude relies on Javascript scripts embedded in the site. If a user has blocked these scripts or disabled Javascript altogether in their browser, their usage is not recorded.
+For the purpose of this evaluation, a *user* is defined as a web browser used to access Rktik. In contrast to the definition given in [Terminology], this does not discriminate between users with an Rktik user account and anonymous users. While it is possible that a person uses more than one web browser to access Rktik, this is not differentiated as it is not technically feasible to identify this behavior. Usage assessment using Google Analytics and Amplitude relies on Javascript scripts embedded in the site. If a user has blocked these scripts or disabled Javascript altogether in their browser, their usage is not recorded.
 
 ### Usage sessions
 
@@ -36,7 +36,7 @@ The number of users per week was assessed using Amplitude. The count rises from 
 
 ### Usage of features
 
-The number of users who have used specific features at least once in a given week was assessed using Amplitude. A count was recorded by firing an Amplitude callback when a user triggers the user interface control associated with the measured action.
+The number of users who have used specific features at least once in a given week was assessed using Amplitude. A count was recorded by firing an Amplitude callback when a user triggers the user interface control associated with the measured action. In the following I list the assessed metrics, events used to measure them and describe the resulting measurement data.
 
 #### Creating a thought
 
@@ -44,7 +44,7 @@ Evaluated: 1) submitting the inline form for creating a thought 2) submitting th
 
 ![Number of users who created thoughts]\
 
-The number of users who create thoughts varies between one and three over the duration of measurement. The maximum number of three users was first reached in the fourth week of measurement and in the last three weeks of measurement there were never less than three users creating thoughts. While only a small amount of total users register an account, only a small amount of registered users actually create content on the site.
+The number of users who create thoughts in a given week varies between one and three over the duration of measurement. The maximum number of three users was first reached in the fourth week of measurement and in the last three weeks of measurement there were never less than three users creating thoughts. While only a small amount of total users register an account, only a small amount of registered users actually create content on the site.
 
 #### Editing a thought
 
@@ -60,11 +60,11 @@ Evaluated: Completed mouse click in any part of the frontpage graph visualizatio
 
 ![Number of users who clicked the frontpage graph visualization]\
 
-The number of users who clicked on the frontpage graph visualization varies between a minimum of zero users in the first two weeks and a maximum of three users in the fourth week of measurement. As the number of of clicks does not return to the maximum of three users and rests at one user per week in the last two weeks of measurement, it may be that users try this feature only once and don’t return to it later.
+The number of users who clicked on the frontpage graph visualization in a given week varies between a minimum of zero users in the first two weeks and a maximum of three users in the fourth week of measurement. As the number of of clicks does not return to the maximum of three users and rests at one user per week in the last two weeks of measurement, it may be assumed that users try this feature only once and don’t return to it later.
 
 #### Follow or unfollow a blog
 
-Evaluated: Complete asynchronous callback following a click on the *follow* or *unfollow* buttons located in movement or personal blogs and in movement mindspaces.
+Evaluated: Click on the *follow* or *unfollow* buttons located in movement or personal blogs and in movement mindspaces.
 
 ![Number of users who followed or unfollowed blogs]\
 
@@ -72,11 +72,11 @@ The number of users who follow or unfollow blogs lies between zero and two users
 
 #### Toggle membership in a movement
 
-Evaluated: Complete asynchronous callback following a click on the *Join movement* or *Leave movement* buttons located in movement blogs and movement mindspaces.
+Evaluated: Click on the *Join movement* or *Leave movement* buttons located in movement blogs and movement mindspaces.
 
 ![Number of users who toggled their membership status]\
 
-The number of users who toggle their membership in movements is one or two in the first three weeks, reaches a maximum of three users in the fourth week and varies between one and two users for the remainder of the measurement. Similar to the number of users who follow or unfollow blogs, this number is unexpectedly low and suggests that users don’t understand the benefits of controlling their membership in movements well enough.
+The number of users who toggle their membership in movements is 1-2 in the first three weeks, reaches a maximum of three users in the fourth week and varies between one and two users for the remainder of the measurement. Similar to the number of users who follow or unfollow blogs, this number is unexpectedly low and suggests that users don’t understand the benefits of controlling their membership in movements well enough.
 
 #### Accessing the notebook view
 
@@ -92,7 +92,7 @@ Evaluated: Completed mouse click on a vote button
 
 ![Number of users who cast votes]\
 
-The number of users who cast votes rises from one in the first week to four in the third week and remains at this level except for the 5th and 6th weeks where two and five users engaged with the feature respectively. This feature is the most popular in this comparison, which confirms its nature as a low-barrier way of engaging with content in Rktik. 
+The number of users who cast votes rises from one in the first week to four in the third week and remains at this level except for the 5th and 6th weeks, where two and five users engaged with the feature respectively. This feature is the most popular in this comparison, which confirms its nature as a low-barrier way of engaging with content in Rktik. 
 
 ## Movement Agency
 
@@ -104,11 +104,11 @@ Planning and voting of any such collective actions may be conducted using a nove
 
 **Events**
 
-A movement member may propose an event in the movement mindspace. An event consists of a title, location, date, time and privacy setting (visible only for members or for all users) and can be implemented as an attachment type. Other members may then discuss the events and propose changes to be made by the author in order to gain their consensus and thus the neccessary votes for making the event official. Finally, members may vote on the event. If this show that consensus is reached, the movement would display the event prominently in the movement mindspace or movement blog, depending on the event’s privacy settings. The final event posting would be attributed to the movement and not its original author. This mechanic would allow movement members to organize collective action outside of Rktik’s online context.
+A movement member may propose an event in the movement mindspace. An event consists of a title, location, date, time and privacy setting (visible only for members or for all users) and can be implemented as an attachment type. Other members may then discuss the events and propose changes to be made by the author in order to gain their consensus, and thus the neccessary votes for making the event official. Finally, members may vote on the event. If this show that consensus is reached, the movement would display the event prominently in the movement mindspace or movement blog, depending on the event’s privacy settings. The final event posting would be attributed to the movement and not its original author. This mechanic would allow movement members to organize collective action outside of Rktik’s online context.
 
 **Public chat**
 
-A movement’s (public) blog may contain a chat module, which non-members can use to converse with the movement. Messages entered in this chat would be displayed in the movement mindspace for members to see. Members can then propose answers and other members can confirm these by voting on them. The non-member who posted the original message into the movement chat would then be shown the answer attributed to the movement as a whole.
+A movement’s (public) blog may contain a chat module, which non-members can use to converse with the movement as a whole. Messages entered in this chat would be displayed in the movement mindspace for members to see. Members can then propose answers and other members can confirm these by voting on them. The non-member who posted the original message into the movement chat would then be shown the answer attributed to the movement as a whole.
 
 **Creating thoughts in other parts of the site**
 
@@ -116,19 +116,19 @@ Members may propose a thought to be posted with attribution to the movement in a
 
 ## External Clients
 
-Rktik is the successor to Souma, which is a prototype for a decentral social network as described in [Problem: Privacy and Identity]. While Rktik is not built as a decentral system, its design allows a future extension with such functionality. Such an extension would entail two parts: 1) a publicly accessible API for Rktik’s Nucleus backend and 2) a local client application that connects to this API. Using a local client makes a new usage pattern possible in which a private movement’s  internal data is only stored in encrypted form on the server. Encrypted information about members’ activity would be distributed among them via the API. Only when members decide on a collective action would information be made available in unencrypted form on the rktik.com website. In this section I will outline the components neccessary to build this extension based on the design implemented by Souma (see @Ahrend2015).
+Rktik is the successor to Souma, which is a prototype for a decentral social network as described in [Problem: Privacy and Identity]. While Rktik is not built as a decentral system, its design allows a future extension with such functionality. Such an extension would entail two parts: 1) a publicly accessible API for Rktik’s Nucleus backend and 2) a local client application that connects to this API. Using a local client makes a new usage pattern possible, in which a private movement’s  internal data is only stored in encrypted form on the server. Encrypted information about members’ activity would be distributed among them via the API. Information would only be made available in unencrypted form on the rktik.com website once members have decided on a collective action. In this section I will outline the components neccessary to build this extension based on the design implemented by Souma (see @Ahrend2015).
 
 **API for Rktik’s Nucleus module**
 
-An API is an interface between two separate pieces of software. JSON and HTTP REST APIs have emerged as defacto standards in web infrastructure (CITE). The API will serialise ORM models into JSON representations, which are encrypted, signed and wrapped in a second layer JSON representation.
+An API is an interface between two separate pieces of software. JSON and HTTP REST APIs have emerged as defacto standards in web infrastructure (CITE). The API will serialise ORM models into JSON representations, which are encrypted, signed and wrapped in a second layer JSON representation for transfer.
 
-The API will be designed primarily for a client that is installed on a users computer, but it may also be used for third party services built on data published by Rktik. Usage scenarios might include clients for mobile devices or third-party websites that interact with Rktik.
+The API will be designed primarily for a client that is installed on a users computer, but it may also be used for third party services built on data published by Rktik. Usage scenarios include clients for mobile devices or third-party websites that interact with Rktik.
 
 **Local client application**
 
-An external client uses the aforementioned API to exchange data with Rktik’s server-based Nucleus backend and provides its own user interface on the user’s local machine. The implementation of this user interface may reuse most of the code from Rktik’s Glia web server to locally serve a version of the site via a loopback connection. Differences in implementation would be expected mostly from 1) code to access the API and 2) performance optimizations for personal computers.
+An external client uses the aforementioned API to exchange data with Rktik’s server-based Nucleus backend and provides its own user interface on the user’s local machine. The implementation of this user interface may reuse most of the code from Rktik’s Glia web server to locally serve a version of the site via a loopback connection ^[TODO: Footnote about loopback connections]. Differences in implementation would be expected mostly from 1) code to access the API and 2) performance optimizations for personal computers.
 
-While such an implementation of an external client would not technically constitute peer to peer data transfer, as data is still transferred using a server, it would bring all of its advantages with it: End-to-end-encryption of data ensures, that the contained *information* is only available at the endpoints of communications when neccessary. At the same time, the server-based infrastructure would 1) ensure that data is available, even when no local machines are online and 2) increase synchronization speeds significantly by profiting off the superior connection speeds available in data centers.
+While such an implementation of an external client would not technically constitute peer to peer data transfer, as data is still transferred using a server, it would bring all of its advantages with it: End-to-end-encryption of data ensures that the contained *information* is only available at the endpoints of communications. At the same time, the server-based infrastructure would 1) ensure that data is available, even when no local machines are online and 2) increase synchronization speeds significantly by profiting off the superior connection speeds available in data centers.
 
 [Number of users who clicked the frontpage graph visualization]: img/eval_click_graph.png
 [Number of users who created thoughts]: img/eval_create_thought.png
