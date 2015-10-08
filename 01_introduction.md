@@ -1,6 +1,6 @@
 # Introduction
 
-Rktik is an online community that allows like minded people to collect and publish content together. This document describes Rktik’s software architecture and how it fulfills its development goals. Separate chapters are dedicated to an introduction to the projects motivation, methodology and comparable products, a conceptual description of Rktik’s functionality as it is experienced by a user, the technical background of implementation and operation of the service and lastly, an evaluation and discussion of the project and future development.
+Rktik is an online community that allows like minded people to collect and publish content together. Rktik is set apart from similar online services by its distinct modelling of personal and collective identity. This document describes Rktik’s software architecture and how it fulfills its development goals. Separate chapters are dedicated to an introduction to the projects motivation, methodology and comparable products, a conceptual description of Rktik’s functionality, the technical background of implementation and operation of the service and lastly, an evaluation and discussion of the project and future development.
 
 ## Motivation
 

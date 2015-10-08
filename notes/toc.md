@@ -7,7 +7,15 @@
 - Attention irgendwo beschreiben
 - Stimmt das: “As described in [Movements], this process 1) guards members’ privacy and 2) may establish stronger cohesion between movement members.” ?
 - Habe ich irgendwo auf Informationen in der Peer to Peer section verwiesen die dort gar nicht enthalten sind?
-
+- [Rights Management] in den Anhang mit Auflistung wer was machen darf.
+- [API Specification]
+- Wird Publishing state beschrieben?
+- Tags im conceptual part beschreiebn
+- Wird das hot raking beschrieben?
+- Werden reposts beschrieben?
+- Discussion: Besser nach notifications fragen
+- [Cached Information]
+- Methodology should include deployment process and Git branching model
 
 **Table of Contents**
 
@@ -41,6 +49,7 @@
 ## Content
 
 - Overview: Thoughts
+- Reposts
 - Attaching Media: Percepts
 - Distributing Attention: Voting and Hotness 
 
@@ -93,5 +102,4 @@
 
 ## Movement Agency
 
-- Serialization and Encryption
-- Peer to Peer Extension
+## External Clients
