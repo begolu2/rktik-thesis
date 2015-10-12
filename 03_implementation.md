@@ -180,7 +180,7 @@ These special views have the `before_request` decorator, which causes them to be
 
 ### HTML Templates
 
-Templates allow separation of content and layout in the application backend and thereby lead to more readable code. They consist of layout definitions written in HTML and additional markup that defines where content needs to be inserted. View functions compute all information neccessary for a given web page and then pass this information as parameters to a template. Rktik uses the Jinja2 template engine ^[[Jinja2 2.8](https://pypi.python.org/pypi/Jinja2/2.8)] included with Flask for this purpose.
+Templates allow separation of content and layout in the application backend and thereby lead to more readable code. They consist of layout definitions written in HTML and additional markup that defines where content needs to be inserted. View functions compute all information necessary for a given web page and then pass this information as parameters to a template. Rktik uses the Jinja2 template engine ^[[Jinja2 2.8](https://pypi.python.org/pypi/Jinja2/2.8)] included with Flask for this purpose.
 
 Jinja2 provides almost all required functionality with missing features provided through extensions. Rktik uses the *humanize* library ^[[Humanize 0.5](https://pypi.python.org/pypi/humanize/0.5)] for converting date and time data into a human readable format ^[As an example, instead of displaying `2015-10-01T15:42:23.254966+00:00` as a thought’s creation time, the relative form *two hours ago* is used]. Additionally, a number of custom filters are used in templates:
 
@@ -188,7 +188,7 @@ Jinja2 provides almost all required functionality with missing features provided
 * The *mentions* filter uses information from mention percepts (see [Nucleus Models]) to replace occurrences of the pattern `@persona_name` with a link to the respective persona’s page
 * The *gallery_col_width* filter is used to adapt the size of image attachments to their number. The largest format is used when only one image is attached. A successively smaller image size is used up to four image attachments.
 
-	![The size of attached images is adapted to available space](img/col_width.png)\
+	![The size of attached images is adapted to available space](img/col_width.png)
 * The *sort_hot* filter can be used to apply the hot ranking to lists of thoughts
 * The *authorize* filter replaces thought contents with a placeholder if the thought is not visible to the active persona (see [Serializable]).
 
@@ -226,7 +226,7 @@ The user may opt out of email delivery entirely or setup specific rules for the 
 
 ## Improving Performance
 
-User satisfaction is related to a web site’s performance (@NIELSEN2012). As the complex page layouts and *hot* sorting used in Rktik require significant server resources, keeping performance at a satisfactory level is hard. As the development process of Rktik did not define performance as a primary objective (see [Methodology]), the neccessary adjustments are even more difficult to make. Still, it was possible to increase performance at the end of the development process by 1) using memcache to reuse computed results and 2) optimizing database queries.
+User satisfaction is related to a web site’s performance (@NIELSEN2012). As the complex page layouts and *hot* sorting used in Rktik require significant server resources, keeping performance at a satisfactory level is hard. As the development process of Rktik did not define performance as a primary objective (see [Methodology]), the necessary adjustments are even more difficult to make. Still, it was possible to increase performance at the end of the development process by 1) using memcache to reuse computed results and 2) optimizing database queries.
 
 **Caching**
 
@@ -246,7 +246,7 @@ These capabilities allow a developer to focus on programming, instead of the tim
 
 Rktik is installed in two separate Heroku environments for *testing* and *production* use. The development process consists of testing a new feature on a local development machine, testing it in the testing environment and only then deploying it to the production environment if no bugs are found (see [Methodology]). The production environment has been accessible to the general public since 26th July 2015.
 
-Deployment to these environments is automated using the scripts ‘push_testing.py’ and ‘push_production.py’ in the source code’s root folder. These scripts execute all tasks neccessary for deployment, which includes:
+Deployment to these environments is automated using the scripts ‘push_testing.py’ and ‘push_production.py’ in the source code’s root folder. These scripts execute all tasks necessary for deployment, which includes:
 
 * Verifying that all changes to the Nucleus repository are commited in Git
 * Pushing the Nucleus repository to Github

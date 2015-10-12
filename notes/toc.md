@@ -17,6 +17,12 @@
 - [Cached Information]
 - Methodology should include deployment process and Git branching model
 
+**Korrektur lesen**
+- Pablo
+- Simon Danisch
+- Leon?
+- 
+
 **Table of Contents**
 
 
