@@ -112,7 +112,7 @@ A movement’s (public) blog may contain a chat module, which non-members can us
 
 **Creating thoughts in other parts of the site**
 
-Members may propose a thought to be posted with attribution to the movement in another part of Rktik. This could be a personal message to a persona, a reply to any thought not in the movement itself or as a message in the public chat of another movement (as described above). Changes to the proposed thought may be discussed by members beforehand as descibed for *events* and *public chat* .
+Members may propose a thought to be posted with attribution to the movement in another part of Rktik. This could be a personal message to a persona, a reply to any thought not in the movement itself or as a message in the public chat of another movement (as described above). Changes to the proposed thought may be discussed by members beforehand as described for *events* and *public chat* .
 
 ## External Clients
 
@@ -120,9 +120,9 @@ Rktik is the successor to Souma, which is a prototype for a decentral social net
 
 **API for Rktik’s Nucleus module**
 
-An API is an interface between two separate pieces of software. JSON and HTTP REST APIs have emerged as defacto standards in web infrastructure (CITE). The API will serialise ORM models into JSON representations, which are encrypted, signed and wrapped in a second layer JSON representation for transfer.
+An API is an interface between two separate pieces of software. JSON and HTTP REST APIs have emerged as de facto standards in web infrastructure (CITE). The API will serialise ORM models into JSON representations, which are encrypted, signed and wrapped in a second layer JSON representation for transfer.
 
-The API will be designed primarily for a client that is installed on a users computer, but it may also be used for third party services built on data published by Rktik. Usage scenarios include clients for mobile devices or third-party websites that interact with Rktik.
+The API will be designed primarily for a client that is installed on a user’s computer, but it may also be used for third party services built on data published by Rktik. Usage scenarios include clients for mobile devices or third-party websites that interact with Rktik.
 
 **Local client application**
 

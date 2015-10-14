@@ -2,7 +2,7 @@
 
 ## Overview
 
-Rktik is an online community where users share text, links and other media pseudonymously in the context of topic-oriented groups and personal blogs. Contents are sorted based on recency as well as a voting and subscription system.
+Rktik is an online community where users share text, links and other media pseudonymously in the context of topic-oriented groups and personal blogs. Contents are sorted based both on recency as well as a voting and subscription system.
 
 This chapter will explain the user-facing functionality of the Rktik website on a conceptual level. First, general concepts are explained, introducing readers to the mechanics of using Rktik. Subsequent sections give detailed information on how Rktik handles *content*, *identity* and *context*. 
 
@@ -14,7 +14,7 @@ This section gives a brief overview of terminology used in Rktik. Please see the
 
 (see [User Accounts])
 
-All actions of users are attributed to their **active persona**, which is a screen name that identifies them across the site. A user may create any number of personas to shape their privacy, but only one of them can be *active* at any time. 
+All actions of users are attributed to their **active persona**, which is a screen name that identifies them across the site. A user may create any number of personas to shape their privacy, but only one of them can be *active* at a time. 
 
 **Thoughts** are short pieces of text submitted by personas and represent the smallest unit of content.
 
@@ -38,9 +38,9 @@ Any persona can create new movements and follow the (public) blog of any movemen
 
 The Frontpage is located at the root of Rktik and presents users with a stream of thoughts from their movements and followed blogs. It is similar to the Facebook News Feed and the Reddit Frontpage in that the stream is sorted based both on the recency of a submission and the number of votes it has received (see [Distributing Attention: Voting and Hotness]).  
 
-Anonymous users don’t have any subscriptions, they are shown thoughts from *top movements*. These are the seven movements with the highest member count.
+Anonymous users do not have any subscriptions, they are shown thoughts from *top movements*. These are the seven movements with the highest member count.
 
-To the side of the thought stream, the frontpage also contains a number of other elements:
+On the right-hand side of the thought stream, the frontpage also contains a number of other elements:
 
 * The **Frontpage Graph Visualization** displays a visual representation of Frontpage contents as a graph (see [Frontpage Graph Visualization]).
 * **Top Thought** When a user is logged in, this contains a short list of thoughts from *top movements* they are not following with their active persona. This allows users to notice particularly popular submissions from contexts they wouldn’t see otherwise.
