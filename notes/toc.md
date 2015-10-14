@@ -23,6 +23,9 @@
 - Leon?
 - 
 
+**Fragen an Helmar**
+- Welche Programme soll ich nur per Fußnote referenzieren und welche in die Bibliographi aufnehmen?
+
 **Table of Contents**
 
 

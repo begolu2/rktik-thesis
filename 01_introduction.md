@@ -33,7 +33,7 @@ The Rktik application is based on the Souma prototype developed in the Cognitive
 5. Finding and removing bugs
 6. Evaluation 
 
-The Github issue tracker was used to record these tasks and eventual subtasks ^[Access to the issue tracker is restricted to Github accounts registered as Rktik developers]. A Git repository, also hosted on Github, was used to track the contents of the source code. Changes in the source code recorded in Git link to the relevant tasks in the issue tracker, that these changes affected. While Git and Github offer the most advantages to team-based programming projects, it also helped me as a single developer, by offering an interface to keep track of open tasks and link progress to specific source code changes.
+The Github issue tracker was used to record these tasks and eventual subtasks ^[Access to the issue tracker is restricted to Github accounts registered as Rktik developers.]. A Git repository, also hosted on Github, was used to track the contents of the source code. Changes in the source code are referenced from the issue tracker when they are connected to the resolution of an issue. Using Git and Github helps to keep an overview of tasks and their relation to specific source code changes and offers quick access to past versions of the source code. This feature can be valuable as it allows deleting code without worrying that it might still be needed later on in development.
 
 The Rktik application is implemented in the Python programming language, using the Flask framework for web applications and the SQLAlchemy object relational mapper. Additionally, some features of the user interface are implemented using the jQuery library. The operating environment is provided by Heroku in the form of a  platform-as-a-service (PAAS). A PAAS allows uploading and running a web application on provisioned servers without having to configure these servers manually. See [Hosting and Deployment] for more details on this process.
 
@@ -41,13 +41,17 @@ These choices were taken from the Souma project which used the same technologica
 
 ## State of the Art 
 
-This section describes approaches to social networks that share similarities with Rktik. All of them allow users to publish messages to a single user or many users on the service. I will explain their functionality and specifically focus on their representation of identity and related software features. 
+This section describes approaches to social networks that share similarities with Rktik. I will explain their functionality and specifically focus on their representation of identity and related software features.
 
-The comparison includes Facebook as a social network mostly used for communication in *peer-groups*, Reddit as an open social network where users mostly publish to the *general public* and email as a communication medium mostly used for *direct communication* with other users. All three services can also be used in one-to-one, one-to-many and many-to-many communication structures.
+This comparison includes three social platforms with more than 100 million monthly active users, each of which has a bias towards a different communication structure. This includes Facebook as a social network used for communication within *peer-groups*, Reddit as an open social network where users publish to the *general public* and email as a communication medium used for *direct communication* with other users. All three services can also be used for one-to-one, one-to-many and many-to-many communication. 
 
-In the following, I will explain the basic functionality of each of the services and then detail what makes them similar and different from Rktik.
+In the following, I will explain the basic functionality of each of the services and then compare them to Rktik.
 
 **Facebook**
+
+Available since: February 2004
+Monthly active users: 1.49 billion as of June 30, 2015 ([@Facebook]).
+Website: [facebook.com](http://facebook.com/)
 
 Facebook is an online social networking service, it allows friends and acquaintances to keep track of each other’s personal lifes. Facebook offers a similar core functionality to that of Rktik in that users can publish content on their profiles, vote ^[Votes on Facebook are called “like”.] and comment on content of other users and subscribe to their content feeds. Both services center the user interface on a feed of content from subscribed sources that is sorted based on recency as well as other factors. Facebook also allows users to create groups as either public spaces related to a topic or private spaces for exchange of messages between group members. Users may also send private messages to their “friends”.
 
@@ -56,6 +60,10 @@ Facebook is different from Rktik both in policy and features. It requires users 
 In addition to the core functionality, Facebook offers many more features ranging from business directories to video calling. These have not been included this comparison as they do not directly compare to features of Rktik.
 
 **Reddit**
+
+Available since: June 2005
+Monthly active users: 203 million as of September 15, 2015 (@Reddita)
+Website: [reddit.com](https://reddit.com)
 
 Reddit is a social link aggregator, it lets users create link and text submissions and sorts them based on user votes and recency. Submissions are created in *subreddits*, which are subcommunities of Reddit related to a specific topic. Each submission has a comments section in which its contents are discussed by the community. Comments can also be voted on and are displayed in a hierarchical layout based on their reply-structure. Each subtree is sorted according to number of votes and recency. 
 
@@ -70,6 +78,10 @@ Users can not directly publish content on a user profile or blog, as all submiss
 The content on reddit.com is almost text-only. If a link submission points at an image, a small preview is displayed next to the submission’s title, while links to other content are never rendered inline. 
 
 **Email**
+
+Available since: ~ 1971 ^[As the email protocol evolved over time from non-networked messaging protocols, there is no specific point in time from which on email was generally available. In 1971 the first networked electronic mail system for ARPANET was standardized (@[Crocker1982]).] 
+Monthly active users: > 2 billion ^[It is difficult to estimate the number of people who actively use email because of the large number of email service providers. The market research firm Radicati estimated a number of 2.6 billion active email users in  2015 (@Radicati2011).]
+Website: none
 
 Email is a protocol for distributing messages from an author to one or many recipients. While Rktik, Facebook and Reddit are offered by their respective providers, Email is a *method* of message delivery that is implemented by many service providers worldwide, while still allowing all users to exchange messages with each other. Email messages may also contain any number of media attachments.
 
