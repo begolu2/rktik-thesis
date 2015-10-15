@@ -34,6 +34,8 @@ Any persona can create new movements and follow the (public) blog of any movemen
 
 (see [Movements])
 
+![Class diagram of important classes and relations in Rktik as described in [Terminology]. Most attributes and operations have been omitted for simplicity.](img/terminology.png)
+
 ### Frontpage
 
 The Frontpage is located at the root of Rktik and presents users with a stream of thoughts from their movements and followed blogs. It is similar to the Facebook News Feed and the Reddit Frontpage in that the stream is sorted based both on the recency of a submission and the number of votes it has received (see [Distributing Attention: Voting and Hotness]).  
