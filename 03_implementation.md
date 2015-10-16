@@ -10,7 +10,7 @@ It is divided into sections for the shared data model *Nucleus*, the *Glia* web 
 
 The Nucleus library uses the SQLAlchemy ORM ^[[SQLAlchemy 0.9.2](https://pypi.python.org/pypi/SQLAlchemy/0.9.2)] to provide data persistency and defines methods for context-independent data processing. It is implemented as a Python package which can be imported from the main application *Glia*. The Nucleus package also provides a direct database connection that can be used from Glia to bypass the ORM layer as well as a connection to the in-memory cache *memcache*, which is also extensively used by the ORM models. A signalling namespace provides event hooks which are used to automate postprocessing and other actions in reaction to model changes.
 
-As Rktik was planned as a semi-decentralized service[^semi_decentral], the object relational manager was decoupled from the rest of the application from the beginning to allow for the easy implementation of client and server applications using this codebase. 
+As Rktik was planned as a semi-decentralized service[^semi_decentral], the object relational manager was decoupled from the rest of the application from the beginning to allow for the easy implementation of client and server applications using this codebase.
 
 [^semi_decentral]: Semi-decentral in this case means that users can chose between 1) a client application for rendering and processing data which uses a web server for the transfer of (encrypted) data and 2) solely using Rktik on its website without installing an application on their computers.
 
@@ -18,7 +18,7 @@ As Rktik was planned as a semi-decentralized service[^semi_decentral], the objec
 
 The *Serializable* module primarily provides serialization capabilities to ORM models that inherit from it. This functionality is not in the scope of this thesis, but part of the planned P2P extension (see [External Clients]). As the module is also required for rights management, I have left it in the codebase submitted along this document, and will describe the relevant functionality here.
 
-Serializable objects provide a method *authorize*, which validates that a given user may execute a specific action on the instance. Each model that inherits from Serializable can define its own handling of user rights by overriding this method. Please see [Rights Management] for detailed information on which users are allowed to make changes to which objects. 
+Serializable objects provide a method *authorize*, which validates that a given user may execute a specific action on the instance. Each model that inherits from Serializable can define its own handling of user rights by overriding this method. Please see [Rights Management] for detailed information on which users are allowed to make changes to which objects.
 
 ### Nucleus Models
 
@@ -30,7 +30,7 @@ The `User` model represents a registered user of the site. It has relations to a
 
 #### Identity
 
-The `Identity` class is a superclass for `Persona` and `Movement `as these two share many attributes and methods related to them being identities. 
+The `Identity` class is a superclass for `Persona` and `Movement `as these two share many attributes and methods related to them being identities.
 
 Apart from basic information such as username, user color, creation and modification timestamps, the `Identity` model has relations to the blog and mindspace associated with each instance.
 
@@ -44,7 +44,21 @@ The `Persona` model provides methods for toggling instances’ membership in mov
 
 Just as the `Persona` model, `Movement` instances inherit from the `Identity` model and thereby provide all its attributes and methods. They also store the movement’s mission, whether the movement is private and relations to the movement’s admin (founder) and to movement members.
 
-**MovementMemberAssociation**
+When votes are cast on thoughts in the movement mindspace, the movement’s `promotion_check` method is called. This method reposts the thought to the movement blog, if the number of votes passes a threshold. Given the number of members (c) the threshold value (t) is defined as:
+
+    t = round(c / 100 + 0.8 / c + log(c, 1.65)) if c > 0 else 1
+
+This formula ensures that for a small movement a low number of votes is required, thus creating lots of content on the blog.  At the same time larger movements need more votes relative to their user count, so that only the best content will be posted to the blog.
+
+![Plot of threshold function for c = 1 to 100](img/threshold_1.png) \
+
+Plot of threshold function for c = 1 to 100.
+
+![Plot of threshold function for c = 100 to 1000](img/threshold_2.png) \
+
+Plot of threshold function for c = 100 to 1000.
+
+**Movement Member Association**
 
 The members relation is implemented using the [association object pattern](http://docs.sqlalchemy.org/en/rel_1_0/orm/basic_relationships.html#association-object) to store additional metadata about the membership:
 
@@ -71,7 +85,7 @@ Thoughts also have a relation to their votes and helper methods for accessing in
 
 #### Upvote
 
-The `Upvote` model inherits from `Thought`. Its instances represent votes cast by personas on other thoughts. This relation is represented by the upvote instance referring to the voted thought as its parent. 
+The `Upvote` model inherits from `Thought`. Its instances represent votes cast by personas on other thoughts. This relation is represented by the upvote instance referring to the voted thought as its parent.
 
 #### Percept
 
@@ -99,7 +113,7 @@ Notifications represent direct messages to the user, generated automatically whe
 
 ### Modeling Data with SQLAlchemy
 
-SQLAlchemy allows the implicit specification of database schemas through defining the Python classes the database ought to model. It maps user-defined Python classes to database tables and instances of these classes to rows in the tables. Changes to instances are transparently synchronized with database contents and queries for retrieving data can be formulated in an object oriented expression language. This has the advantages that 1) developers can start modifying the database schema without having to learn a query language specific to the used database, 2) the connected database backend can be changed with minimal modifications to the model specifications and 3) all code related to the ORM models resides in one place, limiting code fragmentation. 
+SQLAlchemy allows the implicit specification of database schemas through defining the Python classes the database ought to model. It maps user-defined Python classes to database tables and instances of these classes to rows in the tables. Changes to instances are transparently synchronized with database contents and queries for retrieving data can be formulated in an object oriented expression language. This has the advantages that 1) developers can start modifying the database schema without having to learn a query language specific to the used database, 2) the connected database backend can be changed with minimal modifications to the model specifications and 3) all code related to the ORM models resides in one place, limiting code fragmentation.
 
 While SQLAlchemy makes getting started really easy, it can also lead to performance problems. Reducing the complexity of database access is appropriate for straightforward use cases but can lead to inefficiencies in more complex scenarios. Many advanced queries can be optimized with some knowledge of how the underlying database is used, as SQLAlchemy does not necessarily translate a given command into the most effective query. The library provides an extensive suite of tools for implementing these optimizations.
 
@@ -123,9 +137,9 @@ The Glia web server consists of these components:
 
 **Session Management**
 
-Session management is responsible for storing information about which user is logged in on which browsers. Rktik uses the Flask-Login extension ^[[Flask-Login 0.2.11](https://pypi.python.org/pypi/Flask-Login/0.2.11)] to provide most of this functionality. 
+Session management is responsible for storing information about which user is logged in on which browsers. Rktik uses the Flask-Login extension ^[[Flask-Login 0.2.11](https://pypi.python.org/pypi/Flask-Login/0.2.11)] to provide most of this functionality.
 
-Users can login using their email and password which, given a correct password, will let Flask-Login store a cookie in their browser recording the logged-in state. 
+Users can login using their email and password which, given a correct password, will let Flask-Login store a cookie in their browser recording the logged-in state.
 
 ### Web View and URL Routing
 
@@ -147,7 +161,7 @@ Following is a description of all views available in Glia. Some of these are *re
 
 * **create_thought** Dedicated page for creating new thoughts. In contrast to the inline thought creator this view also allows entering long text attachments.
 * **edit_thought** Similar interface to the *create_thought* view that allows removing and editing attachments and the thought’s title.
-* **delete_thought** Confirmation dialog for removing thoughts. 
+* **delete_thought** Confirmation dialog for removing thoughts.
 * **thought** View for a single thought that includes its context, attachments, comments and the thought’s metadata.
 
 *Movements*
@@ -171,7 +185,7 @@ Following is a description of all views available in Glia. Some of these are *re
 * **help** Access help pages stored in *templates/help_\*.html* files
 * **tag** Listing of thoughts marked with a specific hashtag
 
-*Before request* 
+*Before request*
 
 These special views have the `before_request` decorator, which causes them to be executed every time a user visits a page.
 
@@ -194,9 +208,9 @@ Jinja2 provides almost all required functionality with missing features provided
 
 ### Asynchronous UI
 
-Most of the content of Rktik is compiled on the server and then sent as a complete web page to the user’s browser. When an interaction requires only part of the screen contents to be changed, site responsiveness is increased by using asynchronous communication with the server. This functionality is implemented using the *jQuery* Javascript library ([jQuery website](https://jquery.com/)) for one-off asynchronous calls and the *websockets* browser technology for continous streams of information. 
+Most of the content of Rktik is compiled on the server and then sent as a complete web page to the user’s browser. When an interaction requires only part of the screen contents to be changed, site responsiveness is increased by using asynchronous communication with the server. This functionality is implemented using the *jQuery* Javascript library ([jQuery website](https://jquery.com/)) for one-off asynchronous calls and the *websockets* browser technology for continous streams of information.
 
-The websockets technology provides a socket between the browser and the Glia server which is used for relaying information during the time in which the browser window stays open. All thoughts created in a movement mindspace, which includes chat messages as well as all votes on these thoughts, are received and immediately relayed by the server to all browser windows that show part of the movement. Messages received on the client side are inserted into the chat widget. If the browser window shows an invidual thought’s page, new comments are inserted at the appropriate place in the hierarchical comments view. 
+The websockets technology provides a socket between the browser and the Glia server which is used for relaying information during the time in which the browser window stays open. All thoughts created in a movement mindspace, which includes chat messages as well as all votes on these thoughts, are received and immediately relayed by the server to all browser windows that show part of the movement. Messages received on the client side are inserted into the chat widget. If the browser window shows an invidual thought’s page, new comments are inserted at the appropriate place in the hierarchical comments view.
 
 The same channel is used for sending reposts and receiving desktop notifications (see [Notifications]). Server side handlers for websockets are located in the `glia.web.events` module, while client side handlers are located in the static file `glia/static/js/main.js`.
 
@@ -240,7 +254,7 @@ The SQLAlchemy library hides the complexity of accessing data stored and linked 
 
 ## Hosting and Deployment
 
-Rktik ist running on servers provided by the Heroku platform-as-a-service (PAAS) ^[[Heroku website](https://www.heroku.com)). In contrast to traditional server environments, which need to be manually configured for the services to be deployed, a PAAS offers tools that automate many of these tasks. This includes deployment from a Git repository, automatic installation of dependencies, a web interface for installation and semi-automatic configuration of third-party services (e.g. email delivery, memcache, log analysis, etc.) and a mechanism for simple and fast scaling of an application’s resources in the event of rising visitor traffic. 
+Rktik ist running on servers provided by the Heroku platform-as-a-service (PAAS) ^[[Heroku website](https://www.heroku.com)). In contrast to traditional server environments, which need to be manually configured for the services to be deployed, a PAAS offers tools that automate many of these tasks. This includes deployment from a Git repository, automatic installation of dependencies, a web interface for installation and semi-automatic configuration of third-party services (e.g. email delivery, memcache, log analysis, etc.) and a mechanism for simple and fast scaling of an application’s resources in the event of rising visitor traffic.
 
 These capabilities allow a developer to focus on programming, instead of the time-consuming configuration and maintenance of a server environment. The downside of using Heroku is that their services come at a comparatively high price. This is mitigated somewhat as they are offering a free option for applications that require only little resources, as is the case for Rktik right now. However, if Rktik grows to a larger userbase, it might become neccesary to move to a different hosting environment that offers a better cost-benefit ratio.
 
@@ -254,9 +268,9 @@ Deployment to these environments is automated using the scripts ‘push_testing.
 * Pushing the Glia repository to the appropriate environment on Heroku. This step triggers the Heroku environment to automatically install all required dependencies ^[Dependencies are defined in the file `requirements.txt` in the Glia project root folder].
 * Running database migration scripts in the Heroku environment
 
-The script for deployment to the production environment additionally merges all changes in the *development branch* into a new commit on the *master branch* of the Glia repository (see [Methodology]). Therefore, commits on the master branch represent a history of deployments to the production environment and can be seen as versions of the Glia application. 
+The script for deployment to the production environment additionally merges all changes in the *development branch* into a new commit on the *master branch* of the Glia repository (see [Methodology]). Therefore, commits on the master branch represent a history of deployments to the production environment and can be seen as versions of the Glia application.
 
-Rktik uses *environment variables* to determine which environment it is currently running in and to load an appropriate configuration. Configurations for the development, testing and production environment differ in the passwords, secrets and external services they specify as well as the internet hostname they setup for Rktik. Sensitive information, such as passwords, is not stored in the source code repository, but loaded either from access-controlled external files or from environment variables. 
+Rktik uses *environment variables* to determine which environment it is currently running in and to load an appropriate configuration. Configurations for the development, testing and production environment differ in the passwords, secrets and external services they specify as well as the internet hostname they setup for Rktik. Sensitive information, such as passwords, is not stored in the source code repository, but loaded either from access-controlled external files or from environment variables.
 
 The development and testing configurations additionally increase the verbosity of log messages and provide interactive debugging in two ways: 1) a debugging console and interactive traceback embedded in Flask’s response when server errors occur during a request and 2) the Flask DebugToolbar (@VanTellingen2015), which provides an interface for performance measurement, variable introspection and other information as an optional web overlay for successful requests.
 

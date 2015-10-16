@@ -152,7 +152,9 @@ The personal identity of a user of the Rktik website is partially decoupled from
 
 Other online communities allow this to different extents: On Reddit, a user may choose an arbitrary name for their user profile, while Facebook asks their users to provide their real name for online communication (see [State of the Art]). Rktik goes one step further by not only allowing arbitrary handle names but also featuring arbitrary *numbers* of handles, which are called *personas*. 
 
-On initial signup, new users create their first persona by giving it a name and assigning a color to mark this persona’s submissions. Following completed signup, users can create more personas using the *switch* menu in the upper right corner of every screen. They can also to choose to create a new persona any time they are joining a movement. Therefore, they can keep their membership in that movement separate from activities in other parts of the site.
+![The *switch* menu lets users activate or create other personas](img/switch.png)
+
+On initial signup, new users create their first persona by giving it a name and assigning a color to mark this persona’s submissions. Following completed signup, users can create more personas using the *switch* menu in the upper right corner of every screen. They can also choose to create a new persona any time they are joining a movement. Therefore, they can keep their membership in that movement separate from activities in other parts of the site.
 
 Other users can not tell whether any two personas are linked to the same user account. 
 
@@ -178,15 +180,9 @@ Each movement has its own blog and mindspace with embedded chat room. Members ca
 
 #### Promoting Content
 
-Alongside each thought in the mindspace a progress bar is displayed which indicates how many more votes are required for a thought in the mindspace to be promoted to the Movement blog. This threshold value depends on the number of members of the group. Given the number of members c it is defined as:
+Movements automatically repost thoughts on their blog once they have reached a certain number of votes. A progress bar, displayed alongside each thought in the mindspace, indicates how many more votes are required for promotion. This threshold value depends on the number of group members. Please see section [Movement] for details on the implementation of the threshold function.
 
-	threshold = round(c / 100 + 0.8 / c + log(c, 1.65)) if c > 0 else 1
-
-[TODO: picture showing relation threshold and number users]
-
-This formula ensures that a low number of votes is required while a movement is small, creating lots of content on the blog,  while a large movement requires more votes relative to its user count so that only the best content will be posted to the blog.
-
-Movements are similar to Facebook Groups, Reddit’s Subreddit feature and Email newsgroups. All of them distinguish between private and public groups as Rktik does, however they don’t provide group members with the ability of democratically deciding on content to be published separately from the group pool to a public medium.
+Movements are similar to Facebook Groups, Reddit’s Subreddit feature and Email newsgroups. All of them distinguish between private and public groups as Rktik does; however, they do not provide group members with the ability of democratically deciding to publish content publicly.
 
 #### Private Movements
 

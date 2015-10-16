@@ -17,6 +17,7 @@
 - [Cached Information]
 - Methodology should include deployment process and Git branching model
 - Eventuell Gründe für Nymwars anführen in [Identity]
+- Hotness formular in den implementierungsteil verschieben
 
 **Korrektur lesen**
 - Pablo
