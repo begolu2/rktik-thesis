@@ -16,6 +16,7 @@
 - Discussion: Besser nach notifications fragen
 - [Cached Information]
 - Methodology should include deployment process and Git branching model
+- Eventuell Gründe für Nymwars anführen in [Identity]
 
 **Korrektur lesen**
 - Pablo
@@ -25,6 +26,8 @@
 
 **Fragen an Helmar**
 - Welche Programme soll ich nur per Fußnote referenzieren und welche in die Bibliographi aufnehmen?
+- Wie soll ich den Source Code einreichen?
+- Macht es Sinn Klassendiagramme etc in den Anhang zu tun?
 
 **Table of Contents**
 
