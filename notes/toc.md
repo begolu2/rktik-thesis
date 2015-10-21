@@ -19,6 +19,8 @@
 - Eventuell Gründe für Nymwars anführen in [Identity]
 - Hotness formular in den implementierungsteil verschieben
 - rename replies > reactions
+- Bugs erwähnen in Evaluation. Gibt es kritische bugs? Ansonsten auf bugtracker verweisen, oder vllt auch eine liste in den appendix?
+- Zeit in Dicussion: Vergangenheit. Uuberall korrekt?
 
 **Korrektur lesen**
 - Pablo
@@ -30,6 +32,7 @@
 - Welche Programme soll ich nur per Fußnote referenzieren und welche in die Bibliographi aufnehmen?
 - Wie soll ich den Source Code einreichen?
 - Macht es Sinn Klassendiagramme etc in den Anhang zu tun?
+- Bugs auflisten?
 
 **Table of Contents**
 
