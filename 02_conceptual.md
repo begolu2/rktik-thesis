@@ -42,28 +42,28 @@ Any persona can create new movements and follow the (public) blog of any movemen
 
 ### Frontpage
 
-The Frontpage is located at the root of Rktik and presents users with a stream of thoughts from their movements and followed blogs. It is similar to the Facebook News Feed and the Reddit Frontpage in that the stream is sorted based both on the recency of a submission and the number of votes it has received (see [Distributing Attention: Voting and Hotness]).
+The *frontpage* is located at the root of Rktik and presents users with a stream of thoughts from their movements and followed blogs. It is similar to the *Facebook News Feed* and the *Reddit frontpage* in that the stream is sorted based both on the recency of a submission and the number of votes it has received (see [Distributing Attention: Voting and Hotness]).
 
 Anonymous users do not have any subscriptions, they are shown thoughts from *top movements*. These are the seven movements with the highest member count.
 
 On the right-hand side of the thought stream, the frontpage also contains a number of other elements:
 
-* The **Frontpage Graph Visualization**: A visual representation of all thoughts and authors on the page as a graph (see [Frontpage Graph Visualization]).
+* The **frontpage graph visualization**: A visual representation of all thoughts and authors on the page as a graph (see [Frontpage Graph Visualization]).
 * **Top Thought**: When a user is logged in, this contains a short list of thoughts from *top movements* they are not following with their active persona. This allows users to notice particularly popular submissions from contexts they would not see otherwise.
 * **Discover Movements**: A listing of those top movements the active persona is not following.
 * **Recent Thoughts**: The most recent publicly visible thoughts submitted throughout the whole site.
 
 #### Frontpage Graph Visualization
 
-![Frontpage Graph Visualization]
+![Frontpage graph visualization]
 
-The Frontpage contains a visual representation of its contents in the form of a graph with a force-directed layout. This layout communicates the flow of information from a persona’s subscriptions to their frontpage. It also shows some additional thoughts from these subscriptions, that are not *hot* enough to be included in the frontpage.
+The frontpage contains a visual representation of its contents in the form of a graph with a force-directed layout. This layout communicates the flow of information from a persona’s subscriptions to their frontpage. It also shows some additional thoughts from these subscriptions, that are not *hot* enough to be included in the frontpage.
 
-The graph represents the Frontpage as a big red node in the center, identities which are followed by the active persona (content sources) as medium-sized colored nodes and thoughts as small white nodes.
+The graph represents the frontpage as a big red node in the center, identities which are followed by the active persona (content sources) as medium-sized colored nodes and thoughts as small white nodes.
 
 Thoughts are connected to the center node with a dotted edge if they are currently part of the frontpage feed. Thoughts are also always connected to their author’s identity with a further dotted edge. Some of the identities followed by the active persona may have contributed no thoughts to the current frontpage. In this case, they are connected to the center with a faint dashed edge. Nodes representing thoughts have a pulsating animation with a frequency correlated to their hotness and capped at 5 Hz.
 
-Thereby, the Frontpage contents surround the center node as a ring of white nodes, pulsating faster or slower according to their position in the stream. They are connected to a second ring of nodes which consists of those movements and personas who submitted the thoughts. Other content sources are located a bit further away to show that their submissions are also eligible for inclusion in the Frontpage.
+Thereby, the frontpage contents surround the center node as a ring of white nodes, pulsating faster or slower according to their position in the stream. They are connected to a second ring of nodes which consists of those movements and personas who submitted the thoughts. Other content sources are located a bit further away to show that their submissions are also eligible for inclusion in the frontpage.
 
 ### Notifications
 
@@ -265,4 +265,4 @@ Reply                           Determined by the original thought
 
 Table: Context in Rktik
 
-[Frontpage Graph Visualization]: img/graph.png
+[Frontpage graph visualization]: img/graph.png
