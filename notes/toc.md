@@ -21,6 +21,7 @@
 - rename replies > reactions
 - Bugs erwähnen in Evaluation. Gibt es kritische bugs? Ansonsten auf bugtracker verweisen, oder vllt auch eine liste in den appendix?
 - Zeit in Dicussion: Vergangenheit. Uuberall korrekt?
+- threshold function graph nebeneinander anordnen
 
 **Korrektur lesen**
 - Pablo

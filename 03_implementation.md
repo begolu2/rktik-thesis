@@ -26,6 +26,8 @@ Serializable instances provide a method *authorize*, which validates that a give
 
 The module `nucleus.models` contains definitions for all ORM models. Each model is represented by a class definition. See [API specification] for technical details such as the attributes and methods provided by each model. This section gives an overview for each model’s properties and responsibilities with respect to the functionality described in the *conceptual* chapter.
 
+![Class diagram of important classes and relations in Rktik as described in [Nucleus Models]. Most attributes and operations have been omitted for simplicity.](img/terminology.png)
+
 #### User
 
 The `User` model represents a registered user of the site. It has relations to all personas of this user and stores basic metadata such as the user ID, account creation data, email and password hash. The `User` class is also used in verifying user’s email addresses and storing the validation state related to the user.
@@ -127,10 +129,10 @@ In cases where not only the database schema, but also its contents have to be mo
 
 The *Glia* web server is a Python package based on the Flask web framework, and responsible for:
 
-* collecting and computing contents of the user interface, 
-* serving asynchronous UI updates, 
-* validating, storing and modifying information entered by the user, 
-* automatically performing maintenance operations, and 
+* collecting and computing contents of the user interface,
+* serving asynchronous UI updates,
+* validating, storing and modifying information entered by the user,
+* automatically performing maintenance operations, and
 * scheduling email delivery.
 
 Glia consists of the following components:
@@ -278,7 +280,7 @@ Deployment to these environments is automated using the scripts ‘push_testing.
 
 The script for deployment to the production environment additionally merges all changes in the *development branch* into a new commit on the *master branch* of the Glia repository (see [Methodology]). Therefore, commits on the master branch represent a history of deployments to the production environment and can be seen as versions of the Glia application.
 
-Rktik uses *environment variables* to determine which environment it is currently running in and to load an appropriate configuration. Configurations for the development, testing and production environment differ in the passwords, secrets and external services they specify as well as the internet hostname they set up for Rktik. Sensitive information such as passwords is not stored in the source code repository, but loaded either from access-controlled external files or environment variables.
+Rktik uses *environment variables* to determine which environment it is currently running in and to load an appropriate configuration. There are differing configurations for the development, testing and production environment. They differ in the passwords, secrets and external services they specify, as well as the internet hostname they set up for Rktik. Sensitive information such as passwords is not stored in the source code repository, but loaded either from access-controlled external files or environment variables.
 
 The development and testing configurations additionally increase the verbosity of log messages and provide interactive debugging in two ways: 1) a debugging console and interactive traceback embedded in Flask’s response when server errors occur during a request and 2) the Flask DebugToolbar (@VanTellingen2015), which provides an interface for performance measurement, variable introspection and other information as an optional web overlay for successful requests.
 
