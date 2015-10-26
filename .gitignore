@@ -1,2 +1,18 @@
 
 thesis.pdf
+
+*.aux
+
+*.bcf
+
+*.lof
+
+thesis.log
+
+*.out
+
+thesis.run.xml
+
+thesis.synctex.gz
+
+thesis.toc
