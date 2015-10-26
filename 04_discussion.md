@@ -10,13 +10,13 @@ The goals of **completeness**, **feasibility** and **maintainability**, as defin
 
 2. As described in the section [Improving Performance], the site’s speed is still too low for web user’s expectations. This can be improved by setting up periodically running background processes that precompute database queries and store them in memcache. Site performance could also be improved significantly by moving Rktik to more powerful servers, which however increases the costs of running the service.
 
-3. Rktik features interesting content that is regularly updated. Users who have signed up for an account but do not visit the site regularly, could benefit from this through a periodic email newsletter. Each edition of the newsletter may feature the most interesting content on Rktik as measured by votes received on thoughts.
+3. Rktik features interesting content that is regularly updated. Users who have signed up for an account but do not visit the site regularly could benefit from this through a periodic email newsletter. Each edition of the newsletter may feature the most interesting content on Rktik as measured by votes received on thoughts.
 
 ## Usage Metrics
 
 Usage metrics have been collected anonymously using the Amplitude^[[Amplitude website](https://amplitude.com/)] and Google Analytics^[[Google Analytics website](https://www.google.com/analytics/)] services. These are external services which receive usage data via short Javascript scripts embedded in every served page. As I consider this usage data *personal information*, it is collected anonymously. While Google Analytics tracks information about page requests, Amplitude tracks specific, manually defined events in a user’s interaction with the site.
 
-Google Analytics data is included since making rktik.com accessible to the public on July 26th 2015 until October 2nd 2015 for a total of 68 days. Amplitude data is included from August 8th 2015 until October 2nd 2015 for a total of 55 days. This difference exists because I only found out about Amplitude when measurement had already begun. 
+Google Analytics data is included since making rktik.com accessible to the public on July 26th 2015 until October 2nd 2015 for a total of 68 days. Amplitude data is included from August 8th 2015 until October 2nd 2015 for a total of 55 days. This difference exists because I only found out about Amplitude when measurement had already begun.
 
 Google Analytics and Amplitude collect extensive amounts of information. As a complete analysis of the data would go beyond the scope of this thesis, I have focussed on four kinds of measurement: 1) The total number of usage sessions, 2) the number of users per week, 3) the number of users who have used specific features in a given week, and 4) the number of thoughts and votes created. These metrics were chosen because they reflect the total amount of usage, as well as the relative popularity of specific features.
 
@@ -24,7 +24,7 @@ For the purpose of this evaluation, a *user* is defined as a web browser used to
 
 ### Usage sessions
 
-The number of sessions was assessed using Google Analytics. A session is defined as a group of interactions between a user and the website that takes place within 30 minutes or until midnight (@Google). A total of 825 sessions were started, most of which took place in the first weeks of operation. 
+The number of sessions was assessed using Google Analytics. A session is defined as a group of interactions between a user and the website that takes place within 30 minutes or until midnight (@Google). A total of 825 sessions were started, most of which took place in the first weeks of operation. The number of sessions following the first two weeks of operation may have been higher if Rktik had been promoted more extensively. This process was stalled due to the currently high access times described in [Improving Performance].
 
 ![Number of sessions]
 
@@ -92,7 +92,9 @@ Evaluated: Completed mouse click on a vote button
 
 ![Number of users who cast votes]\
 
-The number of users who cast votes rose from one in the first week to four in the third week and remained at this level except for the 5th and 6th weeks, where two and five users engaged with the feature respectively. This feature was the most popular in this comparison, which confirms its nature as a low-barrier way of engaging with content in Rktik. 
+The number of users who cast votes rose from one in the first week to four in the third week and remained at this level except for the 5th and 6th weeks, where two and five users engaged with the feature respectively. This feature was the most popular in this comparison, which confirms its nature as a low-barrier way of engaging with content in Rktik.
+
+The evaluation of user metrics shows how different features are accepted by users. Although the explanatory power of these observations is limited due to the low number of users, some interesting observations include the fact that a high number of users edit their posts and that very few users change their blog subscriptions or membership in movements. Especially the latter fact highlights the need for a tutorial that will guide new users through the features of Rktik. The continued observation of these measurements will allow a focussed development of Rktik in the future.
 
 ## Movement Agency
 
