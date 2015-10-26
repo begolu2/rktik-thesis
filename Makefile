@@ -7,7 +7,7 @@ all: thesis_skeleton.latex appendix.tex
 	--include-after-body=ref-appendix/appendix.tex \
 	--atx-headers \
 	--latex-engine=pdflatex --template=thesis_skeleton.latex \
-	--bibliography=thesis.bib --csl=acm-sigchi-proceedings-extended-abstract-format.csl \
+	--bibliography=thesis.bib --csl=apa.csl \
 	-V bibfile='thesis' \
 	-V bibtitle='Bibliography' \
 	-V documentclass='scrbook' \
@@ -20,7 +20,7 @@ all: thesis_skeleton.latex appendix.tex
 	-V subtitle='A Social Network for Groups' \
 	-V supervisor='Dr. Helmar Gust, University of Osnabrueck \\ Dr. Kai-Uwe Kühnberger, University of Osnabrueck' \
 	-V university_logo='img/uos.png' \
-	-f markdown -o thesis.tex
+	-f markdown -o thesis.pdf
 	rm thesis_skeleton.latex ref-appendix/appendix.tex
 
 appendix.tex: ref-appendix/appendix.md

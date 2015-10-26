@@ -477,8 +477,8 @@ and 2) letting multiple persons control a shared pseudonym.
 \hyperdef{}{methodology}{\section{Methodology}\label{methodology}}
 
 The Rktik application is based on the Souma prototype developed in the
-Cognitive Networks study project (see 1). In line with the goals
-outlined in \hyperref[motivation]{Motivation}, Rtkik's development
+Cognitive Networks study project (see Ahrend (2015)). In line with the
+goals outlined in \hyperref[motivation]{Motivation}, Rtkik's development
 process included
 
 \begin{enumerate}
@@ -546,7 +546,8 @@ services and then compare them to Rktik.
 \textbf{Facebook}
 
 Available since: February 2004\\
-Monthly active users: 1.49 billion as of June 30, 2015 ({[}2{]})\\
+Monthly active users: 1.49 billion as of June 30, 2015 ((Facebook,
+n.d.-b))\\
 Website: \href{http://facebook.com/}{facebook.com}
 
 Facebook is an online social networking service, it allows friends and
@@ -566,7 +567,7 @@ Users may also communicate via private messages.
 In contrast to these similarities, Facebook is different from Rktik both
 in policy and features. It requires users to identify with their real
 name and explicitly forbids creating more than one personal user account
-({[}{\textbf{???}}{]}). Contents of the Facebook network are hidden from
+((Facebook, n.d.-a)). Contents of the Facebook network are hidden from
 the public by default and accessible only once a friendship connection
 has been established with a user. Facebook groups can only choose to be
 either public or private. In contrast to Rktik, private groups cannot
@@ -581,7 +582,8 @@ features of Rktik.
 \textbf{Reddit}
 
 Available since: June 2005\\
-Monthly active users: 203 million as of September 15, 2015 (7)\\
+Monthly active users: 203 million as of September 15, 2015 (Reddit
+(n.d.-a))\\
 Website: \href{https://reddit.com}{reddit.com}
 
 Reddit is a social link aggregator, it lets users create link and text
@@ -603,10 +605,10 @@ user and group identity as well as the way external contents are
 displayed.
 
 In contrast to Facebook, Reddit encourages the creation of multiple
-accounts per user (8). However, it does not provide user interface
-controls for this. Every account is identified by its username, which is
-pseudonymous and does not necessarily reflect the real identity of a
-user in any way.
+accounts per user (Reddit (n.d.-b)). However, it does not provide user
+interface controls for this. Every account is identified by its
+username, which is pseudonymous and does not necessarily reflect the
+real identity of a user in any way.
 
 Users can not directly publish content on a user profile or blog, as all
 submissions must be placed in one of Reddit's communities, which are
@@ -633,7 +635,7 @@ Monthly active users: \textgreater{} 2 billion\footnote{It is difficult
   to estimate the number of people who actively use email because of the
   large number of email service providers. The market research firm
   Radicati estimated a number of 2.6 billion active email users in 2015
-  (6).}\\
+  (Radicati \& Hoang (2011)).}\\
 Website: none
 
 Email is a protocol for distributing messages from an author to one or
@@ -950,9 +952,9 @@ Currently the following attachment kinds are supported:
 \item
   \textbf{Longform text} As thought titles are limited to 300
   characters, the longform text attachment allows adding a longer text.
-  This text may be formatted using Markdown syntax ({[}4{]}), which
-  provides simple markup for basic text formatting such as headlines,
-  enumerations, bold and italic text.
+  This text may be formatted using Markdown syntax ((Gruber, 2004)),
+  which provides simple markup for basic text formatting such as
+  headlines, enumerations, bold and italic text.
 \end{itemize}
 
 \hyperdef{}{hotness}{\subsection{Distributing Attention: Voting and
@@ -984,16 +986,15 @@ hot = v / pow(t + 2, 1.5)
 
 This algorithm is adapted from the sorting algorithm used in the social
 bookmarking site \href{https://news.ycombinator.com/}{Hacker News} (see
-{[}9{]}).
+(Salihefendic, 2010)).
 
 \section{Identity}\label{identity}
 
 Some popular social media sites including Google+ and Facebook have
 tried to push users into publishing content on their services using a
-real name ({[}{\textbf{???}}{]}). The practice proved to be
-controversial, as it did not align with established Internet culture and
-prevented people from decoupling their online and offline activities
-(CITE).
+real name ((Boyd, 2012)). The practice proved to be controversial, as it
+did not align with established Internet culture and prevented people
+from decoupling their online and offline activities (CITE).
 
 However, even though a pseudonymous naming system prevents directly
 linking offline and online identity based on metadata, such a link can
@@ -1950,12 +1951,13 @@ Desktop notifications are displayed using the PNotify library
 (\href{http://sciactive.github.io/pnotify/}{PNotify}), which can insert
 notifications as HTML elements in web pages or as operating system
 specific native UI elements outside the browser window, as specified in
-the W3C recommendation \emph{Web Notifications} (see 12). When users
-first visit the Rktik website, they are prompted to allow displaying web
-notifications. HTML based notifications are used if this request is
-denied. Desktop notifications are relayed to the browser using
-websockets. The javascript functions used for receiving and displaying
-notifications are located in the \texttt{glia/static/js/main.js} script.
+the W3C recommendation \emph{Web Notifications} (see W3C (n.d.)). When
+users first visit the Rktik website, they are prompted to allow
+displaying web notifications. HTML based notifications are used if this
+request is denied. Desktop notifications are relayed to the browser
+using websockets. The javascript functions used for receiving and
+displaying notifications are located in the
+\texttt{glia/static/js/main.js} script.
 
 Email notifications are delivered using the \emph{SendGrid} email
 delivery service (\href{https://sendgrid.com/}{SendGrid website}). Using
@@ -1974,11 +1976,11 @@ Rktik.
 \hyperdef{}{improving-performance}{\section{Improving
 Performance}\label{improving-performance}}
 
-User satisfaction is related to a web site's performance (5). As the
-complex page layouts and \emph{hot} sorting used in Rktik require
-significant server resources, keeping performance at a satisfactory
-level is hard. As the development process of Rktik did not define
-performance as a primary objective (see
+User satisfaction is related to a web site's performance (NIELSEN
+(2012)). As the complex page layouts and \emph{hot} sorting used in
+Rktik require significant server resources, keeping performance at a
+satisfactory level is hard. As the development process of Rktik did not
+define performance as a primary objective (see
 \hyperref[methodology]{Methodology}), the neccessary adjustments are
 even more difficult to make. Still, it was possible to increase
 performance at the end of the development process by 1) using memcache
@@ -2012,12 +2014,13 @@ significantly, it can lead to inefficient patterns of database usage.
 Specifically, the number of queries required to access data can be in a
 linear relation to the number of items retrieved. Often, such queries
 can be combined into a single query or a low number of queries by using
-\emph{eager loading} techniques offered by SQLAlchemy (10). Here, a
-\emph{JOIN} statement is issued to simultaneously load related data from
-the database. Rktik is configured to utilize eager loading 1) for
-specific queries, using the SQLAlchemy \texttt{joinedload} option, and
-2) for certain model properties in general by specifying the option as a
-parameter in Nucleus' model definitions.
+\emph{eager loading} techniques offered by SQLAlchemy (SQLAlchemy Autors
+(n.d.)). Here, a \emph{JOIN} statement is issued to simultaneously load
+related data from the database. Rktik is configured to utilize eager
+loading 1) for specific queries, using the SQLAlchemy
+\texttt{joinedload} option, and 2) for certain model properties in
+general by specifying the option as a parameter in Nucleus' model
+definitions.
 
 \hyperdef{}{hosting-and-deployment}{\section{Hosting and
 Deployment}\label{hosting-and-deployment}}
@@ -2093,9 +2096,10 @@ The development and testing configurations additionally increase the
 verbosity of log messages and provide interactive debugging in two ways:
 1) a debugging console and interactive traceback embedded in Flask's
 response when server errors occur during a request and 2) the Flask
-DebugToolbar (11), which provides an interface for performance
-measurement, variable introspection and other information as an optional
-web overlay for successful requests.
+DebugToolbar (Tellingen \& Individual Contributors (2015)), which
+provides an interface for performance measurement, variable
+introspection and other information as an optional web overlay for
+successful requests.
 
 All logging messages above the \emph{debug} severity level are also
 forwarded to the Rktik engineering channel in the Slack web
@@ -2192,10 +2196,10 @@ altogether in their browser, their usage is not recorded.
 
 The number of sessions was assessed using Google Analytics. A session is
 defined as a group of interactions between a user and the website that
-takes place within 30 minutes or until midnight (3). A total of 825
-sessions were started, most of which took place in the first weeks of
-operation. The number of sessions following the first two weeks of
-operation may have been higher if Rktik had been promoted more
+takes place within 30 minutes or until midnight (Google (n.d.)). A total
+of 825 sessions were started, most of which took place in the first
+weeks of operation. The number of sessions following the first two weeks
+of operation may have been higher if Rktik had been promoted more
 extensively. This process was stalled due to the currently high access
 times described in \hyperref[improving-performance]{Improving
 Performance}.
@@ -2411,7 +2415,7 @@ information about members' activity would be distributed among them via
 the API. Information would only be made available in unencrypted form on
 the rktik.com website once members have decided on a collective action.
 In this section I will outline the components necessary to build this
-extension based on the design implemented by Souma (see 1).
+extension based on the design implemented by Souma (see Ahrend (2015)).
 
 \textbf{API for Rktik's Nucleus module}
 
@@ -2458,54 +2462,68 @@ superior connection speeds available in data centers.
 \chapter*{\bibname}
 
 \hyperdef{}{ref-Ahrend2015}{\label{ref-Ahrend2015}}
-{[}1{]} Ahrend, V., Berov, L., Eilbacher, G., et al. From a humanistic
-reconstruction of social networks to Souma. In L. Berov, A. Jamneshan
-and L. Wjatscheslaw, eds., \emph{From a humanistic reconstruction of
-social networks to souma}. Not published, Osnabrück, 2015, 95--108.
+Ahrend, V. (2015). Implementation. In L. Berov, A. Jamneshan, \& L.
+Wjatscheslaw (Eds.), \emph{From a humanistic reconstruction of social
+networks to souma} (pp. 95--108). Osnabrück: Not published.
+
+\hyperdef{}{ref-Boyd2012}{\label{ref-Boyd2012}}
+Boyd, D. (2012). The politics of ``real names''. \emph{Communications of
+the ACM}, \emph{55}(8), 29.
+\href{http://doi.org/10.1145/2240236.2240247}{doi:10.1145/2240236.2240247}
+
+\hyperdef{}{ref-Facebooka}{\label{ref-Facebooka}}
+Facebook. (n.d.-a). Can I have more than one username for my Page or
+profile? Retrieved from
+\url{https://www.facebook.com/help/154889281245103}
 
 \hyperdef{}{ref-Facebook}{\label{ref-Facebook}}
-{[}2{]} Facebook. Facebook Company Info.
-\url{http://newsroom.fb.com/company-info/}.
+Facebook. (n.d.-b). Facebook Company Info. Retrieved from
+\url{http://newsroom.fb.com/company-info/}
 
 \hyperdef{}{ref-Google}{\label{ref-Google}}
-{[}3{]} Google. How a Session is defined in Analytics.
-\url{https://support.google.com/analytics/answer/2731565?hl=en}.
+Google. (n.d.). How a Session is defined in Analytics. Retrieved from
+\url{https://support.google.com/analytics/answer/2731565?hl=en}
 
 \hyperdef{}{ref-Gruber2004}{\label{ref-Gruber2004}}
-{[}4{]} Gruber, J. Markdown. 2004.
-\url{http://daringfireball.net/projects/markdown/}.
+Gruber, J. (2004). Markdown. Retrieved from
+\url{http://daringfireball.net/projects/markdown/}
 
 \hyperdef{}{ref-NIELSEN2012}{\label{ref-NIELSEN2012}}
-{[}5{]} NIELSEN, J. User Satisfaction vs. Performance Metrics. 2012.
-\url{http://www.nngroup.com/articles/satisfaction-vs-performance-metrics/}.
+NIELSEN, J. (2012). User Satisfaction vs. Performance Metrics. Retrieved
+from
+\url{http://www.nngroup.com/articles/satisfaction-vs-performance-metrics/}
 
 \hyperdef{}{ref-Radicati2011}{\label{ref-Radicati2011}}
-{[}6{]} Radicati, S. and Hoang, Q. Email statistics report, 2011-2015.
-\emph{Retrieved May 44}, 0 (2011), 0--3.
+Radicati, S., \& Hoang, Q. (2011). Email statistics report, 2011-2015.
+\emph{Retrieved May}, \emph{44}(0), 0--3. Retrieved from
+\url{http://scholar.google.com/scholar?hl=en\{/\&\}btnG=Search\{/\&\}q=intitle:Email+Statistics+Report+,+2011-2015\{/\#\}0}
 
 \hyperdef{}{ref-Reddita}{\label{ref-Reddita}}
-{[}7{]} Reddit. About reddit. \url{https://www.reddit.com/about/}.
+Reddit. (n.d.-a). About reddit. Retrieved from
+\url{https://www.reddit.com/about/}
 
 \hyperdef{}{ref-Reddit.com}{\label{ref-Reddit.com}}
-{[}8{]} Reddit.com. Reddit FAQ: Is it okay to create multiple accounts?
-\url{https://www.reddit.com/wiki/faq/\#wiki/_is/_it/_okay/_to/_create/_multiple/_accounts.3F}.
+Reddit. (n.d.-b). Reddit FAQ: Is it okay to create multiple accounts?
+Retrieved from
+\url{https://www.reddit.com/wiki/faq\{/\#\}wiki\{/_\}is\{/_\}it\{/_\}okay\{/_\}to\{/_\}create\{/_\}multiple\{/_\}accounts.3F}
 
 \hyperdef{}{ref-Salihefendic2010}{\label{ref-Salihefendic2010}}
-{[}9{]} Salihefendic, A. How Hacker News ranking algorithm works. 2010.
-\url{http://amix.dk/blog/post/19574}.
+Salihefendic, A. (2010). How Hacker News ranking algorithm works.
+Retrieved from \url{http://amix.dk/blog/post/19574}
 
 \hyperdef{}{ref-SQLAlchemyAutors}{\label{ref-SQLAlchemyAutors}}
-{[}10{]} SQLAlchemy Autors. Relationship Loading Techniques.
-\url{http://docs.sqlalchemy.org/en/rel/_0/_8/orm/loading.html}.
+SQLAlchemy Autors. (n.d.). Relationship Loading Techniques. Retrieved
+from
+\url{http://docs.sqlalchemy.org/en/rel\{/_\}0\{/_\}8/orm/loading.html}
 
 \hyperdef{}{ref-VanTellingen2015}{\label{ref-VanTellingen2015}}
-{[}11{]} Tellingen, M. van and Individual Contributors. Flask
-DebugToolbar. 2015.
-\url{https://flask-debugtoolbar.readthedocs.org/en/latest/}.
+Tellingen, M. van, \& Individual Contributors. (2015). Flask
+DebugToolbar. Retrieved from
+\url{https://flask-debugtoolbar.readthedocs.org/en/latest/}
 
 \hyperdef{}{ref-W3C}{\label{ref-W3C}}
-{[}12{]} W3C. Web Notifications (W3C Proposed Recommendation).
-\url{http://www.w3.org/TR/2015/PR-notifications-20150910/}.
+W3C. (n.d.). Web Notifications (W3C Proposed Recommendation). Retrieved
+from \url{http://www.w3.org/TR/2015/PR-notifications-20150910/}
 
 \appendix
 
