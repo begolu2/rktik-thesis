@@ -1,27 +1,31 @@
 **TODO**
 
+# Schreiben:
 - Citations
 - Acknowledgements
-- Background Workers?
 - Methodology: Deployment / workflow
-- Attention irgendwo beschreiben
+- [Rights Management] in den Anhang mit Auflistung wer was machen darf.
+- Tags im conceptual part beschreiebn
+- Eventuell Gründe für Nymwars anführen in [Identity]
+
+# Fragen:
+- Ist attention beschrieben?
 - Stimmt das: “As described in [Movements], this process 1) guards members’ privacy and 2) may establish stronger cohesion between movement members.” ?
 - Habe ich irgendwo auf Informationen in der Peer to Peer section verwiesen die dort gar nicht enthalten sind?
-- [Rights Management] in den Anhang mit Auflistung wer was machen darf.
 - [API Specification]
 - Wird Publishing state beschrieben?
-- Tags im conceptual part beschreiebn
-- Wird das hot raking beschrieben?
-- Werden reposts beschrieben?
+- Werden reposts im conceptual part beschrieben?
 - Discussion: Besser nach notifications fragen
 - [Cached Information]
-- Methodology should include deployment process and Git branching model
-- Eventuell Gründe für Nymwars anführen in [Identity]
-- Hotness formular in den implementierungsteil verschieben
+- Hotness formel in den implementierungsteil verschieben
 - rename replies > reactions
-- Bugs erwähnen in Evaluation. Gibt es kritische bugs? Ansonsten auf bugtracker verweisen, oder vllt auch eine liste in den appendix?
 - Zeit in Dicussion: Vergangenheit. Uuberall korrekt?
+
+# Format und Drumherum
 - threshold function graph nebeneinander anordnen
+- Zitatformat ändern
+- “section” vor alle verweise
+- real -> offline identity
 
 **Korrektur lesen**
 - Pablo
@@ -29,11 +33,24 @@
 - Leon?
 - 
 
-**Fragen an Helmar**
-- Welche Programme soll ich nur per Fußnote referenzieren und welche in die Bibliographi aufnehmen?
+**Fragen an Helmar 1**
+
+- Welches Format sollen Referenzen haben? 
+	Namen+Jahreszahl
+- Welche Programme/Tools soll ich nur per Fußnote referenzieren und welche in die Bibliographie aufnehmen?
+	Fußnote
 - Wie soll ich den Source Code einreichen?
 - Macht es Sinn Klassendiagramme etc in den Anhang zu tun?
+	UML Klassendiagramme oder eigene Diagrammformen im Text
 - Bugs auflisten?
+	Nein
+- Was mache ich mit Bugs? 
+	Bugs erwähnen wenn sie Einfluss auf konzeptuelle Entwicklung haben
+- Wie ist das weitere vorgehen?
+	Email an Gust, dann 3 Kopien an Prüfungsamt
+
+**Fragen an Helmar 2**
+- Bekomme ich noch einen Schein für CogNet3?
 
 **Table of Contents**
 

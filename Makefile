@@ -20,7 +20,7 @@ all: thesis_skeleton.latex appendix.tex
 	-V subtitle='A Social Network for Groups' \
 	-V supervisor='Dr. Helmar Gust, University of Osnabrueck \\ Dr. Kai-Uwe Kühnberger, University of Osnabrueck' \
 	-V university_logo='img/uos.png' \
-	-f markdown -o thesis.pdf
+	-f markdown -o thesis.tex
 	rm thesis_skeleton.latex ref-appendix/appendix.tex
 
 appendix.tex: ref-appendix/appendix.md
