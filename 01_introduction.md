@@ -37,61 +37,81 @@ The Rktik application is based on the Souma prototype developed in the Cognitive
 
 The methodology used for developing Rktik strives to document the implementation process thoroughly and to help interested third parties participate in development later on. The Github issue tracker^[Access to the issue tracker is restricted to Github accounts registered as Rktik developers. See <https://github.com/features> for a description of the service.] is used to record tasks and eventual subtasks. A Git repository, also hosted on Github, is used to track changes to the source code. Changes are referenced from the issue tracker when they are connected to the resolution of an issue. Using Git and Github helps to keep an overview of tasks and their relation to specific source code changes and offers quick access to past versions of the source code.
 
-The Rktik application is implemented in the Python programming language, using the Flask framework for web applications^[<http://flask.pocoo.org/docs/0.10/>] and the SQLAlchemy object relational mapper^[<https://pypi.python.org/pypi/SQLAlchemy/0.9.2>]. Additionally, some features of the user interface are implemented using the jQuery^[<https://jquery.com/>] library. The operating environment is provided by Heroku^[<heroku.com>] in the form of a  platform-as-a-service (PAAS). A PAAS allows uploading and running a web application on provisioned servers without having to configure these servers manually. See Section [Hosting and Deployment] for more details on this process.
+The Rktik application is implemented in the Python programming language, using the Flask framework for web applications^[<http://flask.pocoo.org/docs/0.10/>] and the SQLAlchemy object relational mapper^[<https://pypi.python.org/pypi/SQLAlchemy/0.9.2>]. Additionally, some features of the user interface are implemented using the jQuery^[<https://jquery.com/>] library. The operating environment is provided by Heroku^[<heroku.com> ] in the form of a  platform-as-a-service (PAAS). A PAAS allows running a web application on provisioned servers without the need to configure them manually. See Section [Hosting and Deployment] for more details on this process.
 
-These choices were taken from the Souma project which used the same technological stack.
+These technological choices were taken from the Souma project.
 
 ## State of the Art
 
-This section describes approaches to social networks that share similarities with Rktik. I will explain their functionality and specifically focus on their representation of identity and related software features.
+This section describes social networks that share similarities with Rktik. It will explain their functionality and specifically focus on their representation of identity.
 
-This comparison includes three social platforms with more than 100 million monthly active users, each of which has a bias towards a different communication structure. This includes Facebook as a social network used for communication within *peer-groups*, Reddit as an open social network where users publish to the *general public* and email as a communication medium used for *direct communication* with other users. All three services can also be used for one-to-one, one-to-many and many-to-many communication.
+This comparison includes three social platforms with more than 100 million monthly active users, each of which has a bias towards a different communication structure. This includes Facebook as a social network used for communication within *peer-groups*, Reddit as a social network where users publish to the *general public* and email as a medium used for *direct communication*. All three services are also used for one-to-one, one-to-many and many-to-many communication.
 
-In the following, I will explain the basic functionality of each of the services and then compare them to Rktik.
+The following subsections will explain the basic functionality of each service and compare them to Rktik.
 
-**Facebook**
+### Facebook
 
-Available since: February 2004 \
-Monthly active users: 1.49 billion as of June 30, 2015 ([@Facebook]) \
-Website: [facebook.com](http://facebook.com/)
+Available since
+:  February 2004
 
-Facebook is an online social networking service, it allows friends and acquaintances to keep track of each other’s personal lifes. Facebook offers a similar core functionality to that of Rktik in that users can publish content on their profiles, vote ^[Votes on Facebook are called “like”.] and comment on content of other users and subscribe to their content feeds. Both services center the user interface on a feed of content from subscribed sources that is sorted based on a combination of recency and other factors. Facebook also allows users to create groups as either public or private spaces. Members can then communicate in a group chat or post messages to the group's feed. Messages can contain events, votes and files/media ^[Files must not be music or executables and their file size cannot exceed 25mb.]. Users may also communicate via private messages.
+Monthly active users
+:  1.49 billion as of June 30, 2015 [@Facebook]
 
-In contrast to these similarities, Facebook is different from Rktik both in policy and features. It requires users to identify with their real name and explicitly forbids creating more than one personal user account ([@Facebooka]).  Contents of the Facebook network are hidden from the public by default and accessible only once a friendship connection has been established with a user. Facebook groups can only choose to be either public or private. In contrast to Rktik, private groups cannot publish contents publicly and groups in general cannot publish content in the name of the group.
+Website
+:  [facebook.com](http://facebook.com/)
+
+---
+
+Facebook is an online social network that allows friends and acquaintances to keep track of each other’s personal lives. Facebook offers a similar core functionality as Rktik in that users can publish content on their profiles, vote\marginpar{Votes are called “like” on Facebook.} and comment on content of other users, and subscribe to their content feeds. Both services center the user interface on a feed of content from subscribed sources that is sorted based on a combination of recency and other factors. Facebook also allows users to create groups as either public or private spaces. Members can communicate in a group chat or post messages to its feed. Messages can contain events, votes and files/media\marginpar{Attached files must not be music or executables and their file size cannot exceed 25mb.}. Users may also communicate via private messages.
+
+In contrast to these similarities, Facebook is different from Rktik both in policy and features. It requires users to identify with their real name and explicitly forbids creating more than one personal user account [@Facebooka].  User generated content on Facebook is hidden from the public by default and accessible only once a friendship connection to the user has been established. Facebook groups must choose to be either public or private. In contrast to Rktik, private groups cannot publish contents publicly and groups in general cannot publish content using the identity of the group.
 
 In addition to the core and group functionality, Facebook offers many features ranging from business directories to video calling. These have not been included in this comparison as they do not directly compare to features of Rktik.
 
-**Reddit**
+### Reddit
 
-Available since: June 2005 \
-Monthly active users: 203 million as of September 15, 2015 (@Reddita) \
-Website: [reddit.com](https://reddit.com)
+Available since
+: June 2005
 
-Reddit is a social link aggregator, it lets users create link and text submissions and sorts them based on user votes and recency. Submissions are created in *subreddits*, which are subcommunities of Reddit related to a specific topic. Each submission has a comments section in which its contents are discussed by the community. Comments can also be voted on and are displayed in a hierarchical layout based on their reply-structure. Each subtree is sorted according to number of votes and recency.
+Monthly active users
+: 203 million as of September 15, 2015 [@Reddita]
 
-Users of reddit can collect *karma*, which is a numeric value that is displayed on their profile and indicates the amount of votes they have received on their own comments and submissions.
+Website
+: [reddit.com](https://reddit.com)
 
-This core functionality of Reddit is mostly identical to that of Rktik.  Differences between the services can be found in their implementation of user and group identity as well as the way external contents are displayed.
+---
 
-In contrast to Facebook, Reddit encourages the creation of multiple accounts per user (@Reddit.com). However, it does not provide user interface controls for this. Every account is identified by its username, which is pseudonymous and does not necessarily reflect the real identity of a user in any way.
+Reddit is a social link aggregator that lets users create link and text submissions and then sorts them based on user votes and recency. Submissions are created in *Subreddits*, which are sub-communities of Reddit related to specific topics. Each submission has a comments section in which its contents are discussed by the community. Comments can also be voted on and are displayed in a hierarchical layout based on their reply-structure. Each subtree is sorted according to number of votes and recency. Users of reddit collect *karma* by gathering votes on their own submissions and comments. Karma serves as an incentive to submit content that other users will vote on and it is displayed on user’s profiles as a numeric value.
 
-Users can not directly publish content on a user profile or blog, as all submissions must be placed in one of Reddit’s communities, which are called *Subreddits*. They allow the aggregation of content related to a specific topic. Their contents are visible either for the general public or only for confirmed members, as decided by the subreddit’s founding user. In contrast to Rktik, Reddit does not allow subreddits to aggregate content in a space visible only to members, while also publishing content in a public space.
+In contrast to Facebook, Reddit encourages the creation of multiple accounts per user [see @Reddit.com]. However, it does not provide user interface controls for this. Every account is identified by its username, which is pseudonymous and does not necessarily reflect the real identity of a user.
 
-The content on reddit.com is almost text-only. If a link submission points at an image, a small preview is displayed next to the submission’s title, while links to other content are never rendered inline.
+This core functionality of Reddit is mostly identical to that of Rktik. Differences between the services can be found in their implementation of user and group identity as well as the way external contents are displayed. These differences will be described in what follows.
 
-**Email**
+Users cannot directly publish content on their profile, as all submissions must be placed in one of the Subreddits. Subreddit’s contents are visible either for the general public or only for confirmed members, as decided by their founding user. In contrast to Rktik, Reddit does not allow Subreddits to aggregate content in a space visible only to members, while also publishing content in a public space. Neither can members publish content using the Subreddit’s identity for authorship.
 
-Available since: ~ 1971 ^[As the email protocol evolved over time from non-networked messaging protocols, there is no specific point in time from which on email was generally available. In 1971 the first networked electronic mail system for ARPANET was standardized (@[Crocker1982]).] \
-Monthly active users: > 2 billion ^[It is difficult to estimate the number of people who actively use email because of the large number of email service providers. The market research firm Radicati estimated a number of 2.6 billion active email users in  2015 (@Radicati2011).] \
+The content on reddit.com is almost text-only. If a link submission points to an image, a small preview is displayed next to the submission’s title, while links to other content are never rendered inline.
+
+### Email
+
+Available since
+: ~ 1971 ^[As the email protocol evolved over time from non-networked messaging protocols, there is no specific point in time from which on email was generally available. In 1971 the first networked electronic mail system for ARPANET was standardized [@Crocker1982].]
+
+Monthly active users
+: ~ 2.6 billion ^[It is difficult to estimate the number of people who actively use email because of the large number of email service providers. The market research firm Radicati estimated a number of 2.6 billion active email users in 2015 [@Radicati2011].]
+
 Website: none
 
-Email is a protocol for distributing messages from an author to one or many recipients. While Rktik, Facebook and Reddit are offered by their respective providers, Email is a *method* of message delivery that is implemented by many service providers worldwide, while still allowing all users to exchange messages with each other. Email messages may also contain any number of media attachments.
+---
 
-A user of Email is identified by their email address. Some email service providers let users choose a username for themselves, while others have policies regarding usage of a real name or other personally identifying features, such as their role in a company. As there is no single user interface for email, users can chose from a wide range of software clients. These can be websites, dedicated email applications, or email features embedded in other applications. Available features depend entirely on the client used.
+Email is a protocol for distributing messages to one or many recipients. While Rktik, Facebook and Reddit are offered by their respective providers, Email is a *protocol* for message delivery that is implemented by many service providers worldwide, while still allowing *all* users to exchange messages with each other. Email messages may also contain any number of media attachments.
 
-Email can be used in combination with *automated email lists* for similar use cases as those Rktik was designed for. Automated email lists, or *email lists*, are distribution services that forward incoming messages, sent to a special email address, to all users registered with the email list. Registration may be open to the general public or restricted to a group of users defined by the email list operator. Messages sent to the email list may also be read using a web based discussion archive.
+A user of Email is identified by their email address. Some email service providers let users choose a username for themselves, while others have policies regarding usage of a real name or other personally identifying features, such as their role in a company. 
 
-An email list is similar to Rktik movements, subreddits and Facebook groups in that it provides members with a space for discussion and exchange related to a specific topic. Submissions are tied to their author and discussion may be hierarchically organized by reply-structure as is the case in Reddit and Rktik. Email does not provide a mechanism for voting on messages, so discussions are sorted chronologically. Email lists also do not offer features for collectively authoring content and publishing it to people outside the email list.
+As there is no single user interface for email, users can chose from a wide range of software clients. These can be websites, native applications, or email features embedded in other applications. Available features depend entirely on the client used.
+
+*Automated email lists*, or *email lists*, allow for similar use cases as those Rktik was designed for. They are distribution services that forward incoming messages, sent to a special email address, to all users registered with the email list. Registration may be open to the general public or restricted to a group of users defined by the email list operator. Messages sent to the email list may also be read using a web based discussion archive.
+
+An email list is similar to Rktik movements, Subreddits and Facebook groups in that it provides members with a space for discussion and exchange related to a specific topic. Submissions are tied to their author and — depending on the email client used — discussion may be hierarchically organized by reply-structure as is the case in Reddit and Rktik. Email does not provide a mechanism for voting on messages, so discussions are sorted chronologically. Email lists also do not offer features for collectively authoring content and publishing it to people outside the email list.
 
 Platform	Username    Group Features
 ---         ---         ---
@@ -102,4 +122,4 @@ Rktik       Pseudonym   Discussion, group chat, publishing
 
 Table: Overview of username restrictions and group features
 
-In conclusion, Rktik as a social platform has many similarities to existing social platforms. Established concepts and functionality such as user profiles, private messaging, media attachments and others are extended with a novel conceptualization of personal and group identity. These new features extend user’s capabilities in shaping their privacy. New group functionality may serve as a catalyst to processes defining the group’s online identity. Other platforms, especially Facebook, also offer extended group features, but are not considering groups as an identity that can publish content itself.
+In conclusion, Rktik has many similarities to existing social platforms. Established concepts and functionality such as user profiles, private messaging, media attachments and others are extended with a novel conceptualization of personal and group identity. These new features extend user’s capabilities in shaping their privacy and identity. They also may serve as a catalyst to processes defining group’s online identity. Facebook also offers extended group features but is not considering groups as an identity that can publish content itself.

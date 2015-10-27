@@ -26,6 +26,7 @@
 - Zitatformat ändern
 - “section” vor alle verweise
 - real -> offline identity
+- Screenshots in State of the Art
 
 # Thesis mit Markdown schreiben
 - [Citations](http://pandoc.org/demo/example19/Extension-citations.html)
