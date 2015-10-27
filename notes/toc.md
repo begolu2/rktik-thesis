@@ -7,6 +7,7 @@
 - [Rights Management] in den Anhang mit Auflistung wer was machen darf.
 - Tags im conceptual part beschreiebn
 - Eventuell Gründe für Nymwars anführen in [Identity]
+- Force-directed graph layout in implementation beschreiben
 
 # Fragen:
 - Ist attention beschrieben?
@@ -27,6 +28,9 @@
 - “section” vor alle verweise
 - real -> offline identity
 - Screenshots in State of the Art
+- Terminology verweist auf das Übersichtsdiagramm. Der Verweis sollte direkt auf das Diagramm zeigen.
+- hyperref durch ref [erweitern](https://en.wikibooks.org/wiki/LaTeX/Hyperlinks#Hyperref)
+- graph viz labeln  wegen schwarzweißdruck
 
 # Thesis mit Markdown schreiben
 - [Citations](http://pandoc.org/demo/example19/Extension-citations.html)

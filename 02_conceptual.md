@@ -2,72 +2,65 @@
 
 ## Overview
 
-Rktik is an online community where users share text, links and other media pseudonymously in the context of topic-oriented groups and personal blogs. Contents are sorted based both on recency as well as a voting and subscription system.
+Rktik is an online community where users share text, links and other media pseudonymously in the context of topic-oriented groups and personal blogs. Contents are sorted and filtered based both on recency as well as a voting and subscription system.
 
-This chapter will explain the user-facing functionality of the Rktik website on a conceptual level. First, general concepts are explained, introducing readers to the mechanics of using Rktik. Subsequent sections give detailed information on how Rktik handles *content*, *identity* and *context*.
+This chapter will explain the user-facing functionality of the Rktik website on a conceptual level. First, general concepts are explained, introducing readers to the mechanics of using Rktik. Subsequent sections give detailed information on how Rktik handles *content*, *identity* and *context* respectively.
 
 ### Terminology
 
-This section gives a brief overview of terminology used in Rktik. Please see the relevant subsequent sections for more in-depth descriptions.
+This section gives a brief overview of terminology used in Rktik. Please see the referred subsequent sections for more in-depth descriptions.\marginpar{See Section \ref{nucleus-models} for a diagram showing the relation of these concepts in Rktik.}
 
-**Users** are individual persons using the site. They may register by creating a *user account* and one or more associated *personas*. Hereby they are able to create content on the site.
+*Users* are individual persons using the site. They may register by creating a *user account* and one or more associated *personas*. Hereby, they are able to create content on the site. For details, see Section [User Accounts].
 
-(see Section [User Accounts])
+All content submissions of users are attributed to their *active persona*, which is a screen name that identifies them across the site. A user may create any number of personas to shape their privacy, but only one of them can be *active* at a time.
 
-All actions of users are attributed to their **active persona**, which is a screen name that identifies them across the site. A user may create any number of personas to shape their privacy, but only one of them can be *active* at a time.
+*Thoughts* are short pieces of text submitted by personas and represent the smallest unit of content. For details, see Section [Overview: Thoughts].
 
-**Thoughts** are short pieces of text submitted by personas and represent the smallest unit of content.
+Thoughts can link to any number of *percepts*, which are attachments containing either more text or a hyperlink to an external resource. They are displayed alongside the thought. For details, see Section [Attaching Media: Percepts].
 
-(see Section [Overview: Thoughts])
+Personas can *vote* on thoughts to make them more visible to other users. Every thought has a numerical *hotness* value, which decreases with time after posting and increases with every vote gained. This value is used for sorting many thought listings. For details, see Section [Distributing Attention: Voting and Hotness].
 
-Thoughts can link to any number of **percepts**, which are attachments containing either more text or a hyperlink to an external resource. They are displayed alongside the thought throughout the user interface.
+*Mindsets* are collections of thoughts. Any thought that is not a reply to another thought must be contained in a mindset. Every persona has a private and a public mindset (*Mindspace* and *blog* respectively). For details, see Section [Context].
 
-(see Section [Attaching Media: Percepts])
+*Movements* are groups related to a specific topic. Each has a private mindset for members and a public mindset (blog).
 
-Personas can **vote** on thoughts to make them more visible to other users. Every thought has a numerical **hotness** value, which decreases with time after posting and increases with every vote gained. This value is used for sorting many thought listings.
-
-(see Section [Distributing Attention: Voting and Hotness])
-
-**Mindsets** are collections of thoughts. Any thought that is not a reply to another thought must be contained in a mindset. Every persona has a private and a public mindset (**notebook** and **blog** respectively).
-
-(see Section [Context])
-
-**Movements** are groups related to a specific topic. Each of them has a private mindset for members and a public mindset (blog).
-
-Any persona can create new movements and follow the (public) blog of any movement or other persona.
-
-(see Section [Movements])
-
-See Section [Nucleus Models] for a diagram showing the relation of these concepts in Rktik.
+Any persona can create new movements and follow the blog of any movement or other persona. For details, see Section [Movements].
 
 ### Frontpage
 
-The *frontpage* is located at the root of Rktik and presents users with a stream of thoughts from their movements and followed blogs. It is similar to the *Facebook News Feed* and the *Reddit frontpage* in that the stream is sorted based both on the recency of a submission and the number of votes it has received (see Section [Distributing Attention: Voting and Hotness]).
+Rktik’s *frontpage* is located at the root URL <rktik.com> and presents users with a stream of thoughts from their movements and followed blogs. It is similar to the *Facebook News Feed* and the *Reddit frontpage* in that the stream is sorted based both on the recency of a submission and the number of votes it has received (see Section [Distributing Attention: Voting and Hotness]).
 
-Anonymous users do not have any subscriptions, they are shown thoughts from *top movements*. These are the seven movements with the highest member count.
+As unregistered users do not have any subscriptions, they are shown thoughts from *top movements*, which are the seven movements with the highest member count.
 
-On the right-hand side of the thought stream, the frontpage also contains a number of other elements:
+On the right-hand side of the thought stream, the frontpage also contains these other elements:
 
-* The **frontpage graph visualization**: A visual representation of all thoughts and authors on the page as a graph (see Section [Frontpage Graph Visualization]).
-* **Top Thought**: When a user is logged in, this contains a short list of thoughts from *top movements* they are not following with their active persona. This allows users to notice particularly popular submissions from contexts they would not see otherwise.
-* **Discover Movements**: A listing of those top movements the active persona is not following.
-* **Recent Thoughts**: The most recent publicly visible thoughts submitted throughout the whole site.
+* *Frontpage graph visualization*: 
+A visual representation of all thoughts and authors on the page as a graph (see Section [Frontpage Graph Visualization]).
+
+* *Top Thought*: 
+When a user is logged in, this contains a short list of thoughts from *top movements* they are not following with their active persona. This allows users to notice particularly popular submissions from contexts they would not see otherwise.
+
+* *Discover Movements*: 
+A listing of *top movements* the active persona is not following.
+
+* *Recent Thoughts*: 
+The most recent publicly visible thoughts submitted throughout the whole site.
 
 #### Frontpage Graph Visualization
 
 ![Frontpage graph visualization]
 
-The frontpage contains a visual representation of its contents in the form of a graph with a force-directed layout. This layout communicates the flow of information from a persona’s subscriptions to their frontpage. It also shows some additional thoughts from these subscriptions, that are not *hot* enough to be included in the frontpage.
+The frontpage contains a visual representation of its contents in the form of a graph. This layout communicates the flow of information from a persona’s subscriptions to their frontpage. It also shows some additional thoughts from these subscriptions, that are not *hot* enough to be included in the frontpage. The following will describe the layout and meaning of the graph’s elements.
 
 The graph represents the frontpage as a big red node in the center, identities which are followed by the active persona (content sources) as medium-sized colored nodes and thoughts as small white nodes.
 
-Thoughts are connected to the center node with a dotted edge if they are currently part of the frontpage feed. Thoughts are also always connected to their author’s identity with a further dotted edge. Some of the identities followed by the active persona may have contributed no thoughts to the current frontpage. In this case, they are connected to the center with a faint dashed edge. Nodes representing thoughts have a pulsating animation with a frequency correlated to their hotness and capped at 5 Hz.
+Thoughts are connected to the center with a dotted edge if they are currently part of the frontpage feed. Thoughts are also always connected to their author’s identity with a further dotted edge. Some of the identities that are followed by the active persona may have contributed no thoughts to the current frontpage. In this case, they are connected to the center with a faint dashed edge. Nodes representing thoughts have a pulsating animation with a frequency correlated to their hotness and capped at 5 Hz.
 
-Thereby, the frontpage contents surround the center node as a ring of white nodes, pulsating faster or slower according to their position in the stream. They are connected to a second ring of nodes which consists of those movements and personas who submitted the thoughts. Other content sources are located a bit further away to show that their submissions are also eligible for inclusion in the frontpage.
+In summary, the frontpage contents surround the center node as a ring of white nodes, pulsating faster or slower according to their position in the stream. They are connected to a second ring of nodes, which consists of movements and personas who submitted the thoughts. Other content sources and thoughts are located a bit further away to show that they are also eligible for inclusion in the frontpage.
 
 ### Notifications
 
-Notifications catch the user’s attention in order to present information which is personally relevant. They are displayed in a drop down menu in the top left corner of every page and some of them are also sent as email notifications  [^optout].
+Notifications catch the user’s attention in order to present information that is personally relevant. They are displayed in a drop down menu in the top left corner of every page and some of them are also sent as email notifications  [^optout].
 
 [^optout]: A user may opt out of receiving emails about notifications of a specific type. See Section [User Accounts].
 
@@ -75,10 +68,10 @@ Notifications catch the user’s attention in order to present information which
 
 There are four notification types:
 
-* **Reply**: Sent when another user replies to one of the active user’s thoughts
-* **Mention**: Sent when someone uses the *@\<username\>* syntax in a thought to notify a persona directly.
-* **Dialogue**: Sent when a new thought is added in a private conversation
-* **Follower**: Sent when a persona’s Blog gains new followers
+* *Reply*: Sent when another user replies to one of the active user’s thoughts.
+* *Mention*: Sent when someone uses the *@\<username\>* syntax in a thought to notify a persona directly.
+* *Dialogue*: Sent when a new thought is added in a private conversation.
+* *Follower*: Sent when a persona’s Blog gains new followers.
 
 See Section [Notification] for implementation details.
 
@@ -86,54 +79,52 @@ See Section [Notification] for implementation details.
 
 ### Overview: Thoughts
 
-*Thoughts* are the basic building block for content in Rktik and roughly equivalent to a post on Facebook or submission on Reddit. They consist of a short text, limited to 300 characters, and any number of percepts (attachments). Thoughts are displayed 1) as part of blogs and mindspaces, 2) on individual thought pages or 3) as part of a chat conversation (see Section [Context]).
+*Thoughts* are the basic building block for content in Rktik and roughly equivalent to a post on Facebook or submission on Reddit. They consist of a short text, limited to 300 characters, and any number of percepts (attachments). Thoughts are displayed 1) on the frontpage, 2) as part of blogs and Mindspaces, 3) on individual thought pages or 4) as part of a chat conversation (see Section [Context]).
 
 The restriction on title length has been set for two reasons:
 
-1. Page layouts can be simpler. Longer titles lead to a bigger variation in title length, which would make the usage of separate display styles for long and short titles necessary. Implementing these increases development and maintenance time.
+1. Page layouts can be simpler. Longer titles make the usage of separate display styles for long and short titles necessary. Implementing these increases development and maintenance time.
 2. Short titles require users to be concise when formulating thoughts. In turn, they make it easier for other users to read and understand titles.
 
-Thoughts can be created using the dedicated *create thought* page or the *inline thought creator*. All mindsets in which the active persona has editing rights contain a link to the create thought page. The inline thought creator is embedded in comments sections and as part of the chat widget. It only allows posting text content up to the length of a thought’s title (300 characters), but lets users switch to the create thought page without losing their input if they wish to continue typing. The dedicated create thought page provides separate input fields for title and longform text attachments.
+Thoughts can be created using the *create thought* page or the *inline thought creator*. All mindsets in which the active persona has editing rights contain a link to the create thought page. The inline thought creator is embedded in comments sections and as part of the *chat widget*. It allows posting text content up to the length of a thought’s title (300 characters), but lets users switch to the create thought page without losing their input if they wish to continue typing. The create thought page provides separate input fields for title and long-form text attachments.
 
 ### Reposts
 
-Thoughts can be *reposted*, which creates a copy of the original thought, but links it to a different mindset and attributes it to the persona who created the repost. Reposts are always created as comments on their original, thereby notifying the original author. Visiting a repost’s page, users see the original thought from which it was created displayed in the context area.
+Thoughts can be *reposted*, which creates a copy of the original thought in a different mindset. The repost is then attributed to the persona who created it. Reposts are always created as comments on their original, thereby notifying the original author. Users can always see the original thought from which a repost was created in the context area of the repost’s page (see Section [Context]).
 
 ### Attaching Media: Percepts
 
-Thoughts may have any number of attachments to enrich their content. These are either rendered as part of the Rktik website or presented as links to other websites.
+[TODO: Screenshot]
 
-Currently the following attachment kinds are supported:
+Thoughts may have any number of attachments to enrich their content. These are either rendered as part of the Rktik website or as links to other websites.
 
-* **Link**: This type can be attached by embedding a URL inside the thought title or longform text.
+The following attachment kinds are supported:
 
-	Links to pictures may be rendered inline with the thought. Clicking the picture displays it enlarged in a modal gallery view. If multiple links to pictures are linked to a single thought, the modal view allows browsing through the picture gallery using keyboard and onscreen controls. The display size of pictures is also adapted to the size and number of image attachments (see Section [HTML Templates]).
+* *Link*: This type can be attached by embedding a URL inside the thought title or long-form text.
 
-	Links that point to the *soundcloud.com* and *youtube.com* domain will be rendered using the respective embeddable widgets to allow playing music and videos without leaving the Rktik website.
+	Links to pictures are rendered inline with the thought. Clicking the picture displays it enlarged in a modal gallery view. If multiple links to pictures are linked to a single thought, the modal view allows browsing through the picture gallery using keyboard and onscreen controls. The display size of pictures is also adapted to the size and number of image attachments (see Section [HTML Templates]).
 
-* **Longform text** As thought titles are limited to 300 characters, the longform text attachment allows adding a longer text. This text may be formatted using Markdown syntax ([@Gruber2004]), which provides simple markup for basic text formatting such as headlines, enumerations, bold and italic text.
+	Links that point to the *soundcloud.com* and *youtube.com* domain will be rendered using the respective embeddable HTML widgets to allow playing music and videos without leaving the Rktik website.
+
+* *Long-form text*: As thought titles are quite limited at 300 characters, the long-form text attachment allows adding more text content. This text may be formatted using Markdown syntax [@Gruber2004], which provides simple markup for basic text formatting such as headlines, enumerations, bold and italic text.
+
+* *Mention*: Mentions let authors refer other users in their submission by using the @\<username\> syntax. This creates a link to the mentioned user in the thought and sends a notification to them.
+
+* *Tag*: Prefixing any word in a text submission with the ‘#’ symbol adds this term as a tag label to the thought. The tag links to a list of all other thoughts with the same tag, thereby allowing users to link content in different areas of Rktik.
 
 ### Distributing Attention: Voting and Hotness {#hotness}
 
 Personas may vote on thoughts, thereby expressing approval of their content. The number of votes is displayed next to every thought.
 
-Apart from being a visible signal about the number of people who have expressed approval of a thought, votes are also used for sorting thoughts in the hotness sorting algorithm (see Section [Distributing Attention: Voting and Hotness]). Depending on context, the order of thoughts is either chronological (chat), reverse chronological (blog) or by their *hotness* value.
-
-Hotness is a numeric value which depends on the recency of a thought and the number of votes it has received.  Accordingly, hotness values are higher for more recent thoughts or thoughts with more votes. Thoughts with equal numbers of votes are effectively sorted in reverse chronological order, while each additional vote pushes the thought upward in the ordering.
-
-Given the number of upvotes (v) and the number of hours since the thought was created (t), a thought’s hotness is:
-
-	hot = v / pow(t + 2, 1.5)
-
-This algorithm is adapted from the sorting algorithm used in the social bookmarking site [Hacker News](https://news.ycombinator.com/) (see [@Salihefendic2010]).
+Apart from being a visible signal about the number of people who have expressed their approval, votes are also used for sorting thought listings. Depending on context, the order of listings is either chronological (chat), reverse chronological (blog) or by their *hotness* value, which is a combined measure of recency and number of votes (see Section [Thought]).
 
 ## Identity
 
-Some popular social media sites including Google+ and Facebook have tried to push users into publishing content on their services using a real name ([@Boyd2012]). The practice proved to be controversial, as it did not align with established Internet culture and prevented people from decoupling their online and offline activities (CITE).
+Popular social media sites including Google+ and Facebook have tried to push users into publishing content on their services using a real name. The practice proved to be controversial with many users protesting the restrictions, and prevented people from decoupling their online and offline activities [@Boyd2012].
 
-However, even though a pseudonymous naming system prevents directly linking offline and online identity based on metadata, such a link can be established by other means. Content posted online may be uniquely bound to an offline identity or link to other online contents that establish such a binding.
+However, even though a pseudonymous naming system prevents directly linking offline and online identity, such a link can be established by other means: Online submissions may identify their author based on the uniqueness of the content alone, or link to other online contents that allow such identification.
 
-Rktik introduces new tools that allow users to shape their digital privacy. Every user may create multiple online identities and use them to separate areas of their online activity. Users may also join their identities by publishing under the name of a movement. The following section will explain these concepts in detail.
+Rktik introduces new tools that allow users to shape their privacy. Every user may create multiple online identities and use them to separate areas of their online activity. Users may also join their identities by publishing under the name of a movement and thereby further obfuscate connections to their offline identity. The following section will explain these concepts in detail.
 
 ### User Accounts
 
@@ -141,30 +132,30 @@ Any user of Rktik can register a personal user account which allows them to crea
 
 The account feature serves two main purposes:
 
-1. Authorizing a user’s identity by asking them to enter the account-specific password and email-address combination. Authorized users may act on the site as one of the personas connected to the user account.
-2. Obtaining a valid email address so that users may be sent notifications and other messages related to their activity on the site.
+1. Authorizing a user’s identity using their password and email-address. Authorized users may act on the site as one of the personas connected to the user account.
+2. Obtaining a valid email address, so that users can be sent notifications and other messages related to their activity on the site.
 
-User accounts also store the user’s email preferences allowing users to disable emails of specific kind (see Section [Notifications]). In general, emails should be sent as little as possible as users may perceive them as spam if they carry insufficient personal relevance or value.
+User accounts also store the user’s email preferences, which allow them to disable emails of specific kind (see Section [Notifications]). In general, emails should be sent as little as possible as users may perceive them as spam if they carry insufficient personal relevance or value.
 
 ### Personas
 
-The personal identity of a user of the Rktik website is partially decoupled from their physical identity: While users may choose to use their real name, they can also use one or more pseudonyms.
+The personal identity of a user is partially decoupled from their physical identity: While users may choose to use their real name, they can also use one or more pseudonyms.
 
-Other online communities allow this to different extents: On Reddit, a user may choose an arbitrary name for their user profile, while Facebook asks their users to provide their real name for online communication (see Section [State of the Art]). Rktik goes a step further by not only allowing arbitrary handle names but also arbitrary *numbers* of handles, which are called *personas*.
+Some online communities allow choosing an arbitrary name for user identities, while others require their users to provide their real name (see Section [State of the Art]). Rktik goes a step further by not only allowing arbitrary handle names but also arbitrary *numbers* of handles, which are called *personas*.
 
-![The *switch* menu lets users activate or create other personas](img/switch.png)
+![The *switch* menu lets users activate or create other personas\label{switch-menu}](img/switch.png)
 
-On initial signup, new users create their first persona by giving it a name and assigning a color to mark this persona’s submissions. Following completed signup, users can create more personas using the *switch* menu in the upper right corner of every screen. They can also choose to create a new persona any time they are joining a movement. Therefore, they can keep their membership in that movement separate from activities in other parts of the site.
+New users create their first persona on initial signup by giving it a name and assigning a color to mark its submissions. Following completed signup, users can create more personas using the *switch* menu in the upper right corner of every screen (see Figure \ref{switch-menu}). They can also choose to create a new persona when joining a movement. Therefore, they can keep their membership in that movement separate from activities in other parts of the site.
 
-Other users can not tell whether any two personas are linked to the same user account.
+Other users cannot tell whether any two personas are linked to the same user account.
 
-This functionality affords users of Rktik more freedom in managing their online identity than comparable social platforms as described in Section [State of the Art]. These freedoms may be used to act out different social roles or to voice unpopular opinions without fear of backlash against a user's offline identity. The notion that there does not necessarily exist a 1:1 mapping between offline and online identity is further established through the concepts of group identity and agency.
+This functionality affords users of Rktik more freedom in managing their online identity than those of comparable social platforms. These freedoms may be used to act out different social roles or to voice unpopular opinions without fear of backlash against a user's offline identity. The notion that there is not necessarily a 1:1 mapping between offline and online identity is further established through the concepts of group identity and agency as described in the following section.
 
 ### Personal vs. Group Identity
 
-Groups communicate their identity in online social networks through the contents they publish and markers in the group’s online representation (group name, picture, color scheme). Rktik furthers this concept by communicating not just a movement's identity but also its *agency*. The sense that a movement can think and act is established through 1) terminology in the user interface that suggests a shared mind and 2) features which let members use this shared mind to act collectively.
+Groups in online social networks communicate their identity through the contents they publish and markers in the group’s online representation (group name, picture, color scheme). Rktik furthers this concept by communicating not just a movement's identity but also its *agency*. The sense that a movement can think and act is established through 1) terminology in the user interface that suggests a shared mind and 2) features that let members use this shared mind to act collectively.
 
-Language used in the context of movements implies that their members have a shared mind: A movement's space for internal discussion and exchange is called *mindspace* and users place contents in movements by *creating thoughts* in the mindspace. This terminology implies that members control a shared mental space, which they can use to exchange thoughts. This notion is even stronger in private movements, where only members can read thoughts in the mindspace.
+Language used in the context of movements implies that members have a shared mind: A movement's space for internal discussion is called *Mindspace* and users place contents in movements by *creating thoughts* in the mindspace. This terminology implies that members control a shared mental space, which they can use to exchange thoughts. This notion is even stronger in private movements, where only members can read thoughts in the mindspace.
 
 A movement’s agency is implied in the functionality of the movement blog. Its contents are not dictated by a designated member of the movement, but selected collectively by voting on thoughts in the movement. The movement members make decisions collectively, which are then attributed to the movement as a whole. Please see section Section [Movement Agency] for possibilities for further development of the concept of movement agency.
 
@@ -218,13 +209,13 @@ Depending on context, a different set of identities is authorized to create, edi
 
 Mindspaces are the first of three kinds of mindsets. They collect internal thoughts of an identity as opposed to thoughts published on a blog which is directed at a wider audience. Personas and movements are both identities in Rktik and therefore have their own mindspace. The differences between personal and collective mindspaces are described in what follows.
 
-**Persona Mindspace**
+*Persona Mindspace*
 
 Every persona has access to their private mindspace in which only they can read and write. This makes it a space for collecting thoughts before deciding on whether or not, or in which context to publish them. The mindspace of a persona is also referred to as the persona’s *notebook* to make it easier for new users to understand how they can use this feature.
 
 Apart from creating thoughts directly in this mindset, users may also use the *repost* interface (see Section [Reposts]) to copy thoughts from anywhere on the site into their notebook.
 
-**Movement Mindspace**
+*Movement Mindspace*
 
 ![Movement mindspace showing thoughts sorted by hotness on the left and the movement chat on the right](img/mindspace.png)
 

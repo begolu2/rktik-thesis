@@ -83,9 +83,17 @@ This model represents a *set of thoughts* with an author and is a superclass of 
 
 The `Thought` model represents content submissions by users of the site. Each instance stores the title text and metadata of the thought. All other media related to the thought is contained in `Percept` objects. Thoughts also store the context they were posted in, which may either be a parent thought for replies or a mindset for top-level thoughts.
 
-The thought class is able to generate instances of itself directly from text input received via the UI through a classmethod. This process includes detecting embedded URLs and validating whether they refer to a *valid* HTTP resource, creating `Percept` objects for any text, link or linked picture attachments, relaying notifications triggered by the creation of new thought and percept instances and invalidating caches touched by the new thought.
+The thought class is able to generate instances of itself directly from text input received via the UI through a class method. This process includes detecting embedded URLs and validating whether they refer to a *valid* HTTP resource, creating `Percept` objects for any text, link or linked picture attachments, relaying notifications triggered by the creation of new thought and percept instances and invalidating caches touched by the new thought.
 
-Thoughts also have a relation to their votes and helper methods for accessing information about these votes (has a specific user voted, total amount of votes, hotness value).
+Thoughts also have a relation to their votes and helper methods for accessing information about these votes (eg. whether a given user has voted or the total amount of votes). This also includes a method to return the *hotness* value of a thought.
+
+Hotness is a numeric value that depends on the recency of a thought and the number of votes it has received.  Accordingly, hotness values are higher for more recent thoughts or thoughts with more votes. Thoughts with equal numbers of votes are effectively sorted in reverse chronological order, while each additional vote pushes the thought upward in the ordering.
+
+Given the number of votes (v) and the number of hours since the thought was created (t), a thought’s hotness is:
+
+	hot = v / pow(t + 2, 1.5)
+
+This algorithm is adapted from the sorting algorithm used in the social bookmarking site Hacker News^[<https://news.ycombinator.com/>] [see @Salihefendic2010].
 
 #### Upvote
 

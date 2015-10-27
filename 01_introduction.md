@@ -99,7 +99,8 @@ Available since
 Monthly active users
 : ~ 2.6 billion ^[It is difficult to estimate the number of people who actively use email because of the large number of email service providers. The market research firm Radicati estimated a number of 2.6 billion active email users in 2015 [@Radicati2011].]
 
-Website: none
+Website
+: none
 
 ---
 
