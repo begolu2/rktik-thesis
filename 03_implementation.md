@@ -36,7 +36,7 @@ The `User` model represents a registered user of the site. It has relations to a
 
 The `Identity` class is a superclass for `Persona` and `Movement ` as these two share many attributes and methods related to them being identities.
 
-Apart from basic information such as username, user color, creation and modification timestamps, the `Identity` model has relations to the blog and mindspace associated with each instance.
+Apart from basic information such as username, user color, creation and modification timestamps, the `Identity` model has relations to the blog and Mindspace associated with each instance.
 
 #### Persona
 
@@ -48,7 +48,7 @@ The `Persona` model provides methods for toggling instances’ memberships in mo
 
 Just as the `Persona` model, `Movement` instances inherit from the `Identity` model and thereby provide all its attributes and methods. They also store the movement’s mission, whether the movement is private and relations to the movement’s admin (founder) and to movement members.
 
-When votes are cast on thoughts in the movement mindspace, the movement’s `promotion_check` method is called. This method reposts the thought to the movement blog, if the number of votes passes a threshold. Given the number of members (c) the threshold value (t) is defined as:
+When votes are cast on thoughts in the movement Mindspace, the movement’s `promotion_check` method is called. This method reposts the thought to the movement blog, if the number of votes passes a threshold. Given the number of members (c) the threshold value (t) is defined as:
 
     t = round(c / 100 + 0.8 / c + log(c, 1.65)) if c > 0 else 1
 
@@ -108,7 +108,7 @@ The `Percept` model represents attachments on thoughts. The `Percept` class is t
 * `MentionPercept`: Stores a relation to the linked user and the text used to refer to them (these might be different if the mentioned persona changes their username after being mentioned)
 * `TagPercept`: Store a relation to an instance of the `Tag` model (see Section [Tag]).
 
-Percepts are linked to a thought with the association object pattern. The `PerceptAssociation` class stores the author who created the association in addition to its thought and percept. The association’s author is usually identical with the thought author, but movement admins also have the rights to edit thoughts submitted to their movement’s mindspace.
+Percepts are linked to a thought with the association object pattern. The `PerceptAssociation` class stores the author who created the association in addition to its thought and percept. The association’s author is usually identical with the thought author, but movement admins also have the rights to edit thoughts submitted to their movement’s Mindspace.
 
 #### Tag
 
@@ -184,9 +184,9 @@ The following section lists a description of all views available in Glia. Some o
 
 *Movements*
 
-* **movement** Redirect view that sends members to a movement’s mindspace and non-members to the movement blog.
+* **movement** Redirect view that sends members to a movement’s Mindspace and non-members to the movement blog.
 * **movement_blog** Main listing for a movement’s blog that presents a reverse chronological, paginated view of thoughts in the blog. Also allows following the movement and becoming a member.
-* **movement_mindspace** View for movement mindspace contents as well as movement chat and basic movement metadata.
+* **movement_Mindspace** View for movement Mindspace contents as well as movement chat and basic movement metadata.
 * **invite_members** Form for obtaining invitation links for a movement and sending email invitations.
 * **movement_list** List all movements registered on Rktik
 
@@ -228,7 +228,7 @@ Jinja2 provides almost all required functionality with missing features made ava
 
 Most of the content of Rktik is compiled on the server and then sent as a complete web page to the user’s browser. When an interaction requires only part of the screen contents to be changed, site responsiveness is increased by using asynchronous communication with the server. This functionality is implemented using the *jQuery* Javascript library ([jQuery website](https://jquery.com/)) for one-off asynchronous calls and the *websockets* browser technology for continuous streams of information.
 
-The websockets technology provides a socket between the browser and the Glia server which is used for relaying information during the time in which the browser window stays open. All thoughts created in a movement mindspace including chat messages as well as all votes on these thoughts, are received and immediately relayed by the server to all browser windows that show part of the movement. Messages received on the client side are inserted into the chat widget. If the browser window shows an individual thought’s page, new comments are inserted at the appropriate place in the hierarchical comments view.
+The websockets technology provides a socket between the browser and the Glia server which is used for relaying information during the time in which the browser window stays open. All thoughts created in a movement Mindspace including chat messages as well as all votes on these thoughts, are received and immediately relayed by the server to all browser windows that show part of the movement. Messages received on the client side are inserted into the chat widget. If the browser window shows an individual thought’s page, new comments are inserted at the appropriate place in the hierarchical comments view.
 
 The same channel is used for sending reposts and receiving desktop notifications (see Section [Notifications]). Server side handlers for websockets are located in the `glia.web.events` module, while client side handlers are located in the static file `glia/static/js/main.js`.
 

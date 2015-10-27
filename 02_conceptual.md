@@ -34,16 +34,16 @@ As unregistered users do not have any subscriptions, they are shown thoughts fro
 
 On the right-hand side of the thought stream, the frontpage also contains these other elements:
 
-* *Frontpage graph visualization*: 
+* *Frontpage graph visualization*:
 A visual representation of all thoughts and authors on the page as a graph (see Section [Frontpage Graph Visualization]).
 
-* *Top Thought*: 
+* *Top Thought*:
 When a user is logged in, this contains a short list of thoughts from *top movements* they are not following with their active persona. This allows users to notice particularly popular submissions from contexts they would not see otherwise.
 
-* *Discover Movements*: 
+* *Discover Movements*:
 A listing of *top movements* the active persona is not following.
 
-* *Recent Thoughts*: 
+* *Recent Thoughts*:
 The most recent publicly visible thoughts submitted throughout the whole site.
 
 #### Frontpage Graph Visualization
@@ -155,25 +155,25 @@ This functionality affords users of Rktik more freedom in managing their online 
 
 Groups in online social networks communicate their identity through the contents they publish and markers in the group’s online representation (group name, picture, color scheme). Rktik furthers this concept by communicating not just a movement's identity but also its *agency*. The sense that a movement can think and act is established through 1) terminology in the user interface that suggests a shared mind and 2) features that let members use this shared mind to act collectively.
 
-Language used in the context of movements implies that members have a shared mind: A movement's space for internal discussion is called *Mindspace* and users place contents in movements by *creating thoughts* in the mindspace. This terminology implies that members control a shared mental space, which they can use to exchange thoughts. This notion is even stronger in private movements, where only members can read thoughts in the mindspace.
+Language used in the context of movements implies that members have a shared mind: A movement's space for internal discussion is called *Mindspace* and users place contents in movements by *creating thoughts* in the Mindspace. This terminology implies that members control a shared mental space, which they can use to exchange thoughts. This notion is even stronger in private movements, where only members can read thoughts in the Mindspace.
 
 A movement’s agency is implied in the functionality of the movement blog. Its contents are not dictated by a designated member of the movement, but selected collectively by voting on thoughts in the movement. The movement members make decisions collectively, which are then attributed to the movement as a whole. Please see section Section [Movement Agency] for possibilities for further development of the concept of movement agency.
 
 ### Movements
 
-Movements allow groups of users with a shared interest to exchange their thoughts about it. Any user may create new movements by specifying a name and optional mission statement. A movement may also be created with the *private* option, which will hide contents of the movement mindspace from non-members and only allow users with an invitation code to join the movement as a member. These invitation codes may be created by any movement member.
+Movements allow groups of users with a shared interest to exchange their thoughts about it. Any user may create new movements by specifying a name and optional mission statement. A movement may also be created with the *private* option, which will hide contents of the movement Mindspace from non-members and only allow users with an invitation code to join the movement as a member. These invitation codes may be created by any movement member.
 
-Users can access a movement by visiting its blog or mindspace, the latter of which includes the movement’s chat room. Members can post thoughts to the movement mindspace by using the *create thought* interface or posting to the movement chat. Mindspace contents are sorted by their hotness value (see Section [Distributing Attention: Voting and Hotness]).
+Users can access a movement by visiting its blog or Mindspace, the latter of which includes the movement’s chat room. Members can post thoughts to the movement Mindspace by using the *create thought* interface or posting to the movement chat. Mindspace contents are sorted by their hotness value (see Section [Distributing Attention: Voting and Hotness]).
 
 #### Promoting Content
 
-Movements automatically repost thoughts on their blog once they have reached a certain number of votes. A progress bar, displayed alongside each thought in the mindspace, indicates how many more votes are required for promotion. This threshold value depends on the number of group members. Please see Section [Movement] for details on the implementation of the threshold function.
+Movements automatically repost thoughts on their blog once they have reached a certain number of votes. A progress bar, displayed alongside each thought in the Mindspace, indicates how many more votes are required for promotion. This threshold value depends on the number of group members. Please see Section [Movement] for details on the implementation of the threshold function.
 
 Movements are similar to Facebook Groups, Reddit’s Subreddit feature and Email newsgroups. All of them distinguish between private and public groups as Rktik does; however, they do not provide group members with the ability of democratically deciding to publish content publicly.
 
 #### Private Movements
 
-When creating a new movement, a user may choose to make it *private*, which 1) hides the movement mindspace from non-members and 2) only allows users with a valid invitation code to enter the movement.
+When creating a new movement, a user may choose to make it *private*, which 1) hides the movement Mindspace from non-members and 2) only allows users with a valid invitation code to enter the movement.
 
 Invitation codes can be sent by movement members by either entering the email addresses of invitees or by copying a URL with an embedded invitation code and sending this to the invitee (e.g. using a messenger application).
 
@@ -183,9 +183,9 @@ The blog page of private movements indicates the movement founder so that users 
 
 Every thought is linked to the context in which it was created. This can either be the mindset in which a thought is submitted or another thought in the case of replies. Reposts have both kinds of contexts as they are created as replies on their original thought and simultaneously placed directly in a specific mindset, effectively linking discussion in two separate areas of Rktik.
 
-![Reposts always have two contexts, marked red in this screenshot: 1) The original thought, created in *Movies mindspace*, to which this one is a reply and 2) *Movies blog*, the mindspace in which this repost was placed.](img/context.png)
+![Reposts always have two contexts, marked red in this screenshot: 1) The original thought, created in *Movies Mindspace*, to which this one is a reply and 2) *Movies blog*, the Mindspace in which this repost was placed.](img/context.png)
 
-Mindsets are collections of thoughts, owned by identities. There are three different kinds of mindsets for 1) internal thoughts of an identity (mindspace), 2) its published thoughts (blog), and 3) private conversation (dialogue). Each of them is rendered with a particular layout and functionality.
+Mindsets are collections of thoughts, owned by identities. There are three different kinds of mindsets for 1) internal thoughts of an identity (Mindspace), 2) its published thoughts (blog), and 3) private conversation (dialogue). Each of them is rendered with a particular layout and functionality.
 
 This section will show how communication happens in the context of a single thought, as well as in mindsets. Then, the differences between the three kinds of mindsets are explained through their requirements, tasks and conceptual design.
 
@@ -207,31 +207,31 @@ Depending on context, a different set of identities is authorized to create, edi
 
 ### Mindspaces
 
-Mindspaces are the first of three kinds of mindsets. They collect internal thoughts of an identity as opposed to thoughts published on a blog which is directed at a wider audience. Personas and movements are both identities in Rktik and therefore have their own mindspace. The differences between personal and collective mindspaces are described in what follows.
+Mindspaces are the first of three kinds of mindsets. They collect internal thoughts of an identity as opposed to thoughts published on a blog which is directed at a wider audience. Personas and movements are both identities in Rktik and therefore have their own Mindspace. The differences between personal and collective Mindspaces are described in what follows.
 
 *Persona Mindspace*
 
-Every persona has access to their private mindspace in which only they can read and write. This makes it a space for collecting thoughts before deciding on whether or not, or in which context to publish them. The mindspace of a persona is also referred to as the persona’s *notebook* to make it easier for new users to understand how they can use this feature.
+Every persona has access to their private Mindspace in which only they can read and write. This makes it a space for collecting thoughts before deciding on whether or not, or in which context to publish them. The Mindspace of a persona is also referred to as the persona’s *notebook* to make it easier for new users to understand how they can use this feature.
 
 Apart from creating thoughts directly in this mindset, users may also use the *repost* interface (see Section [Reposts]) to copy thoughts from anywhere on the site into their notebook.
 
 *Movement Mindspace*
 
-![Movement mindspace showing thoughts sorted by hotness on the left and the movement chat on the right](img/mindspace.png)
+![Movement Mindspace showing thoughts sorted by hotness on the left and the movement chat on the right](img/Mindspace.png)
 
-The movement mindspace is the primary interface for movement members. This space is facilitating discussion and exchange between movement members and serving as a staging area for content that might be posted to the movement’s blog. The movement mindspace should therefore 1) provide an overview of the most interesting content recently posted to the mindspace and 2) provide members with a way to communicate directly and immediately. To fulfill both of these requirements, the layout displays thoughts both as a listing sorted by hotness as well as using a chat widget.
+The movement Mindspace is the primary interface for movement members. This space is facilitating discussion and exchange between movement members and serving as a staging area for content that might be posted to the movement’s blog. The movement Mindspace should therefore 1) provide an overview of the most interesting content recently posted to the Mindspace and 2) provide members with a way to communicate directly and immediately. To fulfill both of these requirements, the layout displays thoughts both as a listing sorted by hotness as well as using a chat widget.
 
 While the chat is an automatically updating view of the most recent thoughts, the listing changes more slowly. As the hotness ranking is based on recency and number of votes, it is akin to a rolling toplist of the currently most interesting thoughts. These thoughts can collect more votes in the listing view until they reach the threshold for promotion to the movement’s blog (see Section [Promoting Content]). A short blue bar displayed underneath each listing entry indicates how many further votes are required for a promotion.
 
 #### Chat
 
-The chat should provide members with a sense of direct and immediate participation in the movement. It provides an automatically updating, chronological listing of all events related to the movement, including all thoughts submitted to the movement mindspace and thumbnails of media attachments.
+The chat should provide members with a sense of direct and immediate participation in the movement. It provides an automatically updating, chronological listing of all events related to the movement, including all thoughts submitted to the movement Mindspace and thumbnails of media attachments.
 
 This allows for a different mode of communication from the listing view and threaded discussion. The immediate transmission of messages allows the use of language with a conversational tone and creates the sense of a more direct exchange between participants.
 
-Replies to any thought in the movement mindspace are also displayed in the chat. They come with an annotation that explicitly marks them as replies and provides a hyperlink to their context. This allows movement members watching the chat to directly start participating in these discussions.
+Replies to any thought in the movement Mindspace are also displayed in the chat. They come with an annotation that explicitly marks them as replies and provides a hyperlink to their context. This allows movement members watching the chat to directly start participating in these discussions.
 
-An inline form UI below the chat message listing allows users to send thoughts to the mindspace/chat. Submitting the form clears the input without reloading the page, so that the user can enter another message immediately. Above the input, a notification text informs the user about the privacy of messages entered, which is dependent on whether the corresponding movement is private or not (see Section [Private Movements]).
+An inline form UI below the chat message listing allows users to send thoughts to the Mindspace/chat. Submitting the form clears the input without reloading the page, so that the user can enter another message immediately. Above the input, a notification text informs the user about the privacy of messages entered, which is dependent on whether the corresponding movement is private or not (see Section [Private Movements]).
 
 ### Blogs
 
@@ -241,9 +241,9 @@ Personas can directly post new thoughts to their personal blog, while movement m
 
 ### Dialogue
 
-While mindspaces allow exchange *between* many users, and blogs allow broadcasting *to* many users, the dialogue mindset models a conversation between just two participants. As dialogues are also implemented as a mindset, messages can be reposted freely between a dialogue and any other context.
+While Mindspaces allow exchange *between* many users, and blogs allow broadcasting *to* many users, the dialogue mindset models a conversation between just two participants. As dialogues are also implemented as a mindset, messages can be reposted freely between a dialogue and any other context.
 
-Apart from the different privacy setting, a dialogue provides the same affordances as the chat module in a movement mindspace (see Section [Chat]).
+Apart from the different privacy setting, a dialogue provides the same affordances as the chat module in a movement Mindspace (see Section [Chat]).
 
 Context                         Visible for
 ---                             ---

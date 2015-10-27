@@ -17,7 +17,7 @@ Movement Mindspace			Members		       — Author, Admin —
 Movement Blog				 Automatic* 			 — Admin —
 Dialogue								Members					 — Author —
 
-	* see section ___ on auto-promotion from movement mindspaces to blogs
+	* see section ___ on auto-promotion from movement Mindspaces to blogs
 
 # Cached Information
 
@@ -33,7 +33,7 @@ Methods:
 
 * Movement.attention
 * Movement.member_count (invalidated by Persona.toggle_movement_membership)
-* Movement.mindspace_top_thought (invalidated by Thought.toggle_upvote)
+* Movement.Mindspace_top_thought (invalidated by Thought.toggle_upvote)
 * Movement.top_movements
 
 * Thought.top_thought (invalidated by Thought.create_from_input)

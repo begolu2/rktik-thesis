@@ -6,7 +6,7 @@ Rktik is an evolution of the Souma prototype, introducing changes in some areas 
 
 The goals of **completeness**, **feasibility** and **maintainability**, as defined in section Section [Methodology], have been reached by the implementation described in this document. Development of the necessary features for *publishing* and *discussing* content using personas and movements have been built, and an appropriate environment for the operation of Rktik has been configured. While these initial goals are important, other aspects of Rktik have shown shortcomings in the course of development and testing. In this areas I have identified three aspects based on my own experiences and informal feedback received from acquaintances.
 
-1. Some of the concepts used in Rktik, such as the distinction between a private mindspace and a public blog or the concept of movements, are hard to understand for new users. This problem should be approached by building a tutorial, which explains core mechanics and concepts. It can be presented after signup and should be conceived for both new users with an account and potential, but unregistered users.
+1. Some of the concepts used in Rktik, such as the distinction between a private Mindspace and a public blog or the concept of movements, are hard to understand for new users. This problem should be approached by building a tutorial, which explains core mechanics and concepts. It can be presented after signup and should be conceived for both new users with an account and potential, but unregistered users.
 
 2. As described in the section Section [Improving Performance], the site’s speed is still too low for web user’s expectations. This can be improved by setting up periodically running background processes that precompute database queries and store them in memcache. Site performance could also be improved significantly by moving Rktik to more powerful servers, which however increases the costs of running the service.
 
@@ -64,7 +64,7 @@ The number of users who clicked on the frontpage graph visualization in a given 
 
 #### Follow or unfollow a blog
 
-Evaluated: Click on the *follow* or *unfollow* buttons located in movement or personal blogs and in movement mindspaces.
+Evaluated: Click on the *follow* or *unfollow* buttons located in movement or personal blogs and in movement Mindspaces.
 
 ![Number of users who followed or unfollowed blogs]\
 
@@ -72,7 +72,7 @@ The number of users who follow or unfollow blogs lies between zero and two users
 
 #### Toggle membership in a movement
 
-Evaluated: Click on the *Join movement* or *Leave movement* buttons located in movement blogs and movement mindspaces.
+Evaluated: Click on the *Join movement* or *Leave movement* buttons located in movement blogs and movement Mindspaces.
 
 ![Number of users who toggled their membership status]\
 
@@ -106,11 +106,11 @@ Planning and voting of any such collective actions may be conducted using a nove
 
 **Events**
 
-A movement member may propose an event in the movement mindspace. An event consists of a title, location, date, time and privacy setting (visible only for members or for all users) and can be implemented as an attachment type. Other members can discuss the events and propose changes to be made by the author in order to gain their consensus, and thus the necessary votes for making the event official. Finally, members vote on the event. If this shows that consensus is reached, the movement displays the event prominently in the movement mindspace or movement blog, depending on the event’s privacy settings. The final event posting is attributed to the movement and not its original author. This mechanic would allow movement members to organize collective action outside of Rktik’s online context.
+A movement member may propose an event in the movement Mindspace. An event consists of a title, location, date, time and privacy setting (visible only for members or for all users) and can be implemented as an attachment type. Other members can discuss the events and propose changes to be made by the author in order to gain their consensus, and thus the necessary votes for making the event official. Finally, members vote on the event. If this shows that consensus is reached, the movement displays the event prominently in the movement Mindspace or movement blog, depending on the event’s privacy settings. The final event posting is attributed to the movement and not its original author. This mechanic would allow movement members to organize collective action outside of Rktik’s online context.
 
 **Public chat**
 
-A movement’s (public) blog may contain a chat module, which non-members can use to converse with the movement as a whole. Messages entered in this chat would be displayed in the movement mindspace for members to see. Members can then propose answers and other members can confirm these by voting on them. The non-member who posted the original message into the movement chat would then be shown the answer attributed to the movement as a whole.
+A movement’s (public) blog may contain a chat module, which non-members can use to converse with the movement as a whole. Messages entered in this chat would be displayed in the movement Mindspace for members to see. Members can then propose answers and other members can confirm these by voting on them. The non-member who posted the original message into the movement chat would then be shown the answer attributed to the movement as a whole.
 
 **Creating thoughts in other parts of the site**
 
