@@ -12,16 +12,16 @@ Rights Management for Mindsets
 | 		Mindset 			| 	Creating 	| 	Updating 	| 	Deleting
 
 Personal Mindspace								— Persona —
-Personal Blog										— Persona — 
+Personal Blog										— Persona —
 Movement Mindspace			Members		       — Author, Admin —
-Movement Blog				 Automatic* 			 — Admin — 
-Dialogue								Members					 — Author — 
+Movement Blog				 Automatic* 			 — Admin —
+Dialogue								Members					 — Author —
 
 	* see section ___ on auto-promotion from movement mindspaces to blogs
 
 # Cached Information
 
-This section gives an overview of values cached using memcache as described in section [Improving Performance].
+This section gives an overview of values cached using memcache as described in Section [Improving Performance].
 
 Methods:
 * Persona.attention
@@ -42,9 +42,9 @@ Methods:
 
 Additional:
 * Recent thoughts helper Nucleus.helpers.recent_thoughts (invalidated by Thought.create_from_input)
-* “Percept” template macro 
+* “Percept” template macro
 * Frontpage graph visualization
-* Async chat view 
+* Async chat view
 
 # Usage Metrics
 

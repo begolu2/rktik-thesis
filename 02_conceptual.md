@@ -12,43 +12,43 @@ This section gives a brief overview of terminology used in Rktik. Please see the
 
 **Users** are individual persons using the site. They may register by creating a *user account* and one or more associated *personas*. Hereby they are able to create content on the site.
 
-(see section [User Accounts])
+(see Section [User Accounts])
 
 All actions of users are attributed to their **active persona**, which is a screen name that identifies them across the site. A user may create any number of personas to shape their privacy, but only one of them can be *active* at a time.
 
 **Thoughts** are short pieces of text submitted by personas and represent the smallest unit of content.
 
-(see section [Overview: Thoughts])
+(see Section [Overview: Thoughts])
 
 Thoughts can link to any number of **percepts**, which are attachments containing either more text or a hyperlink to an external resource. They are displayed alongside the thought throughout the user interface.
 
-(see section [Attaching Media: Percepts])
+(see Section [Attaching Media: Percepts])
 
 Personas can **vote** on thoughts to make them more visible to other users. Every thought has a numerical **hotness** value, which decreases with time after posting and increases with every vote gained. This value is used for sorting many thought listings.
 
-(see section [Distributing Attention: Voting and Hotness])
+(see Section [Distributing Attention: Voting and Hotness])
 
 **Mindsets** are collections of thoughts. Any thought that is not a reply to another thought must be contained in a mindset. Every persona has a private and a public mindset (**notebook** and **blog** respectively).
 
-(see section [Context])
+(see Section [Context])
 
 **Movements** are groups related to a specific topic. Each of them has a private mindset for members and a public mindset (blog).
 
 Any persona can create new movements and follow the (public) blog of any movement or other persona.
 
-(see section [Movements])
+(see Section [Movements])
 
-See section [Nucleus Models] for a diagram showing the relation of these concepts in Rktik.
+See Section [Nucleus Models] for a diagram showing the relation of these concepts in Rktik.
 
 ### Frontpage
 
-The *frontpage* is located at the root of Rktik and presents users with a stream of thoughts from their movements and followed blogs. It is similar to the *Facebook News Feed* and the *Reddit frontpage* in that the stream is sorted based both on the recency of a submission and the number of votes it has received (see section [Distributing Attention: Voting and Hotness]).
+The *frontpage* is located at the root of Rktik and presents users with a stream of thoughts from their movements and followed blogs. It is similar to the *Facebook News Feed* and the *Reddit frontpage* in that the stream is sorted based both on the recency of a submission and the number of votes it has received (see Section [Distributing Attention: Voting and Hotness]).
 
 Anonymous users do not have any subscriptions, they are shown thoughts from *top movements*. These are the seven movements with the highest member count.
 
 On the right-hand side of the thought stream, the frontpage also contains a number of other elements:
 
-* The **frontpage graph visualization**: A visual representation of all thoughts and authors on the page as a graph (see section [Frontpage Graph Visualization]).
+* The **frontpage graph visualization**: A visual representation of all thoughts and authors on the page as a graph (see Section [Frontpage Graph Visualization]).
 * **Top Thought**: When a user is logged in, this contains a short list of thoughts from *top movements* they are not following with their active persona. This allows users to notice particularly popular submissions from contexts they would not see otherwise.
 * **Discover Movements**: A listing of those top movements the active persona is not following.
 * **Recent Thoughts**: The most recent publicly visible thoughts submitted throughout the whole site.
@@ -69,7 +69,7 @@ Thereby, the frontpage contents surround the center node as a ring of white node
 
 Notifications catch the user’s attention in order to present information which is personally relevant. They are displayed in a drop down menu in the top left corner of every page and some of them are also sent as email notifications  [^optout].
 
-[^optout]: A user may opt out of receiving emails about notifications of a specific type. See section [User Accounts].
+[^optout]: A user may opt out of receiving emails about notifications of a specific type. See Section [User Accounts].
 
 ![Notification menu showing one unread notification about a received private message](img/notifications.png)
 
@@ -80,13 +80,13 @@ There are four notification types:
 * **Dialogue**: Sent when a new thought is added in a private conversation
 * **Follower**: Sent when a persona’s Blog gains new followers
 
-See section [Notification] for implementation details.
+See Section [Notification] for implementation details.
 
 ## Content
 
 ### Overview: Thoughts
 
-*Thoughts* are the basic building block for content in Rktik and roughly equivalent to a post on Facebook or submission on Reddit. They consist of a short text, limited to 300 characters, and any number of percepts (attachments). Thoughts are displayed 1) as part of blogs and mindspaces, 2) on individual thought pages or 3) as part of a chat conversation (see section [Context]).
+*Thoughts* are the basic building block for content in Rktik and roughly equivalent to a post on Facebook or submission on Reddit. They consist of a short text, limited to 300 characters, and any number of percepts (attachments). Thoughts are displayed 1) as part of blogs and mindspaces, 2) on individual thought pages or 3) as part of a chat conversation (see Section [Context]).
 
 The restriction on title length has been set for two reasons:
 
@@ -107,7 +107,7 @@ Currently the following attachment kinds are supported:
 
 * **Link**: This type can be attached by embedding a URL inside the thought title or longform text.
 
-	Links to pictures may be rendered inline with the thought. Clicking the picture displays it enlarged in a modal gallery view. If multiple links to pictures are linked to a single thought, the modal view allows browsing through the picture gallery using keyboard and onscreen controls. The display size of pictures is also adapted to the size and number of image attachments (see section [HTML Templates]).
+	Links to pictures may be rendered inline with the thought. Clicking the picture displays it enlarged in a modal gallery view. If multiple links to pictures are linked to a single thought, the modal view allows browsing through the picture gallery using keyboard and onscreen controls. The display size of pictures is also adapted to the size and number of image attachments (see Section [HTML Templates]).
 
 	Links that point to the *soundcloud.com* and *youtube.com* domain will be rendered using the respective embeddable widgets to allow playing music and videos without leaving the Rktik website.
 
@@ -117,7 +117,7 @@ Currently the following attachment kinds are supported:
 
 Personas may vote on thoughts, thereby expressing approval of their content. The number of votes is displayed next to every thought.
 
-Apart from being a visible signal about the number of people who have expressed approval of a thought, votes are also used for sorting thoughts in the hotness sorting algorithm (see section [Distributing Attention: Voting and Hotness]). Depending on context, the order of thoughts is either chronological (chat), reverse chronological (blog) or by their *hotness* value.
+Apart from being a visible signal about the number of people who have expressed approval of a thought, votes are also used for sorting thoughts in the hotness sorting algorithm (see Section [Distributing Attention: Voting and Hotness]). Depending on context, the order of thoughts is either chronological (chat), reverse chronological (blog) or by their *hotness* value.
 
 Hotness is a numeric value which depends on the recency of a thought and the number of votes it has received.  Accordingly, hotness values are higher for more recent thoughts or thoughts with more votes. Thoughts with equal numbers of votes are effectively sorted in reverse chronological order, while each additional vote pushes the thought upward in the ordering.
 
@@ -144,13 +144,13 @@ The account feature serves two main purposes:
 1. Authorizing a user’s identity by asking them to enter the account-specific password and email-address combination. Authorized users may act on the site as one of the personas connected to the user account.
 2. Obtaining a valid email address so that users may be sent notifications and other messages related to their activity on the site.
 
-User accounts also store the user’s email preferences allowing users to disable emails of specific kind (see section [Notifications]). In general, emails should be sent as little as possible as users may perceive them as spam if they carry insufficient personal relevance or value.
+User accounts also store the user’s email preferences allowing users to disable emails of specific kind (see Section [Notifications]). In general, emails should be sent as little as possible as users may perceive them as spam if they carry insufficient personal relevance or value.
 
 ### Personas
 
 The personal identity of a user of the Rktik website is partially decoupled from their physical identity: While users may choose to use their real name, they can also use one or more pseudonyms.
 
-Other online communities allow this to different extents: On Reddit, a user may choose an arbitrary name for their user profile, while Facebook asks their users to provide their real name for online communication (see section [State of the Art]). Rktik goes a step further by not only allowing arbitrary handle names but also arbitrary *numbers* of handles, which are called *personas*.
+Other online communities allow this to different extents: On Reddit, a user may choose an arbitrary name for their user profile, while Facebook asks their users to provide their real name for online communication (see Section [State of the Art]). Rktik goes a step further by not only allowing arbitrary handle names but also arbitrary *numbers* of handles, which are called *personas*.
 
 ![The *switch* menu lets users activate or create other personas](img/switch.png)
 
@@ -158,7 +158,7 @@ On initial signup, new users create their first persona by giving it a name and 
 
 Other users can not tell whether any two personas are linked to the same user account.
 
-This functionality affords users of Rktik more freedom in managing their online identity than comparable social platforms as described in section [State of the Art]. These freedoms may be used to act out different social roles or to voice unpopular opinions without fear of backlash against a user's offline identity. The notion that there does not necessarily exist a 1:1 mapping between offline and online identity is further established through the concepts of group identity and agency.
+This functionality affords users of Rktik more freedom in managing their online identity than comparable social platforms as described in Section [State of the Art]. These freedoms may be used to act out different social roles or to voice unpopular opinions without fear of backlash against a user's offline identity. The notion that there does not necessarily exist a 1:1 mapping between offline and online identity is further established through the concepts of group identity and agency.
 
 ### Personal vs. Group Identity
 
@@ -166,17 +166,17 @@ Groups communicate their identity in online social networks through the contents
 
 Language used in the context of movements implies that their members have a shared mind: A movement's space for internal discussion and exchange is called *mindspace* and users place contents in movements by *creating thoughts* in the mindspace. This terminology implies that members control a shared mental space, which they can use to exchange thoughts. This notion is even stronger in private movements, where only members can read thoughts in the mindspace.
 
-A movement’s agency is implied in the functionality of the movement blog. Its contents are not dictated by a designated member of the movement, but selected collectively by voting on thoughts in the movement. The movement members make decisions collectively, which are then attributed to the movement as a whole. Please see section section [Movement Agency] for possibilities for further development of the concept of movement agency.
+A movement’s agency is implied in the functionality of the movement blog. Its contents are not dictated by a designated member of the movement, but selected collectively by voting on thoughts in the movement. The movement members make decisions collectively, which are then attributed to the movement as a whole. Please see section Section [Movement Agency] for possibilities for further development of the concept of movement agency.
 
 ### Movements
 
 Movements allow groups of users with a shared interest to exchange their thoughts about it. Any user may create new movements by specifying a name and optional mission statement. A movement may also be created with the *private* option, which will hide contents of the movement mindspace from non-members and only allow users with an invitation code to join the movement as a member. These invitation codes may be created by any movement member.
 
-Users can access a movement by visiting its blog or mindspace, the latter of which includes the movement’s chat room. Members can post thoughts to the movement mindspace by using the *create thought* interface or posting to the movement chat. Mindspace contents are sorted by their hotness value (see section [Distributing Attention: Voting and Hotness]).
+Users can access a movement by visiting its blog or mindspace, the latter of which includes the movement’s chat room. Members can post thoughts to the movement mindspace by using the *create thought* interface or posting to the movement chat. Mindspace contents are sorted by their hotness value (see Section [Distributing Attention: Voting and Hotness]).
 
 #### Promoting Content
 
-Movements automatically repost thoughts on their blog once they have reached a certain number of votes. A progress bar, displayed alongside each thought in the mindspace, indicates how many more votes are required for promotion. This threshold value depends on the number of group members. Please see section [Movement] for details on the implementation of the threshold function.
+Movements automatically repost thoughts on their blog once they have reached a certain number of votes. A progress bar, displayed alongside each thought in the mindspace, indicates how many more votes are required for promotion. This threshold value depends on the number of group members. Please see Section [Movement] for details on the implementation of the threshold function.
 
 Movements are similar to Facebook Groups, Reddit’s Subreddit feature and Email newsgroups. All of them distinguish between private and public groups as Rktik does; however, they do not provide group members with the ability of democratically deciding to publish content publicly.
 
@@ -200,7 +200,7 @@ This section will show how communication happens in the context of a single thou
 
 ### Threaded Discussion
 
-Every thought in Rktik has its own page which collects all information related to the thought. This includes its text content and percepts as well as the thought’s context, metadata and reactions to it. Reactions may be replies, reposts or automatic promotions (see section [Promoting Content]).
+Every thought in Rktik has its own page which collects all information related to the thought. This includes its text content and percepts as well as the thought’s context, metadata and reactions to it. Reactions may be replies, reposts or automatic promotions (see Section [Promoting Content]).
 
 Displaying reactions to a thought in a flat listing can make it harder for readers to follow the exchange as conversations regarding different aspects of the original thought may be interweaved in the listing. Rktik solves this problem by using a hierarchical display of reactions: Direct replies are aligned to the left-hand side of the screen with subsequent replies indented to the right. Further, every subsequent subtree of the discussion is sorted by hotness.
 
@@ -212,7 +212,7 @@ If the original thought was created as a reply itself, the page also contains it
 
 ### Contextual Rights Management
 
-Depending on context, a different set of identities is authorized to create, edit and delete thoughts in a given mindset. See section [Rights Management] for detailed information about which users are authorized for which actions.
+Depending on context, a different set of identities is authorized to create, edit and delete thoughts in a given mindset. See Section [Rights Management] for detailed information about which users are authorized for which actions.
 
 ### Mindspaces
 
@@ -222,7 +222,7 @@ Mindspaces are the first of three kinds of mindsets. They collect internal thoug
 
 Every persona has access to their private mindspace in which only they can read and write. This makes it a space for collecting thoughts before deciding on whether or not, or in which context to publish them. The mindspace of a persona is also referred to as the persona’s *notebook* to make it easier for new users to understand how they can use this feature.
 
-Apart from creating thoughts directly in this mindset, users may also use the *repost* interface (see section [Reposts]) to copy thoughts from anywhere on the site into their notebook.
+Apart from creating thoughts directly in this mindset, users may also use the *repost* interface (see Section [Reposts]) to copy thoughts from anywhere on the site into their notebook.
 
 **Movement Mindspace**
 
@@ -230,7 +230,7 @@ Apart from creating thoughts directly in this mindset, users may also use the *r
 
 The movement mindspace is the primary interface for movement members. This space is facilitating discussion and exchange between movement members and serving as a staging area for content that might be posted to the movement’s blog. The movement mindspace should therefore 1) provide an overview of the most interesting content recently posted to the mindspace and 2) provide members with a way to communicate directly and immediately. To fulfill both of these requirements, the layout displays thoughts both as a listing sorted by hotness as well as using a chat widget.
 
-While the chat is an automatically updating view of the most recent thoughts, the listing changes more slowly. As the hotness ranking is based on recency and number of votes, it is akin to a rolling toplist of the currently most interesting thoughts. These thoughts can collect more votes in the listing view until they reach the threshold for promotion to the movement’s blog (see section [Promoting Content]). A short blue bar displayed underneath each listing entry indicates how many further votes are required for a promotion.
+While the chat is an automatically updating view of the most recent thoughts, the listing changes more slowly. As the hotness ranking is based on recency and number of votes, it is akin to a rolling toplist of the currently most interesting thoughts. These thoughts can collect more votes in the listing view until they reach the threshold for promotion to the movement’s blog (see Section [Promoting Content]). A short blue bar displayed underneath each listing entry indicates how many further votes are required for a promotion.
 
 #### Chat
 
@@ -240,19 +240,19 @@ This allows for a different mode of communication from the listing view and thre
 
 Replies to any thought in the movement mindspace are also displayed in the chat. They come with an annotation that explicitly marks them as replies and provides a hyperlink to their context. This allows movement members watching the chat to directly start participating in these discussions.
 
-An inline form UI below the chat message listing allows users to send thoughts to the mindspace/chat. Submitting the form clears the input without reloading the page, so that the user can enter another message immediately. Above the input, a notification text informs the user about the privacy of messages entered, which is dependent on whether the corresponding movement is private or not (see section [Private Movements]).
+An inline form UI below the chat message listing allows users to send thoughts to the mindspace/chat. Submitting the form clears the input without reloading the page, so that the user can enter another message immediately. Above the input, a notification text informs the user about the privacy of messages entered, which is dependent on whether the corresponding movement is private or not (see Section [Private Movements]).
 
 ### Blogs
 
 Blogs are mindsets which allow identities to share their thoughts with a wider audience and are sorted in reverse chronological order. Any persona can follow any blog. Doing so places the blog’s contents in the pool of thoughts eligible for that user’s personal frontpage.
 
-Personas can directly post new thoughts to their personal blog, while movement members can only indirectly place content in a movement’s blog through voting (see section [Promoting Content]).
+Personas can directly post new thoughts to their personal blog, while movement members can only indirectly place content in a movement’s blog through voting (see Section [Promoting Content]).
 
 ### Dialogue
 
 While mindspaces allow exchange *between* many users, and blogs allow broadcasting *to* many users, the dialogue mindset models a conversation between just two participants. As dialogues are also implemented as a mindset, messages can be reposted freely between a dialogue and any other context.
 
-Apart from the different privacy setting, a dialogue provides the same affordances as the chat module in a movement mindspace (see section [Chat]).
+Apart from the different privacy setting, a dialogue provides the same affordances as the chat module in a movement mindspace (see Section [Chat]).
 
 Context                         Visible for
 ---                             ---

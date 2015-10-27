@@ -4,11 +4,11 @@ Rktik is an evolution of the Souma prototype, introducing changes in some areas 
 
 ## Personal Evaluation
 
-The goals of **completeness**, **feasibility** and **maintainability**, as defined in section section [Methodology], have been reached by the implementation described in this document. Development of the necessary features for *publishing* and *discussing* content using personas and movements have been built, and an appropriate environment for the operation of Rktik has been configured. While these initial goals are important, other aspects of Rktik have shown shortcomings in the course of development and testing. In this areas I have identified three aspects based on my own experiences and informal feedback received from acquaintances.
+The goals of **completeness**, **feasibility** and **maintainability**, as defined in section Section [Methodology], have been reached by the implementation described in this document. Development of the necessary features for *publishing* and *discussing* content using personas and movements have been built, and an appropriate environment for the operation of Rktik has been configured. While these initial goals are important, other aspects of Rktik have shown shortcomings in the course of development and testing. In this areas I have identified three aspects based on my own experiences and informal feedback received from acquaintances.
 
 1. Some of the concepts used in Rktik, such as the distinction between a private mindspace and a public blog or the concept of movements, are hard to understand for new users. This problem should be approached by building a tutorial, which explains core mechanics and concepts. It can be presented after signup and should be conceived for both new users with an account and potential, but unregistered users.
 
-2. As described in the section section [Improving Performance], the site’s speed is still too low for web user’s expectations. This can be improved by setting up periodically running background processes that precompute database queries and store them in memcache. Site performance could also be improved significantly by moving Rktik to more powerful servers, which however increases the costs of running the service.
+2. As described in the section Section [Improving Performance], the site’s speed is still too low for web user’s expectations. This can be improved by setting up periodically running background processes that precompute database queries and store them in memcache. Site performance could also be improved significantly by moving Rktik to more powerful servers, which however increases the costs of running the service.
 
 3. Rktik features interesting content that is regularly updated. Users who have signed up for an account but do not visit the site regularly could benefit from this through a periodic email newsletter. Each edition of the newsletter may feature the most interesting content on Rktik as measured by votes received on thoughts.
 
@@ -24,7 +24,7 @@ For the purpose of this evaluation, a *user* is defined as a web browser used to
 
 ### Usage sessions
 
-The number of sessions was assessed using Google Analytics. A session is defined as a group of interactions between a user and the website that takes place within 30 minutes or until midnight (@Google). A total of 825 sessions were started, most of which took place in the first weeks of operation. The number of sessions following the first two weeks of operation may have been higher if Rktik had been promoted more extensively. This process was stalled due to the currently high access times described in section [Improving Performance].
+The number of sessions was assessed using Google Analytics. A session is defined as a group of interactions between a user and the website that takes place within 30 minutes or until midnight (@Google). A total of 825 sessions were started, most of which took place in the first weeks of operation. The number of sessions following the first two weeks of operation may have been higher if Rktik had been promoted more extensively. This process was stalled due to the currently high access times described in Section [Improving Performance].
 
 ![Number of sessions]
 
@@ -56,7 +56,7 @@ The number of users who edited thoughts in a given week varies between zero and 
 
 #### Clicking the graph visualization
 
-Evaluated: Completed mouse click in any part of the frontpage graph visualization (see section [Frontpage Graph Visualization]).
+Evaluated: Completed mouse click in any part of the frontpage graph visualization (see Section [Frontpage Graph Visualization]).
 
 ![Number of users who clicked the frontpage graph visualization]\
 
@@ -98,9 +98,9 @@ The evaluation of user metrics shows how different features are accepted by user
 
 ## Movement Agency
 
-Rktik communicates to its users that movements have agency. This is established by attributing actions taken by its members to the movement itself, once they are confirmed by a certain number of other members. As described in section [Movements] this process 1) guards members’ privacy and 2) may establish stronger cohesion between movement members.
+Rktik communicates to its users that movements have agency. This is established by attributing actions taken by its members to the movement itself, once they are confirmed by a certain number of other members. As described in Section [Movements] this process 1) guards members’ privacy and 2) may establish stronger cohesion between movement members.
 
-While this concept may be applicable to a wide range of actions, Rktik’s current implementation only supports attributing authorship of a thought to a movement (see section [Promoting Content]). In this section I will present three options for other actions that may be attributed to a movement’s agency through building consensus among its members.
+While this concept may be applicable to a wide range of actions, Rktik’s current implementation only supports attributing authorship of a thought to a movement (see Section [Promoting Content]). In this section I will present three options for other actions that may be attributed to a movement’s agency through building consensus among its members.
 
 Planning and voting of any such collective actions may be conducted using a novel interface control which allows members to 1) identify the proposed action, 2) propose changes, and 3) vote on its implementation. This control should be designed for the control of all action types to simplify the process for inexperienced users.
 
@@ -118,7 +118,7 @@ Members may propose a thought to be posted with attribution to the movement in a
 
 ## External Clients
 
-Rktik is the successor to Souma, which is a prototype for a decentral social network as described in section [Problem: Privacy and Identity]. While Rktik is not built as a decentral system, its design allows a future extension with such functionality. Such an extension would entail two parts: 1) a publicly accessible API for Rktik’s Nucleus backend, and 2) a local client application that connects to this API. Using a local client makes a new usage pattern possible in which a private movement’s  internal data is only stored in encrypted form on the server. Encrypted information about members’ activity would be distributed among them via the API. Information would only be made available in unencrypted form on the rktik.com website once members have decided on a collective action. In this section I will outline the components necessary to build this extension based on the design implemented by Souma (see @Ahrend2015).
+Rktik is the successor to Souma, which is a prototype for a decentral social network as described in Section [Problem: Privacy and Identity]. While Rktik is not built as a decentral system, its design allows a future extension with such functionality. Such an extension would entail two parts: 1) a publicly accessible API for Rktik’s Nucleus backend, and 2) a local client application that connects to this API. Using a local client makes a new usage pattern possible in which a private movement’s  internal data is only stored in encrypted form on the server. Encrypted information about members’ activity would be distributed among them via the API. Information would only be made available in unencrypted form on the rktik.com website once members have decided on a collective action. In this section I will outline the components necessary to build this extension based on the design implemented by Souma (see @Ahrend2015).
 
 **API for Rktik’s Nucleus module**
 
