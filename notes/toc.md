@@ -21,6 +21,7 @@
 - Hotness formel in den implementierungsteil verschieben
 - rename replies > reactions
 - Zeit in Dicussion: Vergangenheit. Uuberall korrekt?
+- Context wird zweimal benutzt - irgendwie differenzieren?
 
 # Format und Drumherum
 - threshold function graph nebeneinander anordnen
